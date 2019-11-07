@@ -35,351 +35,77 @@ export default class ChargingScreen extends Component {
     console.log(this.props.navigation.getParam("mockData2").money)
   }
 ////////////////////////////////////////////////////////////////////////////////
-  updateHeader1(text) {
-    if (this.state.state1) {
+  testr(index, price) {
+
+    var backColor = '#E6E6E6';
+
+    this.stateInit();
+
+    if(index == 1) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
+        money: price,
         state1: true,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        money: 1000,
-        color1:"#E6E6E6",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    }
-  }
-  updateHeader2(text) {
-    if (this.state.state2) {
+        color1: backColor
+      })
+    } else if(index == 2) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
-        state1: false,
+        money: price,
         state2: true,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        money: 3000,
-        color1:"white",
-        color2:"#E6E6E6",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    }
-  }
-  updateHeader3(text) {
-    if (this.state.state3) {
+        color2: backColor
+      })
+    } else if(index == 3) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
-        state1: false,
-        state2: false,
+        money: price,
         state3: true,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        money: 5000,
-        color1:"white",
-        color2:"white",
-        color3:"#E6E6E6",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    }
-  }
-  updateHeader4(text) {
-    if (this.state.state4) {
+        color3: backColor
+      })
+    } else if(index == 4) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
+        money: price,
         state4: true,
-        state5: false,
-        state6: false,
-        state7: false,
-        money: 10000,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"#E6E6E6",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    }
-  }
-  updateHeader5(text) {
-    if (this.state.state5) {
+        color4: backColor
+      })
+    } else if(index == 5) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
+        money: price,
         state5: true,
-        state6: false,
-        state7: false,
-        money: 30000,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"#E6E6E6",
-        color6:"white",
-        color7:"white",
-      });
-    }
-  }
-  updateHeader6(text) {
-    if (this.state.state6) {
+        color5: backColor
+      })
+    } else if(index == 6) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
+        money: price,
         state6: true,
-        state7: false,
-        money: 50000,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"#E6E6E6",
-        color7:"white",
-      });
-    }
-  }
-
-  updateHeader7(text) {
-    if (this.state.state7) {
+        color6: backColor
+      })
+    } else if(index == 7) {
       this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
-        state7: false,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"white",
-      });
-    } else {
-      this.setState({
-        state1: false,
-        state2: false,
-        state3: false,
-        state4: false,
-        state5: false,
-        state6: false,
+        money: price,
         state7: true,
-        money: 100000,
-        color1:"white",
-        color2:"white",
-        color3:"white",
-        color4:"white",
-        color5:"white",
-        color6:"white",
-        color7:"#E6E6E6",
-      });
+        color7: backColor
+      })
     }
-  }
-  
-
-  // testr(index, price) {
-  //   if (this.state.state7) {
-  //     this.stateInit();
-  //   } else {
-  //     this.stateInit();
-  //     this.setState({
-  //       money: price,
-  //     });
-
-  //     if(index == 1) {
-  //       this.setState({
-  //         state1: true,
-  //         color1: "skyblue"
-  //       })
-  //     } else if(index == 2) {
-  //       this.setState({
-  //         state2: true,
-  //         color2: "skyblue"
-  //       })
-  //     } else if(index == 3) {
-  //       this.setState({
-  //         state3: true,
-  //         color3: "skyblue"
-  //       })
-  //     } else if(index == 4) {
-  //       this.setState({
-  //         state4: true,
-  //         color4: "skyblue"
-  //       })
-  //     } else if(index == 5) {
-  //       this.setState({
-  //         state5: true,
-  //         color5: "skyblue"
-  //       })
-  //     }
       
-  //   }
-  // }
+      
+    
+  }
 
-  // stateInit() {
-  //   this.setState({
-  //     state1: false,
-  //     state2: false,
-  //     state3: false,
-  //     state4: false,
-  //     state5: false,
-  //     state6: false,
-  //     state7: false,
-  //     color1:"white",
-  //     color2:"white",
-  //     color3:"white",
-  //     color4:"white",
-  //     color5:"white",
-  //     color6:"white",
-  //     color7:"white",
-  //   });
-  // }
-
-  backgroundColorChange(text) {
-    if (this.state.state1) {
-      backgroundColor:'skyblue'
-    } else if (this.state.state2) {
-      backgroundColor:'skyblue'
-    } else if (this.state.state3) {
-      backgroundColor:'skyblue'
-    } else if (this.state.state4) {
-      backgroundColor:'skyblue'
-    } else if (this.state.state5) {
-      backgroundColor:'skyblue'
-    } else if (this.state.state6) {
-      backgroundColor:'skyblue'
-    } else if (this.state.state7) {
-      backgroundColor:'skyblue'
-    } else {
-      backgroundColor:'default'
-    }
+  stateInit() {
+    this.setState({
+      state1: false,
+      state2: false,
+      state3: false,
+      state4: false,
+      state5: false,
+      state6: false,
+      state7: false,
+      color1:"white",
+      color2:"white",
+      color3:"white",
+      color4:"white",
+      color5:"white",
+      color6:"white",
+      color7:"white",
+    });
   }
   
   // charging() {
@@ -442,7 +168,7 @@ export default class ChargingScreen extends Component {
             
             
             <ListItem selected={this.state.state1}
-              onPress={this.updateHeader1.bind(this)}
+              onPress={()=>this.testr(1, 1000)}
               containerStyle={{ 
                 backgroundColor: this.state.color1,
                 borderTopWidth: 1,
@@ -459,7 +185,7 @@ export default class ChargingScreen extends Component {
             
 
             <ListItem selected={this.state.state2}
-              onPress={this.updateHeader2.bind(this)}
+              onPress={()=>this.testr(2, 3000)}
               containerStyle={{
                 backgroundColor: this.state.color2,
                 borderBottomWidth:1,
@@ -472,7 +198,7 @@ export default class ChargingScreen extends Component {
               rightTitleStyle={{color: 'red', fontSize: 14}}
               />
             <ListItem selected={this.state.state3}
-              onPress={this.updateHeader3.bind(this)}
+              onPress={()=>this.testr(3, 5000)}
               containerStyle={{
                 backgroundColor: this.state.color3,
                 borderBottomWidth:1,
@@ -486,7 +212,7 @@ export default class ChargingScreen extends Component {
             />
 
             <ListItem selected={this.state.state4}
-              onPress={this.updateHeader4.bind(this)}
+              onPress={()=>this.testr(4, 10000)}
               containerStyle={{
                 backgroundColor: this.state.color4,
                 borderBottomWidth:1,
@@ -500,7 +226,7 @@ export default class ChargingScreen extends Component {
             />
 
             <ListItem  selected={this.state.state5}
-              onPress={this.updateHeader5.bind(this)}
+              onPress={()=>this.testr(5, 30000)}
               containerStyle={{
                 backgroundColor: this.state.color5,
                 borderBottomWidth:1,
@@ -514,7 +240,7 @@ export default class ChargingScreen extends Component {
             />
 
             <ListItem  selected={this.state.state6}
-              onPress={this.updateHeader6.bind(this)}
+              onPress={()=>this.testr(6, 50000)}
               containerStyle={{
                 backgroundColor: this.state.color6,
                 borderBottomWidth:1,
@@ -528,7 +254,7 @@ export default class ChargingScreen extends Component {
             />
 
             <ListItem  selected={this.state.state7}
-              onPress={this.updateHeader7.bind(this)}
+              onPress={()=>this.testr(7, 100000)}
               containerStyle={{
                 backgroundColor: this.state.color7,
                 borderBottomWidth:1,
@@ -560,7 +286,8 @@ export default class ChargingScreen extends Component {
             }}
             buttonColor={'#4630EB'}
             onPress={()=>{{
-                      this.listup();
+                      console.log("충전금액 : " + this.state.money);
+                      // this.listup();
                       this.props.navigation.navigate({
                       state1: this.state.state1,
                       state2: this.state.state2,
