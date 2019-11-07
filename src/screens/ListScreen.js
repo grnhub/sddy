@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native';
-import List from '../components/List';
+import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import Item from '../components/Item';
 
 const mockData = [
     {
@@ -12,7 +12,7 @@ const mockData = [
       time: '2019-10-21 08:15',
       startDate: '2019-10-01',
       endDate: '2019-12-31',
-      content: '3개월 썼어요. 작동잘됩니다.\n쿨거래시 보조배터리도 빌려줍니다.\n대화신청하세요 감사합니다 :)',
+      content: '3개월 썼어요, 작동잘됩니다, \n 쿨거래시 보조배터리도 빌려줍니다. \n 대화신청하세요 감사합니다 :)',
       like: 784,
       image:
         'http://img.hani.co.kr/imgdb/resize/2018/0209/00500596_20180209.JPG',
@@ -89,21 +89,129 @@ const mockData = [
     },
   ];
 
+
+
 export default class ListScreen extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-          itemList: mockData
+          itemList: mockData,
+          category: "0"
         };
       }
+
+      setCategory(c) {
+        this.setState({category: c});
+      }
+      
+    renderItemList({item, index, separators}) {
+        if(this.state.category == "0") {
+          return (
+            <Item
+                item={item}
+                onPress={() => this.props.navigation.push("DetailScreen", {item: item}) }
+
+            />
+          )
+        }
+
+        if(item.category == this.state.category) {
+          return (
+            <Item
+                item={item}
+                onPress={() => this.props.navigation.push("DetailScreen", {item: item}) }
+
+            />
+          )
+        }
+     }
+
+     bottomColorStyle = function(index) {
+        if(index == this.state.category) {
+          return {
+            borderBottomWidth: 2,
+            borderBottomColor: '#4630eb'
+          }
+      }
+    }
+
 
     render() {
         return (
             
-            <View style={{width: "100%", height: "100%"}}>
-                <List itemList={this.state.itemList} toNavigate="DetailScreen" {...this.props}></List>
+          <View style={{paddingTop:5, paddingBottom: 50, width: "100%", height: "100%"}}>
+            <View style = { styles.scrollViewHolder }>
+                <ScrollView horizontal = { true } showsHorizontalScrollIndicator = { false }>
+                  <TouchableOpacity onPress={()=>this.setCategory("0")}>
+                    <Text style = { [styles.item, this.bottomColorStyle(0)] }>전체</Text>
+                  </TouchableOpacity>
+                  <View style = { styles.separator }/>
+                  <TouchableOpacity onPress={()=>this.setCategory("1")}>
+                    <Text style = { [styles.item, this.bottomColorStyle(1)] }>디지털/가전</Text>
+                  </TouchableOpacity>
+                  <View style = { styles.separator }/>
+                  <TouchableOpacity onPress={()=>this.setCategory("2")}>
+                    <Text style = {  [styles.item, this.bottomColorStyle(2)]  }>유아용품</Text>
+                  </TouchableOpacity>
+                  <View style = { styles.separator }/>
+                  <TouchableOpacity onPress={()=>this.setCategory("3")}>
+                    <Text style = {  [styles.item, this.bottomColorStyle(3)]  }>운동기기</Text>
+                  </TouchableOpacity>
+                  <View style = { styles.separator }/>
+                  <TouchableOpacity onPress={()=>this.setCategory("4")}>
+                    <Text style = {  [styles.item, this.bottomColorStyle(4)]  }>뷰티/미용</Text>
+                  </TouchableOpacity>
+                  <View style = { styles.separator }/>
+                  <TouchableOpacity onPress={()=>this.setCategory("5")}>
+                    <Text style = {  [styles.item, this.bottomColorStyle(5)]  }>기타</Text>
+                  </TouchableOpacity>
+              </ScrollView>
             </View>
+            <FlatList
+                    data = {this.state.itemList}
+                    renderItem={this.renderItemList.bind(this)}
+                    ItemSeparatorComponent={item => {
+                      return <View></View>
+                    }}
+                    keyExtractor={(item)=> item.pno}
+            ></FlatList>
+        </View>
         )
     }
 }
+
+const styles = StyleSheet.create(
+  {
+     container:
+     {
+        paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
+        flex: 1,
+        justifyContent: 'center'
+     },
+  
+     scrollViewHolder:
+     {
+        borderBottomWidth: 1,
+        borderTopColor: 'rgba(0,0,0,0.5)',
+        borderBottomColor: 'rgba(0,0,0,0.5)'
+     }, 
+     item:
+     {
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 20,
+        paddingLeft: 20,
+        color: 'black',
+        fontSize: 14
+     },
+     separator:
+     {
+        backgroundColor: 'rgba(0,0,0,0.5)'
+     },
+     selectTab: {
+       borderBottomColor: '#4630eb',
+       borderBottomWidth: 2,
+     },
+     
+  });

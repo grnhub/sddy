@@ -9,7 +9,6 @@ import AttentionScreen from './src/screens/AttentionScreen';
 import ChattingScreen from './src/screens/ChattingScreen';
 import MyScreen from './src/screens/MyScreen';
 import DetailScreen from './src/screens/DetailScreen';
-import CategoryScreen from './src/screens/CategoryScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
 import TradeApplyScreen from './src/screens/TradeApplyScreen';
 import ModifyingScreen from './src/screens/ModifyingScreen';
@@ -22,15 +21,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ListStack = createStackNavigator(
   {
-      ListScreen,
-      DetailScreen : {
-        screen: DetailScreen
-      },
-      CategoryScreen : {
-          screen: CategoryScreen
-      },
-      HistoryScreen,
-      TradeApplyScreen
+    ListScreen,
+    DetailScreen : {
+      screen: DetailScreen
+    },
+    HistoryScreen,
+    TradeApplyScreen,
+    CompleteScreen
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
