@@ -5,7 +5,6 @@ import { createBottomTabNavigator, createTabNavigator } from "react-navigation-t
 import { createStackNavigator } from "react-navigation-stack";
 
 import ListScreen from './src/screens/ListScreen';
-import AttentionScreen from './src/screens/AttentionScreen';
 import ChattingScreen from './src/screens/ChattingScreen';
 import MyScreen from './src/screens/MyScreen';
 import DetailScreen from './src/screens/DetailScreen';
@@ -15,6 +14,8 @@ import ModifyingScreen from './src/screens/ModifyingScreen';
 import WalletScreen from './src/screens/WalletScreen';
 import ChargingScreen from './src/screens/ChargingScreen';
 import ExchangingScreen from './src/screens/ExchangingScreen';
+import CompleteScreen from './src/screens/CompleteScreen';
+import EvaluateScreen from './src/screens/EvaluateScreen';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -38,14 +39,14 @@ const ListStack = createStackNavigator(
 );
 const AttentionStack = createStackNavigator(
   {
-      AttentionScreen
+    EvaluateScreen
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
           title: '관심목록',
           headerRight: () => (<TouchableOpacity onPress={()=>alert('aa')}><View style={{marginRight:10}}><MaterialCommunityIcons name="bell" size={20}/></View></TouchableOpacity>)
       }),
-      initialRouteName: 'AttentionScreen',
+      initialRouteName: 'EvaluateScreen',
   }
 );
 const ChattingStack = createStackNavigator(
@@ -111,7 +112,7 @@ const TabNavigator = createBottomTabNavigator(
                 iconName = 'human-greeting';
               }
 
-              // can use react-native-vector-icons
+              // can use react-native-vector-icons 
               // <Icon name={iconName} size={iconSize} color={iconColor} />
               //return <Text style={{color: focused && "#4630eb" || "#888"}}>{icon}</Text>
               return (
