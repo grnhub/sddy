@@ -116,6 +116,7 @@ export default class ChargingScreen extends Component {
 
   listup(){
     const listUpFunc = this.props.navigation.getParam('listUpFunc')
+    if (this.state.money != 0){
     listUpFunc({
                   name: "충전",
                   state: "1",
@@ -123,6 +124,7 @@ export default class ChargingScreen extends Component {
                   money: (this.state.money),
                   profile: ""
                 })
+              }
   }
 
   
@@ -287,7 +289,7 @@ export default class ChargingScreen extends Component {
             buttonColor={'#4630EB'}
             onPress={()=>{{
                       console.log("충전금액 : " + this.state.money);
-                      // this.listup();
+                      this.listup();
                       this.props.navigation.navigate({
                       state1: this.state.state1,
                       state2: this.state.state2,
