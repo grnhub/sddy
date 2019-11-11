@@ -20,6 +20,22 @@ export default class DetailScreen extends Component {
                     </View>
                     <View style={styles.middle}>
                         <Text style={styles.productName}>{this.state.product.name}</Text>
+                        <View style={styles.interest}>
+                            <TouchableOpacity onPress={()=>Alert.alert('관심목록',
+                            '관심목록에 추가하시겠습니까?',
+                            [
+                            {
+                                text: '취소',
+                                onPress: () => console.log('Cancel Pressed'),
+                                style: 'cancel',
+                            },
+                            {text: '예', onPress: () => console.log('관심 목록 추가')},
+                            ],
+                            {cancelable: false}
+                            )}>
+                                <MaterialCommunityIcons name="heart-outline" size={32}/>
+                            </TouchableOpacity>
+                        </View>
                         <Text style={styles.price}>{this.state.product.price}원/일</Text>
                     </View>
                     <View style={styles.bottom}>
@@ -54,22 +70,6 @@ export default class DetailScreen extends Component {
                                 <Text style={styles.gray}>대여가능기간</Text>
                                 <Text style={styles.date}>{this.state.product.startDate} ~ {this.state.product.endDate}</Text>
                             </View>
-                            <View style={{justifyContent:'center',alignItems:'center',width:120}}>
-                                <TouchableOpacity onPress={()=>Alert.alert('관심목록',
-                                '관심목록에 추가하시겠습니까?',
-                                [
-                                {
-                                    text: '취소',
-                                    onPress: () => console.log('Cancel Pressed'),
-                                    style: 'cancel',
-                                },
-                                {text: '예', onPress: () => console.log('관심 목록 추가')},
-                                ],
-                                {cancelable: false}
-                                )}>
-                                    <MaterialCommunityIcons name="heart-outline" size={50}/>
-                                </TouchableOpacity>
-                            </View>
                         </View>
                         <Text style={styles.gray}>제품 설명</Text>
                         <Text style={styles.content}>{this.state.product.content}</Text>
@@ -81,6 +81,14 @@ export default class DetailScreen extends Component {
         )
     }
 }
+// Platform.select({
+//     ios: {
+
+//     },
+//     android: {
+
+//     }
+//   });
 
 const styles = StyleSheet.create({
     container: {
@@ -95,17 +103,6 @@ const styles = StyleSheet.create({
         margin: 20,
         padding: 5,
         resizeMode: 'contain'
-    },
-    productName: {
-        fontSize: 32,
-        marginTop: 8,
-        marginBottom: 8
-    },
-    price: {
-        color: '#F15F5F',
-        fontSize: 24,
-        alignSelf: "flex-end",
-        marginRight: 32
     },
     date: {
         fontSize: 20,
@@ -122,13 +119,32 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     middle: {
+        display: "flex",
         width:'100%',
         justifyContent: 'center',
-        //alignItems: 'left',
         marginTop: 8,
         marginLeft: 16,
         marginRight: 16,
         marginBottom: 8,
+    },
+    productName: {
+        flex: 1,
+        fontSize: 32,
+        marginTop: 8,
+        marginBottom: 8,
+        
+    },
+    interest: {
+        flex: 1,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    price: {
+        flex: 0,
+        color: '#F15F5F',
+        fontSize: 24,
+        alignSelf: "flex-end",
+        marginRight: 32
     },
     bottom: {
         width:'100%',
