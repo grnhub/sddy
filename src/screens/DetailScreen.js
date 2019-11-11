@@ -67,7 +67,8 @@ export default class DetailScreen extends Component {
                                                         style: 'cancel',
                                                     },
                                                     {   text: '등록자 버전', 
-                                                        onPress: () => alert('등록자')},
+                                                        onPress: ()=>this.props.navigation.navigate("HistoryScreen_registrant", {history: this.state.product})
+                                                    },
                                                     ],
                                                     {cancelable: false}
                                                     )

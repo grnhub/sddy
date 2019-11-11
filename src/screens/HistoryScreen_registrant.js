@@ -81,17 +81,16 @@ export default class HistoryScreen_registrant extends Component {
                     <View style={historyCss.s2}><Text>현재</Text></View>
                     <View style={historyCss.s2}><Text>{this.state.data.now}</Text></View>
                 </View>
-                </ScrollView>
                 <Button
                 buttonStyle={{alignContent: 'center',
                 justifyContent: 'center',
-                width: 130,
                 backgroundColor: '#4630EB'}}
                 onPress={() =>
-                  this.props.navigation.push('Exchanging')
+                  alert('aa')
                 }
                 title='추가하기' 
                 />
+                </ScrollView>
             </View>
         )
     }
