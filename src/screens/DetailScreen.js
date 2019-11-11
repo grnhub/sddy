@@ -127,24 +127,25 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         marginRight: 24,
         marginBottom: 8,
-        backgroundColor: 'pink'
     },
     flexsetting: {
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'row'
     },
     productName: {
-        flexDirection: 'row',
         flex: 8,
         fontSize: 32,
         marginTop: 8,
         marginBottom: 8,
-        backgroundColor: 'green'
+        
         
     },
     interest: {
-        flexDirection: 'row',
         flex: 2,
-        backgroundColor: 'yellow'
+        justifyContent:'center',
+        alignItems:'center',
+        marginRight:15
+        
     },
     price: {
         flex: 0,
