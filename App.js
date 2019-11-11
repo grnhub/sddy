@@ -16,6 +16,7 @@ import ChargingScreen from './src/screens/ChargingScreen';
 import ExchangingScreen from './src/screens/ExchangingScreen';
 import CompleteScreen from './src/screens/CompleteScreen';
 import EvaluateScreen from './src/screens/EvaluateScreen';
+import PostProductScreen from './src/screens/PostProductScreen';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -73,6 +74,8 @@ const MyStack = createStackNavigator(
         screen : ChargingScreen
       },Exchanging:{
         screen : ExchangingScreen
+      },PostProductScreen: {
+        screen: PostProductScreen   //물품등록하기
       }
   },
   {

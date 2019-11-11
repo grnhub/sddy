@@ -93,7 +93,7 @@ export default class MyScreen extends Component {
             
 
             
-            <ListItem icon onPress={()=>alert('aa')}>
+            <ListItem icon onPress={()=>this.props.navigation.push('PostProductScreen')}>
               <Left>
               <MaterialCommunityIcons name="playlist-edit" size={30} />
                 </Left>
