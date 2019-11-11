@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, PickerIOSComponent} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class DetailScreen extends Component {
@@ -19,22 +19,24 @@ export default class DetailScreen extends Component {
                             style={styles.image} />
                     </View>
                     <View style={styles.middle}>
-                        <Text style={styles.productName}>{this.state.product.name}</Text>
-                        <View style={styles.interest}>
-                            <TouchableOpacity onPress={()=>Alert.alert('관심목록',
-                            '관심목록에 추가하시겠습니까?',
-                            [
-                            {
-                                text: '취소',
-                                onPress: () => console.log('Cancel Pressed'),
-                                style: 'cancel',
-                            },
-                            {text: '예', onPress: () => console.log('관심 목록 추가')},
-                            ],
-                            {cancelable: false}
-                            )}>
+                        <View style={styles.flexsetting}>
+                            <Text style={styles.productName}>{this.state.product.name}</Text>
+                            <View style={styles.interest}>
+                                <TouchableOpacity onPress={()=>Alert.alert('관심목록',
+                                '관심목록에 추가하시겠습니까?',
+                                [
+                                {
+                                    text: '취소',
+                                    onPress: () => console.log('Cancel Pressed'),
+                                    style: 'cancel',
+                                },
+                                {text: '예', onPress: () => console.log('관심 목록 추가')},
+                                ],
+                                {cancelable: false}
+                                )}>
                                 <MaterialCommunityIcons name="heart-outline" size={32}/>
-                            </TouchableOpacity>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <Text style={styles.price}>{this.state.product.price}원/일</Text>
                     </View>
@@ -119,25 +121,30 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     middle: {
-        display: "flex",
         width:'100%',
         justifyContent: 'center',
         marginTop: 8,
         marginLeft: 16,
-        marginRight: 16,
+        marginRight: 24,
         marginBottom: 8,
+        backgroundColor: 'pink'
+    },
+    flexsetting: {
+        display: 'flex'
     },
     productName: {
-        flex: 1,
+        flexDirection: 'row',
+        flex: 8,
         fontSize: 32,
         marginTop: 8,
         marginBottom: 8,
+        backgroundColor: 'green'
         
     },
     interest: {
-        flex: 1,
-        justifyContent:'center',
-        alignItems:'center',
+        flexDirection: 'row',
+        flex: 2,
+        backgroundColor: 'yellow'
     },
     price: {
         flex: 0,
