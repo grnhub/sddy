@@ -23,18 +23,19 @@ export default class DetailScreen extends Component {
                             <Text style={styles.productName}>{this.state.product.name}</Text>
                             <View style={styles.interest}>
                                 <TouchableOpacity onPress={()=>Alert.alert('관심목록',
-                                '관심목록에 추가하시겠습니까?',
-                                [
-                                {
-                                    text: '취소',
-                                    onPress: () => console.log('Cancel Pressed'),
-                                    style: 'cancel',
-                                },
-                                {text: '예', onPress: () => console.log('관심 목록 추가')},
-                                ],
-                                {cancelable: false}
-                                )}>
-                                <MaterialCommunityIcons name="heart-outline" size={32}/>
+                                    '관심목록에 추가하시겠습니까?',
+                                    [
+                                    {
+                                        text: '취소',
+                                        onPress: () => console.log('Cancel Pressed'),
+                                        style: 'cancel',
+                                    },
+                                    {   text: '예', 
+                                        onPress: () => console.log('관심 목록 추가')},
+                                    ],
+                                    {cancelable: false}
+                                    )}>
+                                    <MaterialCommunityIcons name="heart-outline" size={32}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -57,7 +58,20 @@ export default class DetailScreen extends Component {
                                             style={styles.button}>
                             <Text style={styles.buttonText}>채팅</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate("HistoryScreen", {history: this.state.product})}
+                        <TouchableOpacity onPress={()=> Alert.alert('히스토리',
+                                                    '어떤 화면으로?',
+                                                    [
+                                                    {
+                                                        text: '그냥',
+                                                        onPress: ()=>this.props.navigation.navigate("HistoryScreen", {history: this.state.product}),
+                                                        style: 'cancel',
+                                                    },
+                                                    {   text: '등록자 버전', 
+                                                        onPress: () => alert('등록자')},
+                                                    ],
+                                                    {cancelable: false}
+                                                    )
+                                                }
                                             style={styles.button}>
                             <Text style={styles.buttonText}>히스토리</Text>
                         </TouchableOpacity>

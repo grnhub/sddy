@@ -17,6 +17,7 @@ import ExchangingScreen from './src/screens/ExchangingScreen';
 import CompleteScreen from './src/screens/CompleteScreen';
 import EvaluateScreen from './src/screens/EvaluateScreen';
 import PostProductScreen from './src/screens/PostProductScreen';
+import HistoryScreen_registrant from './src/screens/HistoryScreen_registrant';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -29,7 +30,8 @@ const ListStack = createStackNavigator(
     },
     HistoryScreen,
     TradeApplyScreen,
-    CompleteScreen
+    CompleteScreen,
+    HistoryScreen_registrant
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
