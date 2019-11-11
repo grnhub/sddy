@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class DetailScreen extends Component {
 
@@ -48,8 +49,28 @@ export default class DetailScreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.middle}>
-                        <Text style={styles.gray}>대여가능기간</Text>
-                        <Text style={styles.date}>{this.state.product.startDate} ~ {this.state.product.endDate}</Text>
+                        <View style={{flexDirection:'row',width:'100%'}}>
+                            <View>
+                                <Text style={styles.gray}>대여가능기간</Text>
+                                <Text style={styles.date}>{this.state.product.startDate} ~ {this.state.product.endDate}</Text>
+                            </View>
+                            <View style={{justifyContent:'center',alignItems:'center',width:120}}>
+                                <TouchableOpacity onPress={()=>Alert.alert('관심목록',
+                                '관심목록에 추가하시겠습니까?',
+                                [
+                                {
+                                    text: '취소',
+                                    onPress: () => console.log('Cancel Pressed'),
+                                    style: 'cancel',
+                                },
+                                {text: '예', onPress: () => console.log('관심 목록 추가')},
+                                ],
+                                {cancelable: false}
+                                )}>
+                                    <MaterialCommunityIcons name="heart-outline" size={50}/>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                         <Text style={styles.gray}>제품 설명</Text>
                         <Text style={styles.content}>{this.state.product.content}</Text>
                     </View>
