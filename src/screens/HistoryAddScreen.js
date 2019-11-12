@@ -4,7 +4,7 @@ import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-ba
 import historyCss from '../css/HistoryStyle';
 import getHistory from '../components/History';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox,Button } from 'react-native-elements';
 
 export default class HistoryAddScreen extends Component {
 
@@ -45,14 +45,12 @@ export default class HistoryAddScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={{flex: 1}} behavior="padding" enabled
-                >
+            <KeyboardAvoidingView style={{flex: 1}} behavior="padding" enabled>
             <ScrollView style={{flex: 1,
                 width: "100%",
                 padding: 10,
-                backgroundColor: 'white'}}
-                
-                >
+                backgroundColor: 'white'}}    
+            >
                 <View style={{flex:2, 
                     flexDirection:"row",
                     marginBottom: 5,
@@ -150,9 +148,32 @@ export default class HistoryAddScreen extends Component {
                     <View><Text>수리내용</Text></View>
                     <Content>
                         <Form>
-                            <Textarea rowSpan={5} bordered placeholder="Textarea" />
+                            <Textarea rowSpan={3} bordered placeholder="Textarea" />
                         </Form>
                     </Content>
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-around',
+                    padding: 10,
+                    flex:1
+                  }}>
+                    <Button
+                        buttonStyle={{alignContent: 'center',
+                        justifyContent: 'center',
+                        width: 130,
+                        backgroundColor: '#4630EB'}}
+                        onPress={() =>alert('취소')}
+                        title='취소하기'
+                    />  
+                    <Button
+                        buttonStyle={{alignContent: 'center',
+                        justifyContent: 'center',
+                        width: 130,
+                        backgroundColor: '#4630EB'}}
+                        onPress={() =>alert('추가')}
+                        title='추가하기' 
+                    />
                 </View>
             </ScrollView>
             </KeyboardAvoidingView>
