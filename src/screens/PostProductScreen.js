@@ -18,12 +18,16 @@ export default class PostProductScreen extends Component {
         this.state = {
             category: '',
             pname: '',
+            price: '',
             uploadDate : '',       //히스토리에 자동으로 등록되는 시간
             allowDateStart : null,
             allowDateEnd : null,
         };
-        handlePname = (text) => {
+        inputPname = (text) => {
             this.setState({pname: text})
+        };
+        inputPrice = (text) => {
+            this.setState({price: text})
         };
         this.onStartDateChange = this.onStartDateChange.bind(this);
         this.onEndDateChange = this.onEndDateChange.bind(this);
@@ -61,30 +65,43 @@ export default class PostProductScreen extends Component {
                         style={pickerSelectStyles}
                     />
                     <View style={styles.line} />
-                    <TextInput style={styles.input}
+                    <TextInput style={styles.inputTitle}
                                 placeholder = "상품명(제목)"
                                 placeholderTextColor = "#d5d5d5"
-                                onChangeText = {this.handlePname} />
+                                onChangeText = {this.inputPname}
+                    />
                 </View>
                 <View style={styles.line2} />
                 <View style={styles.box}>
                     <Text>대여기간</Text>
-                    <Text>{startDate}부터</Text>
+                    <View style={styles.row}>
+                        <Text>{startDate}부터 </Text><Text>{endDate}까지</Text>
+                    </View>
                     <CalendarPicker
                         onStartDateChange={this.onStartDateChange}
                     />
-                    <Text>{endDate}까지</Text>
                     <CalendarPicker
                         onEndDateChange={this.onEndDateChange}
                     />
                 </View>
                 <View style={styles.line2} />
-
-
-
-                <Text>판매가격설정</Text>
+                <View style={styles.box}>
+                    <Text>판매가격</Text>
+                    <View style={styles.row}>
+                        <TextInput style={styles.inputPrice}
+                                    placeholder = "판매가격 입력"
+                                    placeholderTextColor = "#d5d5d5"
+                                    onChangeText = {this.inputPrice}
+                        />
+                        <Text style={styles.won}>원</Text>
+                    </View>
+                    <View style={styles.line} />
+                </View>
+                <View style={styles.line2} />
                 <Text>거래방법선택</Text>
+                <View style={styles.line2} />
                 <Text>직접거래/택배거래</Text>
+                <View style={styles.line2} />
                 <Text>상품내용입력</Text>
                 <Text>사진첨부</Text>
 
@@ -102,13 +119,29 @@ const styles = StyleSheet.create({
         backgroundColor: '#d5d5d5'
     },
     line2: {
-        height: 8,
+        height: 6,
         backgroundColor: '#ebebeb'
     },
-    input: {
+    inputTitle: {
         padding: 8,
         height: 32,
         fontSize: 16,
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    inputPrice: {
+        flex: 9,
+        padding: 8,
+        height: 32,
+        fontSize: 18,
+    },
+    won: {
+        flex: 1,
+        fontSize: 18,
+        paddingTop: 8,
+        paddingLeft: 4,
     }
 })
 
