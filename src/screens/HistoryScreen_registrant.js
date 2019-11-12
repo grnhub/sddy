@@ -85,8 +85,7 @@ export default class HistoryScreen_registrant extends Component {
                 buttonStyle={{alignContent: 'center',
                 justifyContent: 'center',
                 backgroundColor: '#4630EB'}}
-                onPress={() =>
-                  alert('aa')
+                onPress={()=>this.props.navigation.navigate("HistoryAddScreen", {history: this.state.history})
                 }
                 title='추가하기' 
                 />
