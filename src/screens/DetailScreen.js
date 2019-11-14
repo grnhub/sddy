@@ -20,7 +20,7 @@ export default class DetailScreen extends Component {
                     </View>
                     <View style={styles.middle}>
                         <View style={styles.flexsetting}>
-                            <Text style={styles.productName}>{this.state.product.name}</Text>
+                            <Text style={styles.productName}>{this.state.product.pname}</Text>
                             <View style={styles.interest}>
                                 <TouchableOpacity onPress={()=>Alert.alert('관심목록',
                                     '관심목록에 추가하시겠습니까?',
@@ -85,12 +85,12 @@ export default class DetailScreen extends Component {
                         <View style={{flexDirection:'row',width:'100%'}}>
                             <View>
                                 <Text style={styles.gray}>대여가능기간</Text>
-                                <Text style={styles.date}>{this.state.product.startDate} ~ {this.state.product.endDate}</Text>
+                                <Text style={styles.date}>{this.state.product.allowDateStart.substring(0,10)} ~ {this.state.product.allowDateEnd ? this.state.product.allowDateEnd.substring(0,10) : "2099-12-12" }</Text>
                             </View>
                         </View>
                         <Text style={styles.gray}>제품 설명</Text>
                         <Text style={styles.content}>{this.state.product.content}</Text>
-                    </View>
+                    </View> 
                     
                     
                 </ScrollView>

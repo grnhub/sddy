@@ -27,10 +27,10 @@ export default class Item extends Component {
                 </View>
 
                 <View style={styles.product}>
-                    <Text style={styles.productTitle}>{this.props.item.name}</Text>
+                    <Text style={styles.productTitle}>{this.props.item.pname}</Text>
                     <Text style={styles.area}>{this.props.item.area}·3초전</Text> 
                     <Text>{this.props.item.price}원/일</Text>
-                    <Text style={styles.heart}>♡{this.props.item.like}</Text>
+                    <Text style={styles.heart}>♡{this.props.item.likeCount}</Text>
                 </View>     
             </TouchableOpacity>
         )
