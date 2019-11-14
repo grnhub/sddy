@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView,Image } from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-elements';
-
+import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-base';
+import historyCss from '../css/HistoryStyle';
 export default class EvaluateScreen extends Component {
  
     constructor(props) {
@@ -21,19 +22,29 @@ export default class EvaluateScreen extends Component {
     render() {
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-                <Text style={styles.title}>평가</Text>
-                <View style={[styles.rowflex, styles.content1]}> 
-                    <Text style={styles.content1_image}>*이미지넣을곳*</Text>
-                    <Text style={styles.content_title}>안마의자 | 홍길동</Text>
+                <View style={{flex:3, 
+                    flexDirection:"row",
+                    marginBottom: 5,
+                    paddingBottom: 5,
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#cbcbcb",
+                    paddingRight: 10,
+                    paddingLeft: 10,
+                    fontSize: 20}}> 
+                    <View style={{flex: 2.5}}>
+                        <Image source={{uri: 'http://img.hani.co.kr/imgdb/resize/2018/0209/00500596_20180209.JPG'}} style={historyCss.image}></Image>
+                    </View>
+                    <View style={historyCss.namebox}>
+                        <Text style={historyCss.name}>홍길동</Text>
+                        <Text style={historyCss.productName}>'Samsung Galaxy'</Text>
+                    </View>
                 </View>
                 <View style={styles.content2}>
                     <Text style={styles.content2_text}>평가를 남기시면 SNAC을 드립니다.</Text>
                 </View>
                 <View style={[styles.rowflex, styles.content3]}>
                     <Text>상품평가</Text>
-
-                </View>
-                <AirbnbRating
+                    <AirbnbRating
                     count={5}
                     reviews={["Terrible", "Bad", "Good",  "Very Good",  "Amazing"]}
                     ratingColor='#D4F4FA'
@@ -43,10 +54,17 @@ export default class EvaluateScreen extends Component {
                     ratingBackgroundColor='#D4F4FA'
                     onPress={()=>console.log("=====")}
                     />
-                <View styles={styles.content4}>
-                    <Text>상세평가</Text>
-                    <TextInput style={styles.textinput} multiline numberOfLines={9}></TextInput>
                 </View>
+                
+                <View style={{flex: 2}}>
+                    <View><Text>상세평가</Text></View>
+                    <Content>
+                        <Form>
+                            <Textarea rowSpan={3} bordered placeholder="Textarea" />
+                        </Form>
+                    </Content>
+                </View>
+                
                 <View style={styles.rowflex}>
                     <TouchableOpacity style={[styles.button, {backgroundColor: '#cdcdcd'}]}>
                         <Text>취소하기</Text>
