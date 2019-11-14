@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
+import { DatePicker} from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import CalendarPicker from 'react-native-calendar-picker';
+import { Button } from 'react-native-elements';
 
 const category = [
     {label: '디지털/가전', value: 1},
@@ -22,6 +24,10 @@ export default class PostProductScreen extends Component {
             uploadDate : '',       //히스토리에 자동으로 등록되는 시간
             allowDateStart : null,
             allowDateEnd : null,
+            checked1 : false,
+            checked2 : false,
+            color1 : 'white',
+            color2 : 'white'
         };
         inputPname = (text) => {
             this.setState({pname: text})
@@ -72,17 +78,42 @@ export default class PostProductScreen extends Component {
                     />
                 </View>
                 <View style={styles.line2} />
-                <View style={styles.box}>
-                    <Text>대여기간</Text>
-                    <View style={styles.row}>
-                        <Text>{startDate}부터 </Text><Text>{endDate}까지</Text>
+                <View style={{flex: 1,margin:16}}>
+                    <View><Text>대여기간</Text></View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <DatePicker
+                            defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
+                            minimumDate={new Date((new Date().getFullYear()-1), 1, 1)}
+                            maximumDate={new Date(2022, 12, 31)}
+                            locale={"en"}
+                            timeZoneOffsetInMinutes={undefined}
+                            modalTransparent={false}
+                            animationType={"fade"}
+                            androidMode={"default"}
+                            placeHolderText="Select date"
+                            textStyle={{ color: "green" }}
+                            placeHolderTextStyle={{ color: "#d3d3d3" }}
+                            onDateChange={this.setDate}
+                            disabled={false}
+                        />
+                        <Text>부터</Text>
+                        <DatePicker
+                            defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
+                            minimumDate={new Date((new Date().getFullYear()-1), 1, 1)}
+                            maximumDate={new Date(2022, 12, 31)}
+                            locale={"en"}
+                            timeZoneOffsetInMinutes={undefined}
+                            modalTransparent={false}
+                            animationType={"fade"}
+                            androidMode={"default"}
+                            placeHolderText="Select date"
+                            textStyle={{ color: "green" }}
+                            placeHolderTextStyle={{ color: "#d3d3d3" }}
+                            onDateChange={this.setDate}
+                            disabled={false}
+                        />
+                        <Text>까지</Text>
                     </View>
-                    <CalendarPicker
-                        onStartDateChange={this.onStartDateChange}
-                    />
-                    <CalendarPicker
-                        onEndDateChange={this.onEndDateChange}
-                    />
                 </View>
                 <View style={styles.line2} />
                 <View style={styles.box}>
@@ -101,6 +132,11 @@ export default class PostProductScreen extends Component {
                 <Text>거래방법선택</Text>
                 <View style={styles.line2} />
                 <Text>직접거래/택배거래</Text>
+                <Button
+                    title="Outline button"
+                    type="outline"
+                    style={{backgroundColor:'black'}}
+                />
                 <View style={styles.line2} />
                 <Text>상품내용입력</Text>
                 <Text>사진첨부</Text>
@@ -124,8 +160,10 @@ const styles = StyleSheet.create({
     },
     inputTitle: {
         padding: 8,
-        height: 32,
+        height: 48,
         fontSize: 16,
+        borderBottomWidth:1,
+        borderColor:'#d5d5d5'
     },
     row: {
         display: 'flex',
@@ -134,13 +172,13 @@ const styles = StyleSheet.create({
     inputPrice: {
         flex: 9,
         padding: 8,
-        height: 32,
+        height: 52,
         fontSize: 18,
     },
     won: {
         flex: 1,
         fontSize: 18,
-        paddingTop: 8,
+        paddingTop: 16,
         paddingLeft: 4,
     }
 })
