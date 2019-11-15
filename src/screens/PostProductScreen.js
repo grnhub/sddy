@@ -60,6 +60,7 @@ export default class PostProductScreen extends Component {
         const uploadDate = new Date();     //today 오늘
         const startDate = allowDateStart ? allowDateStart.toString() : '';
         const endDate = allowDateEnd ?  allowDateEnd.toString() : '';
+        console.log("A0")
 
         return(
             <ScrollView>
@@ -78,20 +79,20 @@ export default class PostProductScreen extends Component {
                     />
                 </View>
                 <View style={styles.line2} />
-                <View style={{flex: 1,margin:16}}>
-                    <View><Text>대여기간</Text></View>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                <View style={styles.box}>
+                    <Text>대여기간</Text>
+                    <View style={styles.row}>
                         <DatePicker
-                            defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
-                            minimumDate={new Date((new Date().getFullYear()-1), 1, 1)}
+                            defaultDate={new Date()}
+                            minimumDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
                             maximumDate={new Date(2022, 12, 31)}
-                            locale={"en"}
+                            locale={"ko"}
                             timeZoneOffsetInMinutes={undefined}
                             modalTransparent={false}
-                            animationType={"fade"}
+                            animationType={"slide"}
                             androidMode={"default"}
-                            placeHolderText="Select date"
-                            textStyle={{ color: "green" }}
+                            placeHolderText="시작날짜 선택"
+                            textStyle={{ color: "#4630eb" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
                             onDateChange={this.setDate}
                             disabled={false}
@@ -99,15 +100,15 @@ export default class PostProductScreen extends Component {
                         <Text>부터</Text>
                         <DatePicker
                             defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
-                            minimumDate={new Date((new Date().getFullYear()-1), 1, 1)}
+                            minimumDate={new Date()}
                             maximumDate={new Date(2022, 12, 31)}
-                            locale={"en"}
+                            locale={"ko"}
                             timeZoneOffsetInMinutes={undefined}
                             modalTransparent={false}
                             animationType={"fade"}
                             androidMode={"default"}
-                            placeHolderText="Select date"
-                            textStyle={{ color: "green" }}
+                            placeHolderText="마지막날짜 선택"
+                            textStyle={{ color: "#4630eb" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
                             onDateChange={this.setDate}
                             disabled={false}
@@ -130,17 +131,19 @@ export default class PostProductScreen extends Component {
                 </View>
                 <View style={styles.line2} />
                 <Text>거래방법선택</Text>
-                <View style={styles.line2} />
-                <Text>직접거래/택배거래</Text>
                 <Button
-                    title="Outline button"
+                    title="직접거래"
+                    type="outline"
+                    style={{backgroundColor:'black'}}
+                />
+                <Button
+                    title="택배거래"
                     type="outline"
                     style={{backgroundColor:'black'}}
                 />
                 <View style={styles.line2} />
                 <Text>상품내용입력</Text>
                 <Text>사진첨부</Text>
-
             </ScrollView>
         )
     }
@@ -163,11 +166,11 @@ const styles = StyleSheet.create({
         height: 48,
         fontSize: 16,
         borderBottomWidth:1,
-        borderColor:'#d5d5d5'
+        borderColor: '#d5d5d5'
     },
     row: {
-        display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     inputPrice: {
         flex: 9,
