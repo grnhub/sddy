@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import { DatePicker} from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
-import CalendarPicker from 'react-native-calendar-picker';
-import { Button } from 'react-native-elements';
+import { SelectMultipleButton } from 'react-native-selectmultiple-button';
+import _ from 'lodash';
 
+//상품 카테고리 선택 category
 const category = [
     {label: '디지털/가전', value: 1},
     {label: '유아용품', value: 2},
@@ -12,22 +13,20 @@ const category = [
     {label: '뷰티/미용', value: 4},
     {label: '기타', value: 5}
 ];
-
+//거래방식 선택
+const multipleData = ["직접거래", "택배거래"];
 
 export default class PostProductScreen extends Component {
     constructor(props){
         super(props);
         this.state = {
-            category: '',
-            pname: '',
-            price: '',
+            category: '',       //상품 카테고리
+            pname: '',          //상품명
+            price: '',          //가격,
             uploadDate : '',       //히스토리에 자동으로 등록되는 시간
             allowDateStart : null,
             allowDateEnd : null,
-            checked1 : false,
-            checked2 : false,
-            color1 : 'white',
-            color2 : 'white'
+            multipleSelectedData : [],   //거래방식 선택
         };
         inputPname = (text) => {
             this.setState({pname: text})
@@ -49,6 +48,23 @@ export default class PostProductScreen extends Component {
         });
     }
 
+    singleTapMultipleSelectedButtons(deal) {
+        if (this.state.multipleSelectedData.includes(deal)) {
+          _.remove(this.state.multipleSelectedData, ele => {
+            return ele === deal;
+          });
+        } else {
+          this.state.multipleSelectedData.push(deal);
+        }
+    
+        this.setState({
+          multipleSelectedData: this.state.multipleSelectedData
+        });
+      }
+
+
+
+
     render() {
         const categoryPlaceholder = {
             label: '카테고리 선택',
@@ -60,7 +76,6 @@ export default class PostProductScreen extends Component {
         const uploadDate = new Date();     //today 오늘
         const startDate = allowDateStart ? allowDateStart.toString() : '';
         const endDate = allowDateEnd ?  allowDateEnd.toString() : '';
-        console.log("A0")
 
         return(
             <ScrollView>
@@ -130,24 +145,39 @@ export default class PostProductScreen extends Component {
                     <View style={styles.line} />
                 </View>
                 <View style={styles.line2} />
-                <Text>거래방법선택</Text>
-                <Button
-                    title="직접거래"
-                    type="outline"
-                    style={{backgroundColor:'black'}}
-                />
-                <Button
-                    title="택배거래"
-                    type="outline"
-                    style={{backgroundColor:'black'}}
-                />
+                <View style={styles.box}>
+                    <Text>거래방법선택</Text>
+                    <View style={styles.selectBtn}>
+                        {multipleData.map(deal => (
+                            <SelectMultipleButton
+                                key={deal}
+                                buttonViewStyle={{height: 40}}
+                                textStyle={{fontSize: 16}}
+                                highLightStyle={{
+                                    borderColor: "gray",
+                                    backgroundColor: "transparent",
+                                    textColor: "gray",
+                                    textTintColor: "#4630eb",
+                                    boardTintColor: "#4630eb"
+                                }}
+                                value={deal}
+                                selected={this.state.multipleSelectedData.includes(deal)}
+                                singleTap={valueTap => this.singleTapMultipleSelectedButtons(deal)}
+                            />
+                        ))}
+                    </View>
+                </View>
                 <View style={styles.line2} />
-                <Text>상품내용입력</Text>
-                <Text>사진첨부</Text>
+                <View style={styles.box}>
+                    <Text>상품내용입력</Text>
+                    <Text>사진첨부</Text>
+                </View>
             </ScrollView>
         )
     }
 }
+
+
 
 const styles = StyleSheet.create({
     box: {
@@ -183,6 +213,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         paddingTop: 16,
         paddingLeft: 4,
+    }
+    ,
+    selectBtn: {
+        flexWrap: "wrap",
+        flexDirection: "row",
+        justifyContent: "center"
     }
 })
 
