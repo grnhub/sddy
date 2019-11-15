@@ -19,6 +19,7 @@ import EvaluateScreen from './src/screens/EvaluateScreen';
 import PostProductScreen from './src/screens/PostProductScreen';
 import HistoryScreen_registrant from './src/screens/HistoryScreen_registrant';
 import HistoryAddScreen from './src/screens/HistoryAddScreen';
+import Test from './src/screens/Test';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -44,14 +45,15 @@ const ListStack = createStackNavigator(
 );
 const AttentionStack = createStackNavigator(
   {
-    EvaluateScreen
+    //EvaluateScreen
+    Test 
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
           title: '관심목록',
           headerRight: () => (<TouchableOpacity onPress={()=>alert('aa')}><View style={{marginRight:10}}><MaterialCommunityIcons name="bell" size={20}/></View></TouchableOpacity>)
       }),
-      initialRouteName: 'EvaluateScreen',
+      initialRouteName: 'Test',
   }
 );
 const ChattingStack = createStackNavigator(

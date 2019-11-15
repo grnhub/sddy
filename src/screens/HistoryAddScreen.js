@@ -12,7 +12,7 @@ export default class HistoryAddScreen extends Component {
         // 수정해야됨
         super(props);
         const historyData = this.props.navigation.getParam("history");
-        var d  = getHistory(historyData.pno);
+        var d  = historyData.histories;
 
         this.state = {
             history: historyData,

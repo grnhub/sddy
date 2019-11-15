@@ -31,12 +31,6 @@ export default class HistoryScreen extends Component {
         
      }
 
-    renderRepairMemo() {
-        return({
-
-        })
-
-    }
 
     renderHistory({item, index, separators}) {
         return (
