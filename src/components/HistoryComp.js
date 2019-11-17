@@ -6,7 +6,7 @@ export default class HistoryComp extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.history);
+        //console.log(this.props.history);
     }
 
     static defaultProps = {
@@ -21,16 +21,7 @@ export default class HistoryComp extends Component {
         }
 
     }
-
-    // 어차피 우리는 mongoose를 가지고 노는게 중요한게 아니라 
-    // 블록체인 기술을 사용한다는 것이 중요하기 때문에
-    // product 에 다 때려쳐박자
-    // 빨리 끝내야하니깐 ^_^ ..;
-    // 싕스쌤이 잘 해결해주었지만 사용하지 않을 것..
-    // 언넝 web3 
-
-
-
+ 
     render() {
         return(
             <View>

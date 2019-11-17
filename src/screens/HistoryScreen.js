@@ -11,14 +11,46 @@ export default class HistoryScreen extends Component {
         const historyData = this.props.navigation.getParam("history");
         var d  = historyData.histories;
 
+        // history.pid
         this.state = {
             history: historyData,
             data: d
         }
 
         console.log("============history,,,");
-        console.log(historyData);
-        console.log(d);
+        // console.log(historyData);
+        //console.log(d);
+
+        this.getHistoryFromFuturpia();
+    }
+
+    async getHistoryFromFuturpia() {
+        var d = [];
+        url = "http://developer.futurepia.io:3032/api/getDappContent";
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            Accept: "application/json", 
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            "dapp_name":"blockit",
+            "author":"blockit",
+            "permlink": this.state.history.pid
+        })
+        }).then(function(response) {
+            return response.json();
+          }).then(function(data) {
+            d = data;
+        });
+        //this.setState({ data: d.result.body });
+        console.log("============api");
+        console.log(d.result.body);
+        var j = JSON.parse(d.result.body);
+
+        this.setState({
+            data: j
+        })
     }
 
     renderReturnMemo() {
@@ -28,7 +60,6 @@ export default class HistoryScreen extends Component {
             
         } 
         return memo;
-        
      }
 
 
@@ -72,8 +103,8 @@ export default class HistoryScreen extends Component {
                           renderItem={this.renderHistory.bind(this)}
                           ItemSeparatorComponent={item => {
                               return <View></View>
-                          }}
-                          keyExtractor={item=>item._id}/>
+                          }} 
+                          keyExtractor={(item, index)=>index.toString()}/>
                 <View style={historyCss.row}>
                     <View style={historyCss.s1}><Image source={require('../images/location2.png')} style={historyCss.location}></Image></View>
                     <View style={historyCss.s2}><Text>현재</Text></View>
