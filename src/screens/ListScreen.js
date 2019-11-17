@@ -28,10 +28,7 @@ export default class ListScreen extends Component {
           this.setState({itemList: data});
         });
 
-
-        
       }
-
 
     setCategory(c) {
       this.setState({category: c});
@@ -72,7 +69,7 @@ export default class ListScreen extends Component {
     render() {
         return (
             
-          <View style={{paddingTop:5, paddingBottom: 50, width: "100%", height: "100%"}}>
+          <View style={ styles.overall }>
             <View style = { styles.scrollViewHolder }>
                 <ScrollView horizontal = { true } showsHorizontalScrollIndicator = { false }>
                   <TouchableOpacity onPress={()=>this.setCategory("0")}>
@@ -115,9 +112,12 @@ export default class ListScreen extends Component {
 
 const styles = StyleSheet.create(
   {
+    overall: {
+      width: "100%",
+      height: "100%"
+    },
      container:
      {
-        paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center'
      },
@@ -132,18 +132,19 @@ const styles = StyleSheet.create(
      {
         paddingTop: 5,
         paddingBottom: 5,
-        paddingRight: 20,
-        paddingLeft: 20,
+        paddingRight: 16,
+        paddingLeft: 16,
         color: 'black',
-        fontSize: 14
+        fontSize: 16
      },
      separator:
      {
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(0,0,0,0.5)',
+
      },
      selectTab: {
        borderBottomColor: '#4630eb',
-       borderBottomWidth: 2,
+       borderBottomWidth: 1,
      },
      
   });
