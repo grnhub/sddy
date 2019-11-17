@@ -24,7 +24,7 @@ export default class ListScreen extends Component {
           }
           return resp.json();
         }).then(data => {
-          console.log(data);
+          //console.log(data);
           this.setState({itemList: data});
         });
 
@@ -103,7 +103,7 @@ export default class ListScreen extends Component {
                     ItemSeparatorComponent={item => {
                       return <View></View>
                     }}
-                    keyExtractor={(item)=> item._id}
+                    keyExtractor={(item, index)=> index.toString()}
             ></FlatList>
         </View>
         )
