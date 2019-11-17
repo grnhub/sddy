@@ -29,7 +29,7 @@ export default class Item extends Component {
                 <View style={styles.product}>
                     <Text style={styles.productTitle}>{this.props.item.pname}</Text>
                     <Text style={styles.area}>{this.props.item.area}·3초전</Text> 
-                    <Text>{this.props.item.price}원/일</Text>
+                    <Text style={styles.price}>{this.props.item.price}원/일</Text>
                     <Text style={styles.heart}>♡{this.props.item.likeCount}</Text>
                 </View>     
             </TouchableOpacity>
@@ -42,35 +42,43 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: "row",
       width: "100%",
-      // borderWidth:1
-      paddingTop: 10,
-      paddingLeft: 10,
-      marginTop: 10,
-
+      paddingTop: 16,
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingBottom: 16,
+      borderBottomColor: '#ebebeb',
+      borderBottomWidth: 1
     },
     image: {
-        width: "100%", 
-        height: 110,
-        paddingLeft: 10,
-        paddingTop: 10,
-        paddingRight: 10,
-        borderRadius: 15,
+        width: 120, 
+        height: 104,
+        marginRight: 8,
+        borderRadius: 10,
         resizeMode: 'stretch'
     },
     product: {
-        flex:7, 
+        flex:6, 
         paddingTop: 10,
-        paddingLeft: 30
+        paddingLeft: 24
     },
     productTitle: {
         fontSize: 18
     },
     heart: {
+        width: "100%",
+        fontSize: 20,
+        color: '#7a7a7a',
         textAlign: 'right',
-        paddingRight: 15
+        textAlignVertical: 'bottom'
     },
     area: {
         color : '#cbcbcb'
+    },
+    price: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 5,
+        marginBottom: 5
     }
 
 });

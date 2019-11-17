@@ -151,14 +151,14 @@ export default class PostProductScreen extends Component {
                         {multipleData.map(deal => (
                             <SelectMultipleButton
                                 key={deal}
-                                buttonViewStyle={{height: 40}}
+                                buttonViewStyle={{height: 40, width: '46%'}}
                                 textStyle={{fontSize: 16}}
                                 highLightStyle={{
                                     borderColor: "gray",
                                     backgroundColor: "transparent",
                                     textColor: "gray",
                                     textTintColor: "#4630eb",
-                                    boardTintColor: "#4630eb"
+                                    borderTintColor: "#4630eb"
                                 }}
                                 value={deal}
                                 selected={this.state.multipleSelectedData.includes(deal)}
