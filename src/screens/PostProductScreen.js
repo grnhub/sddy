@@ -342,7 +342,7 @@ export default class PostProductScreen extends Component {
                         style={styles.root}
                     >
                         <MenuProvider style={{flex: 1}}>
-                        <View style={styles.toolbarContainer}>
+                            <View style={styles.toolbarContainer}>
                                 <CNToolbar
                                     style={{
                                         height: 35,
@@ -350,37 +350,10 @@ export default class PostProductScreen extends Component {
                                     iconSetContainerStyle={{
                                         flexGrow: 1,
                                         justifyContent: 'space-evenly',
-                                        alignItems: 'center',
+                                        alignItems: 'flex-start',
                                     }}
                                     size={28} 
                                     iconSet={[
-                                        {
-                                            type: 'tool',
-                                            iconArray: [{
-                                                toolTypeText: 'bold',
-                                                buttonTypes: 'style',
-                                                iconComponent: <MaterialCommunityIcons name="format-bold" />
-                                            }, 
-                                            {
-                                                toolTypeText: 'italic',
-                                                buttonTypes: 'style',
-                                                iconComponent: <MaterialCommunityIcons name="format-italic" />
-                                            },
-                                            {
-                                                toolTypeText: 'underline',
-                                                buttonTypes: 'style',
-                                                iconComponent: <MaterialCommunityIcons name="format-underline" />
-                                            },
-                                            {
-                                                toolTypeText: 'lineThrough',
-                                                buttonTypes: 'style',
-                                                iconComponent: <MaterialCommunityIcons name="format-strikethrough-variant" />
-                                            }
-                                        ]
-                                        },
-                                        {
-                                            type: 'seperator'
-                                        },
                                         {
                                             type: 'tool',
                                             iconArray: [
@@ -400,23 +373,23 @@ export default class PostProductScreen extends Component {
                                     selectedColor='white' // optional (will override default selectedColor)
                                     selectedBackgroundColor='gray' // optional (will override default selectedBackgroundColor)
                                 /> 
-                            </View>
-                            <TouchableWithoutFeedback onPress={Keyboard.dismiss} >             
-                                <View style={styles.main}>
-                                    <CNRichTextEditor                   
-                                        ref={input => this.editor = input}
-                                        onSelectedTagChanged={this.onSelectedTagChanged}
-                                        onSelectedStyleChanged={this.onSelectedStyleChanged}
-                                        value={this.state.value}
-                                        style={styles.editor}
-                                        styleList={this.customStyles}
-                                        foreColor='dimgray' // optional (will override default fore-color)
-                                        textInputStyle={fontSize=12}
-                                        onValueChanged={this.onValueChanged}
-                                        onRemoveImage={this.onRemoveImage}
-                                    />                        
                                 </View>
-                            </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={Keyboard.dismiss} >             
+                                    <View style={styles.main}>
+                                        <CNRichTextEditor                   
+                                            ref={input => this.editor = input}
+                                            onSelectedTagChanged={this.onSelectedTagChanged}
+                                            onSelectedStyleChanged={this.onSelectedStyleChanged}
+                                            value={this.state.value}
+                                            style={styles.editor}
+                                            styleList={this.customStyles}
+                                            foreColor='dimgray' // optional (will override default fore-color)
+                                            textInputStyle={fontSize=12}
+                                            onValueChanged={this.onValueChanged}
+                                            onRemoveImage={this.onRemoveImage}
+                                        />                        
+                                    </View>
+                                </TouchableWithoutFeedback>
                         </MenuProvider>
                     </KeyboardAvoidingView>
                 </View>
