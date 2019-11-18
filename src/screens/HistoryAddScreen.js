@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Text, View, Image, ScrollView,KeyboardAvoidingView} from 'react-native';
 import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-base';
 import historyCss from '../css/HistoryStyle';
-import getHistory from '../components/History';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CheckBox,Button } from 'react-native-elements';
 
@@ -65,7 +64,7 @@ export default class HistoryAddScreen extends Component {
                     </View>
                     <View style={historyCss.namebox}>
                         <Text style={historyCss.name}>홍길동</Text>
-                        <Text style={historyCss.productName}>{this.state.history.name}</Text>
+                        <Text style={historyCss.productName}>{this.state.history.pname}</Text>
                     </View>
                 </View>
                 <View style={{flex: 1}}>
