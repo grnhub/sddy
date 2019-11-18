@@ -10,6 +10,14 @@ export default class DetailScreen extends Component {
             product: this.props.navigation.getParam("item")
         }
     }
+
+    numberWithCommas() {
+        var m = this.state.product.price;
+        return m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+
+
     render() {
         return (
             <View style={styles.container}>
@@ -39,7 +47,7 @@ export default class DetailScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <Text style={styles.price}>{this.state.product.price}원/일</Text>
+                        <Text style={styles.price}>{this.numberWithCommas()}원/일</Text>
                     </View>
                     <View style={styles.bottom}>
                         <TouchableOpacity onPress={()=> Alert.alert('채팅신청',

@@ -27,7 +27,7 @@ export default class HistoryComp extends Component {
             <View>
                 <View style={historyCss.row}>
                     <View style={historyCss.s1}><Image source={require('../images/location1.png')} style={historyCss.location}></Image></View>
-                    <View style={historyCss.s2}><Text>대여</Text></View>
+                    <View style={historyCss.s2}><Text>대여자 {this.props.history.lender}</Text></View>
                     <View style={historyCss.s2}><Text>{this.props.history.rentDate ? this.props.history.rentDate.substring(0,10) : "-"}</Text></View>
                 </View>
                 <View style={historyCss.row2}>

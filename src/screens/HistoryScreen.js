@@ -17,10 +17,6 @@ export default class HistoryScreen extends Component {
             data: d
         }
 
-        console.log("============history,,,");
-        // console.log(historyData);
-        //console.log(d);
-
         this.getHistoryFromFuturpia();
     }
 
@@ -43,9 +39,7 @@ export default class HistoryScreen extends Component {
           }).then(function(data) {
             d = data;
         });
-        //this.setState({ data: d.result.body });
-        console.log("============api");
-        console.log(d.result.body);
+
         var j = JSON.parse(d.result.body);
 
         this.setState({

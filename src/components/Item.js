@@ -14,6 +14,41 @@ export default class Item extends Component {
         onPress: () => console.log("push")
     }
 
+    getTime() {
+
+        var date = new Date();
+        var yy = date.getFullYear();
+        var mm = date.getMonth() + 1; // getMonth() is zero-based
+        var dd = date.getDate();
+        var d = [yy,(mm>9 ? '' : '0') + mm,(dd>9 ? '' : '0') + dd].join('-');
+
+        var ud = this.props.item.uploadDate;
+        var newud = ud.substring(0,10);
+
+        if(d == newud) 
+            return "오늘";
+        else {
+
+            if(ud.substring(0,4) != yy) {
+                return yy - ud.substring(0,4)*1 + "년전";
+            } else if(ud.substring(5,7) != mm) {
+                
+                return mm - ud.substring(5,7)*1 + "달전";
+            } else {
+                
+                return dd - ud.substring(8,10)*1 + "일전";
+            }
+        }
+
+    }
+
+    numberWithCommas() {
+        var m = this.props.item.price;
+        return m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+
+
     render() {
         return (
             <TouchableOpacity
@@ -28,8 +63,8 @@ export default class Item extends Component {
 
                 <View style={styles.product}>
                     <Text style={styles.productTitle}>{this.props.item.pname}</Text>
-                    <Text style={styles.area}>{this.props.item.area}·3초전</Text> 
-                    <Text style={styles.price}>{this.props.item.price}원/일</Text>
+                    <Text style={styles.area}>{this.props.item.area}·{this.getTime()}</Text> 
+                    <Text style={styles.price}>{this.numberWithCommas()}원/일</Text>
                     <Text style={styles.heart}>♡{this.props.item.likeCount}</Text>
                 </View>     
             </TouchableOpacity>
