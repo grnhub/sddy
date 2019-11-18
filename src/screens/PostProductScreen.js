@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Dimensions, Platform } from 'react-native';
-import { DatePicker} from 'native-base';
+import { DatePicker } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import { SelectMultipleButton } from 'react-native-selectmultiple-button';
 import _ from 'lodash';
@@ -13,11 +13,11 @@ import { Menu, MenuOption, MenuOptions, MenuTrigger, MenuProvider, renderers } f
 
 //상품 카테고리 선택 category
 const category = [
-    {label: '디지털/가전', value: 1},
-    {label: '유아용품', value: 2},
-    {label: '운동기기', value: 3},
-    {label: '뷰티/미용', value: 4},
-    {label: '기타', value: 5}
+    { label: '디지털/가전', value: 1 },
+    { label: '유아용품', value: 2 },
+    { label: '운동기기', value: 3 },
+    { label: '뷰티/미용', value: 4 },
+    { label: '기타', value: 5 }
 ];
 
 //거래방식 선택
@@ -30,35 +30,36 @@ const { width, height } = Dimensions.get('window');
 const defaultStyles = getDefaultStyles();
 
 export default class PostProductScreen extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.customStyles = {...defaultStyles, body: {fontSize: 12}, heading : {fontSize: 16}
-        , bold: {fontSize: 12, fontWeight: 'bold', color: 'black'}
+        this.customStyles = {
+            ...defaultStyles, body: { fontSize: 12 }, heading: { fontSize: 16 }
+            , bold: { fontSize: 12, fontWeight: 'bold', color: 'black' }
         };
         this.state = {
             category: '',                //상품 카테고리
             pname: '',                   //상품명
             price: '',                   //가격
-            uploadDate : '',             //히스토리에 자동으로 등록되는 시간
-            allowDateStart : null,
-            allowDateEnd : null,
-            multipleSelectedData : [],   //거래방식 선택
+            uploadDate: '',             //히스토리에 자동으로 등록되는 시간
+            allowDateStart: null,
+            allowDateEnd: null,
+            multipleSelectedData: [],   //거래방식 선택
             selectedTag: 'body',         //상품설명 입력
             // selectedColor: 'default',
             // selectedHighlight: 'default',
             // colors: ['red','green', 'blue'],
             // highlights: ['yellow_hl', 'pink_hl', 'orange_hl', 'green_hl', 'puple_hl', 'blue_hl'],
-            selectedStyles: [],          
+            selectedStyles: [],
             value: [getInitialObject()],
-            image: '', 
+            image: '',
         };
         //상품이름 입력, 제목
         inputPname = (text) => {
-            this.setState({pname: text})
+            this.setState({ pname: text })
         };
         //가격 입력, 금액
         inputPrice = (text) => {
-            this.setState({price: text})
+            this.setState({ price: text })
         };
 
         this.onStartDateChange = this.onStartDateChange.bind(this);
@@ -83,15 +84,15 @@ export default class PostProductScreen extends Component {
     //거래방식 선택 버튼
     singleTapMultipleSelectedButtons(deal) {
         if (this.state.multipleSelectedData.includes(deal)) {
-          _.remove(this.state.multipleSelectedData, ele => {
-            return ele === deal;
-          });
+            _.remove(this.state.multipleSelectedData, ele => {
+                return ele === deal;
+            });
         } else {
-          this.state.multipleSelectedData.push(deal);
+            this.state.multipleSelectedData.push(deal);
         }
-    
+
         this.setState({
-          multipleSelectedData: this.state.multipleSelectedData
+            multipleSelectedData: this.state.multipleSelectedData
         });
     }
 
@@ -135,47 +136,47 @@ export default class PostProductScreen extends Component {
         const cameraRoll = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
         this.setState({
-        hasCameraPermission: camera.status === 'granted',
-        hasCameraRollPermission: cameraRoll.status === 'granted'
+            hasCameraPermission: camera.status === 'granted',
+            hasCameraRollPermission: cameraRoll.status === 'granted'
         });
     };
     useLibraryHandler = async () => {
         await this.askPermissionsAsync();
         let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 4],
-        base64: false,
+            allowsEditing: true,
+            aspect: [4, 4],
+            base64: false,
         });
-        
+
         this.insertImage(result.uri);
     };
     useCameraHandler = async () => {
         await this.askPermissionsAsync();
         let result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [4, 4],
-        base64: false,
+            allowsEditing: true,
+            aspect: [4, 4],
+            base64: false,
         });
-        console.log("카메라 핸들러"+result);
-        
+        console.log("카메라 핸들러" + result);
+
         this.insertImage(result.uri);
     };
     onImageSelectorClicked = (value) => {
-        if(value == 1) {
-            this.useCameraHandler();    
+        if (value == 1) {
+            this.useCameraHandler();
         }
-        else if(value == 2) {
-            this.useLibraryHandler();         
+        else if (value == 2) {
+            this.useLibraryHandler();
         }
     }
     // onColorSelectorClicked = (value) => {
-        
+
     //     if(value === 'default') {
     //         this.editor.applyToolbar(this.state.selectedColor);
     //     }
     //     else {
     //         this.editor.applyToolbar(value);
-           
+
     //     }
 
     //     this.setState({
@@ -189,7 +190,7 @@ export default class PostProductScreen extends Component {
     //     }
     //     else {
     //         this.editor.applyToolbar(value);
-           
+
     //     }
 
     //     this.setState({
@@ -199,33 +200,33 @@ export default class PostProductScreen extends Component {
     renderImageSelector() {
         return (
             <Menu renderer={SlideInMenu} onSelect={this.onImageSelectorClicked}>
-            <MenuTrigger>
-                <MaterialCommunityIcons name="image" size={28} color="#737373" />
-            </MenuTrigger>
-            <MenuOptions>
-                <MenuOption value={1}>
-                    <Text style={styles.menuOptionText}>
-                        사진 찍기
+                <MenuTrigger>
+                    <MaterialCommunityIcons name="image" size={28} color="#737373" />
+                </MenuTrigger>
+                <MenuOptions>
+                    <MenuOption value={1}>
+                        <Text style={styles.menuOptionText}>
+                            사진 찍기
                     </Text>
-                </MenuOption>
-                <View style={styles.divider}/>
-                <MenuOption value={2} >
-                    <Text style={styles.menuOptionText}>
-                        앨범에서 선택
+                    </MenuOption>
+                    <View style={styles.divider} />
+                    <MenuOption value={2} >
+                        <Text style={styles.menuOptionText}>
+                            앨범에서 선택
                     </Text>
-                </MenuOption> 
-                <View style={styles.divider}/>
-                <MenuOption value={3}>
-                    <Text style={styles.menuOptionText}>
-                        취소
+                    </MenuOption>
+                    <View style={styles.divider} />
+                    <MenuOption value={3}>
+                        <Text style={styles.menuOptionText}>
+                            취소
                     </Text>
-                </MenuOption>
-            </MenuOptions>
+                    </MenuOption>
+                </MenuOptions>
             </Menu>
         );
-    
+
     }
-    onRemoveImage = ({url, id}) => {        
+    onRemoveImage = ({ url, id }) => {
         // do what you have to do after removing an image
         console.log(`image removed (url : ${url})`);
     }
@@ -241,22 +242,22 @@ export default class PostProductScreen extends Component {
         const { allowDateStart, allowDateEnd } = this.state;
         const uploadDate = new Date();     //today 오늘
         const startDate = allowDateStart ? allowDateStart.toString() : '';
-        const endDate = allowDateEnd ?  allowDateEnd.toString() : '';
+        const endDate = allowDateEnd ? allowDateEnd.toString() : '';
 
-        return(
+        return (
             <ScrollView>
                 <View style={styles.box}>
-                    <RNPickerSelect 
+                    <RNPickerSelect
                         placeholder={categoryPlaceholder}
                         items={category}
-                        onValueChange={(value) => this.setState({category: value})}
+                        onValueChange={(value) => this.setState({ category: value })}
                         style={pickerSelectStyles}
                     />
                     <View style={styles.line} />
                     <TextInput style={styles.inputTitle}
-                                placeholder = "상품명(제목)"
-                                placeholderTextColor = "#d5d5d5"
-                                onChangeText = {this.inputPname}
+                        placeholder="상품명(제목)"
+                        placeholderTextColor="#d5d5d5"
+                        onChangeText={this.inputPname}
                     />
                 </View>
                 <View style={styles.line2} />
@@ -286,7 +287,7 @@ export default class PostProductScreen extends Component {
                             locale={"ko"}
                             timeZoneOffsetInMinutes={undefined}
                             modalTransparent={false}
-                            animationType={"fade"}
+                            animationType={"slide"}
                             androidMode={"default"}
                             placeHolderText="마지막날짜 선택"
                             textStyle={{ color: "#4630eb" }}
@@ -302,11 +303,13 @@ export default class PostProductScreen extends Component {
                     <Text>판매가격</Text>
                     <View style={styles.row}>
                         <TextInput style={styles.inputPrice}
-                                    placeholder = "판매가격 입력"
-                                    placeholderTextColor = "#d5d5d5"
-                                    onChangeText = {this.inputPrice}
+                            keyboardType='numeric'
+                            maxLength={20}
+                            placeholder="판매가격 입력"
+                            placeholderTextColor="#d5d5d5"
+                            onChangeText={this.inputPrice}
                         />
-                        <Text style={styles.won}>원</Text>
+                        <Text style={styles.won}>원/일</Text>
                     </View>
                     <View style={styles.line} />
                 </View>
@@ -317,8 +320,8 @@ export default class PostProductScreen extends Component {
                         {multipleData.map(deal => (
                             <SelectMultipleButton
                                 key={deal}
-                                buttonViewStyle={{height: 40, width: '46%'}}
-                                textStyle={{fontSize: 16}}
+                                buttonViewStyle={{ height: 40, width: '46%' }}
+                                textStyle={{ fontSize: 16 }}
                                 highLightStyle={{
                                     borderColor: "gray",
                                     backgroundColor: "transparent",
@@ -335,13 +338,34 @@ export default class PostProductScreen extends Component {
                 </View>
                 <View style={styles.line2} />
                 <View style={styles.box}>
-                    <KeyboardAvoidingView 
-                        behavior="padding" 
+                    <KeyboardAvoidingView
+                        behavior="padding"
                         enabled
                         keyboardVerticalOffset={IS_IOS ? 0 : 0}
                         style={styles.root}
                     >
-                        <MenuProvider style={{flex: 1}}>
+                    <ScrollView style={{flex: 1,
+                                        width: "100%",
+                                        padding: 1,
+                                }}    
+                    >
+                        <MenuProvider style={{ flex: 1 }}>
+                            <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+                                <View style={styles.main}>
+                                    <CNRichTextEditor
+                                        ref={input => this.editor = input}
+                                        onSelectedTagChanged={this.onSelectedTagChanged}
+                                        onSelectedStyleChanged={this.onSelectedStyleChanged}
+                                        value={this.state.value}
+                                        style={styles.editor}
+                                        styleList={this.customStyles}
+                                        foreColor='dimgray' // optional (will override default fore-color)
+                                        textInputStyle={fontSize = 12}
+                                        onValueChanged={this.onValueChanged}
+                                        onRemoveImage={this.onRemoveImage}
+                                    />
+                                </View>
+                            </TouchableWithoutFeedback>
                             <View style={styles.toolbarContainer}>
                                 <CNToolbar
                                     style={{
@@ -350,7 +374,7 @@ export default class PostProductScreen extends Component {
                                     iconSetContainerStyle={{
                                         flexGrow: 1,
                                         justifyContent: 'space-evenly',
-                                        alignItems: 'flex-start',
+                                        alignItems: 'center',
                                     }}
                                     size={28} 
                                     iconSet={[
@@ -358,10 +382,29 @@ export default class PostProductScreen extends Component {
                                             type: 'tool',
                                             iconArray: [
                                                 {
-                                                    toolTypeText: 'image',
-                                                    iconComponent: this.renderImageSelector()
+                                                    toolTypeText: 'ul',
+                                                    buttonTypes: 'tag',
+                                                    iconComponent:
+                                                    <MaterialCommunityIcons name="format-list-bulleted" />
+                                                },
+                                                {
+                                                    toolTypeText: 'ol',
+                                                    buttonTypes: 'tag',
+                                                    iconComponent:
+                                                    <MaterialCommunityIcons name="format-list-numbered" />
                                                 }
                                             ]
+                                        },
+                                        {
+                                            type: 'seperator'
+                                        },
+                                        {
+                                            type: 'tool',
+                                            iconArray: [
+                                            {
+                                                toolTypeText: 'image',
+                                                iconComponent: this.renderImageSelector()
+                                            }]
                                         },
                                         
                                     ]}
@@ -371,26 +414,11 @@ export default class PostProductScreen extends Component {
                                     backgroundColor="aliceblue" // optional (will override default backgroundColor)
                                     color="gray" // optional (will override default color)
                                     selectedColor='white' // optional (will override default selectedColor)
-                                    selectedBackgroundColor='gray' // optional (will override default selectedBackgroundColor)
+                                    selectedBackgroundColor='deepskyblue' // optional (will override default selectedBackgroundColor)
                                 /> 
-                                </View>
-                                <TouchableWithoutFeedback onPress={Keyboard.dismiss} >             
-                                    <View style={styles.main}>
-                                        <CNRichTextEditor                   
-                                            ref={input => this.editor = input}
-                                            onSelectedTagChanged={this.onSelectedTagChanged}
-                                            onSelectedStyleChanged={this.onSelectedStyleChanged}
-                                            value={this.state.value}
-                                            style={styles.editor}
-                                            styleList={this.customStyles}
-                                            foreColor='dimgray' // optional (will override default fore-color)
-                                            textInputStyle={fontSize=12}
-                                            onValueChanged={this.onValueChanged}
-                                            onRemoveImage={this.onRemoveImage}
-                                        />                        
-                                    </View>
-                                </TouchableWithoutFeedback>
+                        </View>
                         </MenuProvider>
+                        </ScrollView>
                     </KeyboardAvoidingView>
                 </View>
                 <View style={styles.box}>
@@ -419,7 +447,7 @@ const styles = StyleSheet.create({
         padding: 8,
         height: 48,
         fontSize: 16,
-        borderBottomWidth:1,
+        borderBottomWidth: 1,
         borderColor: '#d5d5d5'
     },
     row: {
@@ -427,16 +455,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputPrice: {
-        flex: 9,
-        padding: 8,
-        height: 52,
-        fontSize: 18,
+        flex: 8.5,
+        fontSize: 24,
+        paddingLeft: 16,
+        paddingTop: 16,
+        marginLeft: 'auto'
     },
     won: {
-        flex: 1,
+        flex: 1.5,
         fontSize: 18,
         paddingTop: 16,
         paddingLeft: 4,
+        color: 'gray'
     }
     ,
     selectBtn: {
@@ -448,9 +478,9 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         paddingTop: 1,
-        backgroundColor:'#eee',
-        flexDirection: 'column', 
-        justifyContent: 'flex-end', 
+        backgroundColor: '#eee',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
     },
     main: {
         flex: 1,
@@ -461,8 +491,8 @@ const styles = StyleSheet.create({
         height: 384,
         alignItems: 'stretch',
     },
-    editor: { 
-        backgroundColor : '#fff'
+    editor: {
+        backgroundColor: '#fff'
     },
     toolbarContainer: {
         minHeight: 35
