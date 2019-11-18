@@ -64,7 +64,7 @@ export default class HistoryAddScreen extends Component {
                     </View>
                     <View style={historyCss.namebox}>
                         <Text style={historyCss.name}>홍길동</Text>
-                        <Text style={historyCss.productName}>{this.state.history.name}</Text>
+                        <Text style={historyCss.productName}>{this.state.history.pname}</Text>
                     </View>
                 </View>
                 <View style={{flex: 1}}>

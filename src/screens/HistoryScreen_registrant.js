@@ -9,12 +9,42 @@ export default class HistoryScreen_registrant extends Component {
         // 수정해야됨
         super(props);
         const historyData = this.props.navigation.getParam("history");
-        var d  = historyData.histories;
+        
 
+        // history.pid
         this.state = {
             history: historyData,
-            data: d
+            data: []
         }
+
+        this.getHistoryFromFuturpia();
+    }
+
+    async getHistoryFromFuturpia() {
+        var d = [];
+        url = "http://developer.futurepia.io:3032/api/getDappContent";
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            Accept: "application/json", 
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            "dapp_name":"blockit",
+            "author":"blockit",
+            "permlink": this.state.history.pid
+        })
+        }).then(function(response) {
+            return response.json();
+          }).then(function(data) {
+            d = data;
+        });
+
+        var j = JSON.parse(d.result.body);
+
+        this.setState({
+            data: j
+        })
     }
 
     renderReturnMemo() {
@@ -56,7 +86,7 @@ export default class HistoryScreen_registrant extends Component {
                     </View>
                     <View style={historyCss.namebox}>
                         <Text style={historyCss.name}>홍길동</Text>
-                        <Text style={historyCss.productName}>{this.state.history.name}</Text>
+                        <Text style={historyCss.productName}>{this.state.history.pname}</Text>
                     </View>
                 </View>
                 <View style={historyCss.row}>
@@ -64,11 +94,6 @@ export default class HistoryScreen_registrant extends Component {
                     <View style={historyCss.s2}><Text>제품 등록</Text></View>
                     <View style={historyCss.s2}><Text>{this.state.history.uploadDate ? this.state.history.uploadDate.substring(0, 10) : this.getDateNow()}</Text></View>
                     
-                </View>
-                <View style={historyCss.row}>
-                    <View style={historyCss.s1}><Image source={require('../images/location1.png')} style={historyCss.location}></Image></View>
-                    <View style={historyCss.s2}><Text>대여</Text></View>
-                    <View style={historyCss.s2}><Text>{this.state.data.rentDate}</Text></View>
                 </View>
 
                 <FlatList data={this.state.data}

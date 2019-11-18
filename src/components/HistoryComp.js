@@ -24,7 +24,7 @@ export default class HistoryComp extends Component {
  
     render() {
         return(
-            <View>
+            <View style={{borderTopWidth:2}}>
                 <View style={historyCss.row}>
                     <View style={historyCss.s1}><Image source={require('../images/location1.png')} style={historyCss.location}></Image></View>
                     <View style={historyCss.s2}><Text>대여자 {this.props.history.lender}</Text></View>
