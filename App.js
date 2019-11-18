@@ -19,6 +19,7 @@ import EvaluateScreen from './src/screens/EvaluateScreen';
 import PostProductScreen from './src/screens/PostProductScreen';
 import HistoryScreen_registrant from './src/screens/HistoryScreen_registrant';
 import HistoryAddScreen from './src/screens/HistoryAddScreen';
+import BorrowingScreen from './src/screens/BorrowingScreen';
 import Test from './src/screens/Test';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -45,15 +46,15 @@ const ListStack = createStackNavigator(
 );
 const AttentionStack = createStackNavigator(
   {
-    //EvaluateScreen
-    Test 
+    EvaluateScreen
+    //Test 
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
           title: '관심목록',
           headerRight: () => (<TouchableOpacity onPress={()=>alert('aa')}><View style={{marginRight:10}}><MaterialCommunityIcons name="bell" size={20}/></View></TouchableOpacity>)
       }),
-      initialRouteName: 'Test',
+      initialRouteName: 'EvaluateScreen',
   }
 );
 const ChattingStack = createStackNavigator(
@@ -82,7 +83,10 @@ const MyStack = createStackNavigator(
         screen : ExchangingScreen
       },PostProductScreen: {
         screen: PostProductScreen   //물품등록하기
-      }
+      },BorrowingScreen: {
+        screen: BorrowingScreen //빌린내역
+      },
+      EvaluateScreen
   },
   {
       defaultNavigationOptions: ({navigation}) => ({

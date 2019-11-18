@@ -9,12 +9,12 @@ export default class HistoryScreen extends Component {
         // 수정해야됨
         super(props);
         const historyData = this.props.navigation.getParam("history");
-        var d  = historyData.histories;
+        
 
         // history.pid
         this.state = {
             history: historyData,
-            data: d
+            data: []
         }
 
         this.getHistoryFromFuturpia();
