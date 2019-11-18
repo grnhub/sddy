@@ -66,7 +66,7 @@ export default class MyScreen extends Component {
             
 
             
-            <ListItem icon onPress={()=>alert('aa')}>
+            <ListItem icon onPress={()=>this.props.navigation.push('BorrowingScreen')}>
               <Left>
               <MaterialCommunityIcons name="playlist-check" size={30} />
                 </Left>

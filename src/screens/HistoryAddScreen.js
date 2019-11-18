@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Text, View, Image, ScrollView,KeyboardAvoidingView} from 'react-native';
 import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-base';
 import historyCss from '../css/HistoryStyle';
-import getHistory from '../components/History';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CheckBox,Button } from 'react-native-elements';
 

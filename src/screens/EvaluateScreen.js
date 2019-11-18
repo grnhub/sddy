@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView,Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView,Image,Platform } from 'react-native';
 import { Rating, AirbnbRating,Button } from 'react-native-elements';
 import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-base';
 import historyCss from '../css/HistoryStyle';
@@ -11,8 +11,18 @@ export default class Test extends Component {
     constructor(props) {
         super(props);
 
-        console.log("------------------------------ Test");
-        this.getProductList();
+        var item = this.props.navigation.getParam("item");
+        console.log(item);
+        // var dd = JSON.parse(item).pid;
+        // console.log("pid  :" );
+        this.state = {
+            // pname : item.pname,
+            // image : item.image,
+            id: '',
+            userMemo: '', 
+            rentDate: '2019-11-08',
+            name : '강원기'
+        }
     }
 
     selectStar(index) {
@@ -23,6 +33,54 @@ export default class Test extends Component {
         return(
             <Text>asdfffsafd</Text>
         )
+    }
+
+    getDateNow() {
+        var date = new Date();
+        var mm = date.getMonth() + 1; // getMonth() is zero-based
+        var dd = date.getDate();
+      
+        return [date.getFullYear(),
+                (mm>9 ? '' : '0') + mm,
+                (dd>9 ? '' : '0') + dd
+               ].join('-');
+    };
+
+    async updateFuturpia() {
+        var bodyObj = [{
+            id: this.state.id,
+            userMemo : this.state.userMemo,
+            rentDate : this.state.rentDate,
+            returnDate : this.getDateNow(),
+            lender : this.state.name,
+            rentalDays : "10"
+        }]
+
+        var obj = {
+            dapp_name: "blockit",
+            author: "blockit",
+            pwd: "qmffhrdlt",
+            permlink: this.state.id,
+            title:"History",
+            body: JSON.stringify(bodyObj)
+        }
+        var objJson = JSON.stringify(obj);
+
+        var d = [];
+        url = "http://developer.futurepia.io:3032/api/commentDapp";
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            Accept: "application/json", 
+            "Content-Type": "application/json"
+          },
+          body: objJson
+        }).then(function(response) {
+            return response.json();
+          }).then(function(data) {
+              console.log("comment update success,,, get block number");
+              console.log(data);
+        });
     }
 
     ///api/commentDapp post dapp_name=(string)&author=(string)&pwd=(string)&parent_author=(string)&parent_permlink=(string)&permlink=(string)&title=(string)&body=(string)&json_meta=(string)
@@ -40,11 +98,11 @@ export default class Test extends Component {
                     paddingLeft: 10,
                     fontSize: 20}}> 
                     <View style={{flex: 2}}>
-                        <Image source={{uri: 'http://img.hani.co.kr/imgdb/resize/2018/0209/00500596_20180209.JPG'}} style={historyCss.image}></Image>
+                        <Image source={{uri: this.state.image}} style={historyCss.image}></Image>
                     </View>
                     <View style={historyCss.namebox}>
                         <Text style={historyCss.name}>홍길동</Text>
-                        <Text style={historyCss.productName}>'Samsung Galaxy'</Text>
+                        <Text style={historyCss.productName}>{this.state.panme}</Text>
                     </View>
                 </View>
                 <View style={styles.content2}>
@@ -71,7 +129,7 @@ export default class Test extends Component {
                     <View><Text>상세평가</Text></View>
                     <Content>
                         <Form>
-                            <Textarea rowSpan={3} bordered placeholder="Textarea" />
+                            <Textarea rowSpan={3} bordered placeholder="Textarea" onChangeText={(text) => this.setState({userMemo : text})} />
                         </Form>
                     </Content>
                 </View>
@@ -96,7 +154,7 @@ export default class Test extends Component {
                     justifyContent: 'center',
                     width: 130,
                     backgroundColor: '#4630EB'}}
-                    onPress={() => console.log('bb')}
+                    onPress={() => this.updateFuturpia()}
                     title='등록하기' 
                     />
                 </View>
