@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-import Item from '../components/Item';
+import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList, Alert } from 'react-native';
+import Borrowing from '../components/Borrowing';
 
 export default class BorrowingScreen extends Component {
 
@@ -38,9 +38,23 @@ export default class BorrowingScreen extends Component {
     renderItemList({item, index, separators}) {
 
         return (
-        <Item
+        <Borrowing
             item={item}
-            onPress={() => this.props.navigation.push("EvaluateScreen", {item: item}) }
+            onPress={() => Alert.alert('안내', '반납 신청합니다. 평가를 남기시겠습니까?',
+                                  [
+                                    {
+                                      text: '취소',
+                                      onPress: ()=> console.log("asd")
+                                    },
+                                    {
+                                      text: '네',
+                                      onPress: ()=> this.props.navigation.push("EvaluateScreen", {item: item}),
+                                      style: 'cancel'
+                                    }
+                                    
+                                  ])
+              
+               }
 
         />
         )
