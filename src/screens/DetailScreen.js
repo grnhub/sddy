@@ -9,6 +9,7 @@ export default class DetailScreen extends Component {
         this.state = {
             product: this.props.navigation.getParam("item")
         }
+        console.log(this.state.product);
     }
 
     numberWithCommas() {
@@ -16,7 +17,19 @@ export default class DetailScreen extends Component {
         return m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
+    async likeCountIncrease() {
+        //console.log(this.state.product._id);
+        url = "http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/" + this.state.product._id;
+        await fetch(url, {
+          method: "PUT"
+        }).then(function(response) {
+            //console.log(response);
+            //return response.json();
+          }).then(function(data) {
+            //console.log(data);
+        });
 
+    }
 
     render() {
         return (
@@ -30,18 +43,17 @@ export default class DetailScreen extends Component {
                         <View style={styles.flexsetting}>
                             <Text style={styles.productName}>{this.state.product.pname}</Text>
                             <View style={styles.interest}>
-                                <TouchableOpacity onPress={()=>Alert.alert('관심목록',
-                                    '관심목록에 추가하시겠습니까?',
-                                    [
-                                    {
-                                        text: '취소',
-                                        onPress: () => console.log('Cancel Pressed'),
-                                        style: 'cancel',
-                                    },
-                                    {   text: '예', 
-                                        onPress: () => console.log('관심 목록 추가')},
-                                    ],
-                                    {cancelable: false}
+                                <TouchableOpacity onPress={()=>Alert.alert('관심목록', '관심목록에 추가하시겠습니까?',
+                                        [
+                                            {
+                                                text: '취소',
+                                                onPress: () => console.log('Cancel Pressed'),
+                                                style: 'cancel',
+                                            },
+                                            {   text: '예', 
+                                                onPress: () => this.likeCountIncrease()},
+                                        ],
+                                        {cancelable: false}
                                     )}>
                                     <MaterialCommunityIcons name="heart-outline" size={32}/>
                                 </TouchableOpacity>

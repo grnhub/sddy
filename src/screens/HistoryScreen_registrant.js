@@ -85,7 +85,7 @@ export default class HistoryScreen_registrant extends Component {
                         <Image source={{uri: this.state.history.image}} style={historyCss.image}></Image>
                     </View>
                     <View style={historyCss.namebox}>
-                        <Text style={historyCss.name}>홍길동</Text>
+                        <Text style={historyCss.name}>{this.state.history.nickname}</Text>
                         <Text style={historyCss.productName}>{this.state.history.pname}</Text>
                     </View>
                 </View>

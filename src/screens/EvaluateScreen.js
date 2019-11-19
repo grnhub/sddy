@@ -5,23 +5,15 @@ import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-ba
 import historyCss from '../css/HistoryStyle';
 import Stars from 'react-native-stars';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { addHistory } from '../apis/HistoryAdd';
 
-export default class Test extends Component {
+export default class EvaluateScreen extends Component {
  
     constructor(props) {
         super(props);
-
-        var item = this.props.navigation.getParam("item");
-        console.log(item);
-        // var dd = JSON.parse(item).pid;
-        // console.log("pid  :" );
         this.state = {
-            // pname : item.pname,
-            // image : item.image,
-            id: '',
+            product : this.props.navigation.getParam("item"),
             userMemo: '', 
-            rentDate: '2019-11-08',
-            name : '강원기'
         }
     }
 
@@ -47,39 +39,25 @@ export default class Test extends Component {
     };
 
     async updateFuturpia() {
-        var bodyObj = [{
-            id: this.state.id,
+        var bodyObj = {
+            id: this.state.product.pid,
             userMemo : this.state.userMemo,
-            rentDate : this.state.rentDate,
+            rentDate : '2019-01-05',
             returnDate : this.getDateNow(),
-            lender : this.state.name,
+            lender : '꾸요미',
             rentalDays : "10"
-        }]
+        };
 
-        var obj = {
-            dapp_name: "blockit",
-            author: "blockit",
-            pwd: "qmffhrdlt",
-            permlink: this.state.id,
-            title:"History",
-            body: JSON.stringify(bodyObj)
-        }
-        var objJson = JSON.stringify(obj);
+        console.log(this.state.product.pid);
 
-        var d = [];
-        url = "http://developer.futurepia.io:3032/api/commentDapp";
-        await fetch(url, {
-          method: "POST",
-          headers: {
-            Accept: "application/json", 
-            "Content-Type": "application/json"
-          },
-          body: objJson
-        }).then(function(response) {
-            return response.json();
-          }).then(function(data) {
-              console.log("comment update success,,, get block number");
-              console.log(data);
+
+        addHistory(this.state.product.pid, bodyObj);
+    }
+
+
+    changeUserMemo(txt) {
+        this.setState({
+            userMemo: txt
         });
     }
 
@@ -98,11 +76,11 @@ export default class Test extends Component {
                     paddingLeft: 10,
                     fontSize: 20}}> 
                     <View style={{flex: 2}}>
-                        <Image source={{uri: this.state.image}} style={historyCss.image}></Image>
+                        <Image source={{uri: this.state.product.image}} style={historyCss.image}></Image>
                     </View>
                     <View style={historyCss.namebox}>
-                        <Text style={historyCss.name}>홍길동</Text>
-                        <Text style={historyCss.productName}>{this.state.panme}</Text>
+                        <Text style={historyCss.name}>{this.state.product.nickname}</Text>
+                        <Text style={historyCss.productName}>{this.state.product.pname}</Text>
                     </View>
                 </View>
                 <View style={styles.content2}>
@@ -129,7 +107,7 @@ export default class Test extends Component {
                     <View><Text>상세평가</Text></View>
                     <Content>
                         <Form>
-                            <Textarea rowSpan={3} bordered placeholder="Textarea" onChangeText={(text) => this.setState({userMemo : text})} />
+                            <Textarea rowSpan={3} bordered placeholder="Textarea" onChangeText={(text) => this.changeUserMemo(text)} />
                         </Form>
                     </Content>
                 </View>
@@ -140,22 +118,21 @@ export default class Test extends Component {
                         justifyContent: 'space-around',
                         padding: 10,}}>
                     <Button
-                    buttonStyle={{alignContent: 'center',
-                    justifyContent: 'center',
-                    width: 130,
-                    backgroundColor: '#cdcdcd'}}
-                    onPress={() => console.log('aa')}
-                    
-                    title='취소하기'
+                        buttonStyle={{alignContent: 'center',
+                        justifyContent: 'center',
+                        width: 130,
+                        backgroundColor: '#cdcdcd'}}
+                        onPress={() => console.log(this.state.userMemo)}
+                        title='취소하기'
                     />
     
                     <Button
-                    buttonStyle={{alignContent: 'center',
-                    justifyContent: 'center',
-                    width: 130,
-                    backgroundColor: '#4630EB'}}
-                    onPress={() => this.updateFuturpia()}
-                    title='등록하기' 
+                        buttonStyle={{alignContent: 'center',
+                        justifyContent: 'center',
+                        width: 130,
+                        backgroundColor: '#4630EB'}}
+                        onPress={() => this.updateFuturpia()}
+                        title='등록하기' 
                     />
                 </View>
             </KeyboardAvoidingView>
