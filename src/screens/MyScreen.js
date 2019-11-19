@@ -53,84 +53,72 @@ export default class MyScreen extends Component {
           <List>
 
             <ListItem icon onPress={()=>alert('aa')}>
-              <Left>
-              <MaterialCommunityIcons name="playlist-check" size={30} />
-              </Left>
-              <Body style={{justifyContent:'flex-start'}}>
-              <Text>빌려준 내역</Text>
+              <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <MaterialCommunityIcons name="playlist-check" size={30}/>
+                <Text style={{marginLeft:20}}>빌려준 내역</Text>
               </Body>
               <Right>
-              <MaterialCommunityIcons name="chevron-right" size={30} />
+                <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
             </ListItem>
             
 
             
             <ListItem icon onPress={()=>this.props.navigation.push('BorrowingScreen')}>
-              <Left>
-              <MaterialCommunityIcons name="playlist-check" size={30} />
-                </Left>
-                <Body style={{justifyContent:'flex-start'}}>
-                <Text>빌린 내역</Text>
-                </Body>
+              <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <MaterialCommunityIcons name="playlist-check" size={30}/>
+                <Text style={{marginLeft:20}}>빌린 내역</Text>
+              </Body>
               <Right>
-              <MaterialCommunityIcons name="chevron-right" size={30} />
+                <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
             </ListItem>
 
             
             <ListItem icon onPress={()=>alert('aa')}>
-              <Left>
-              <MaterialCommunityIcons name="heart-circle" size={30} />
-                </Left>
-                <Body style={{justifyContent:'flex-start'}}>
-                <Text>관심 목록</Text>
-                </Body>
+              <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <MaterialCommunityIcons name="heart-circle" size={30}/>
+                <Text style={{marginLeft:20}}>관심 목록</Text>
+              </Body>
               <Right>
-              <MaterialCommunityIcons name="chevron-right" size={30} />
+                <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
             </ListItem>
             
 
             
             <ListItem icon onPress={()=>this.props.navigation.push('PostProductScreen')}>
-              <Left>
-              <MaterialCommunityIcons name="playlist-edit" size={30} />
-                </Left>
-              <Body style={{justifyContent:'flex-start'}}>
-              <Text>물품등록하기</Text>
+              <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <MaterialCommunityIcons name="playlist-edit" size={30}/>
+                <Text style={{marginLeft:20}}>물품등록하기</Text>
               </Body>
               <Right>
-              <MaterialCommunityIcons name="chevron-right" size={30} />
+                <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
             </ListItem>
           
             <ListItem icon onPress={()=>this.props.navigation.push('WalletScreen')}>
-              <Left>
-              <MaterialCommunityIcons name="wallet" size={30} />
-                </Left>
-                <Body style={{justifyContent:'flex-start'}}>
-                <Text>나의 지갑</Text>
-                </Body>
+              <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <MaterialCommunityIcons name="wallet" size={30}/>
+                <Text style={{marginLeft:20}}>나의 지갑</Text>
+              </Body>
               <Right>
-              <MaterialCommunityIcons name="chevron-right" size={30} />
+                <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
             </ListItem>
           </List>
-
+          
           <ListItem itemDivider />
 
           <List>
-          
-          <ListItem onPress={()=>alert('aa')}>
+            <ListItem onPress={()=>alert('aa')}>
               <Left>
                 <Text>고객 센터</Text>
               </Left>
               <Right>
-              <MaterialCommunityIcons name="chevron-right" size={30} />
+                <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
-            </ListItem>
-            
+            </ListItem>  
           </List>
         </Content>
       </Container>

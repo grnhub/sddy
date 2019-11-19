@@ -386,19 +386,16 @@ export default class ExchangingScreen extends Component {
           </List>
           <List>
             <ListItem
-                containerStyle={{
-                    marginTop: 10,
-                    marginLeft:10,
-                    marginRight:10,
-                    height: 20,
-                    borderTopWidth: 1,
-                    borderTopColor: 'black',
-                    backgroundColor: '#CEE3F6',
-                }}
-                contentContainerStyle={{justifyContent:'center',alignContent: 'center'}}
-                title={'환전 금액 선택'}
-                titleStyle={{ fontSize: 16 }}
-            />
+              containerStyle={{
+                marginLeft:10,
+                marginRight:10,
+                height: 20,
+                borderTopWidth: 1,
+                borderTopColor: 'black',
+                backgroundColor: '#CEE3F6',
+              }}
+              title={'환전 금액 선택'}
+              titleStyle={{ fontSize: 16 ,marginTop: 16}}/>
             
             <ListItem selected={this.state.state1}
               onPress={this.updateHeader1.bind(this)}

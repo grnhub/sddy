@@ -46,15 +46,15 @@ const ListStack = createStackNavigator(
 );
 const AttentionStack = createStackNavigator(
   {
-    EvaluateScreen
-    //Test 
+    //EvaluateScreen
+    Test 
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
           title: '관심목록',
           headerRight: () => (<TouchableOpacity onPress={()=>alert('aa')}><View style={{marginRight:10}}><MaterialCommunityIcons name="bell" size={20}/></View></TouchableOpacity>)
       }),
-      initialRouteName: 'EvaluateScreen',
+      initialRouteName: 'Test',
   }
 );
 const ChattingStack = createStackNavigator(
@@ -85,8 +85,10 @@ const MyStack = createStackNavigator(
         screen: PostProductScreen   //물품등록하기
       },BorrowingScreen: {
         screen: BorrowingScreen //빌린내역
-      },
-      EvaluateScreen
+      }, 
+      EvaluateScreen : {
+        screen: EvaluateScreen
+      }
   },
   {
       defaultNavigationOptions: ({navigation}) => ({

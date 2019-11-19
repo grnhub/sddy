@@ -142,6 +142,7 @@ export default class ChargingScreen extends Component {
                 flexDirection: 'row',
                 marginTop: 10,
                 height: 40,
+                marginBottom: 10,
               }}>
               <Left>
                 <Text style={{ marginLeft: 16 }}>보유스낵:</Text>
@@ -156,7 +157,6 @@ export default class ChargingScreen extends Component {
           <List>
             <ListItem
               containerStyle={{
-                marginTop:10,
                 marginLeft:10,
                 marginRight:10,
                 height: 20,
@@ -164,9 +164,8 @@ export default class ChargingScreen extends Component {
                 borderTopColor: 'black',
                 backgroundColor: '#CEE3F6',
               }}
-              contentContainerStyle={{justifyContent:'center',alignContent: 'center'}}
               title={'충전 금액 선택'}
-              titleStyle={{ fontSize: 16 }}/>
+              titleStyle={{ fontSize: 16 ,marginTop: 16}}/>
             
             
             <ListItem selected={this.state.state1}
