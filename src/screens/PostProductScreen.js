@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Dimensions, Platform, TouchableOpacity } from 'react-native';
 import { DatePicker } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import { SelectMultipleButton } from 'react-native-selectmultiple-button';
@@ -44,6 +44,7 @@ export default class PostProductScreen extends Component {
             allowDateStart: null,
             allowDateEnd: null,
             multipleSelectedData: [],   //거래방식 선택
+            content: '',
             selectedTag: 'body',         //상품설명 입력
             // selectedColor: 'default',
             // selectedHighlight: 'default',
@@ -157,7 +158,6 @@ export default class PostProductScreen extends Component {
             aspect: [4, 4],
             base64: false,
         });
-        console.log("카메라 핸들러" + result);
 
         this.insertImage(result.uri);
     };
@@ -169,34 +169,7 @@ export default class PostProductScreen extends Component {
             this.useLibraryHandler();
         }
     }
-    // onColorSelectorClicked = (value) => {
-
-    //     if(value === 'default') {
-    //         this.editor.applyToolbar(this.state.selectedColor);
-    //     }
-    //     else {
-    //         this.editor.applyToolbar(value);
-
-    //     }
-
-    //     this.setState({
-    //         selectedColor: value
-    //     });
-    // }
-
-    // onHighlightSelectorClicked = (value) => {
-    //     if(value === 'default') {
-    //         this.editor.applyToolbar(this.state.selectedHighlight);
-    //     }
-    //     else {
-    //         this.editor.applyToolbar(value);
-
-    //     }
-
-    //     this.setState({
-    //         selectedHighlight: value
-    //     });
-    // }
+    
     renderImageSelector() {
         return (
             <Menu renderer={SlideInMenu} onSelect={this.onImageSelectorClicked}>
@@ -341,7 +314,7 @@ export default class PostProductScreen extends Component {
                     <KeyboardAvoidingView
                         behavior="padding"
                         enabled
-                        keyboardVerticalOffset={IS_IOS ? 0 : 0}
+                        keyboardVerticalOffset={IS_IOS ? 100 : 0}
                         style={styles.root}
                     >
                     <ScrollView style={{flex: 1,
@@ -421,15 +394,14 @@ export default class PostProductScreen extends Component {
                         </ScrollView>
                     </KeyboardAvoidingView>
                 </View>
-                <View style={styles.box}>
-                    <Text>등록하기 | 취소하기</Text>
+                <View style={styles.btnBox}>
+                    <TouchableOpacity style={styles.cancelBtn}><Text style={styles.cancelBtnText}>취소</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.submitBtn}><Text style={styles.submitBtnText}>등록</Text></TouchableOpacity>
                 </View>
             </ScrollView>
         )
     }
 }
-
-
 
 const styles = StyleSheet.create({
     box: {
@@ -508,7 +480,43 @@ const styles = StyleSheet.create({
         marginHorizontal: 0,
         borderBottomWidth: 1,
         borderColor: '#eee'
+    },
+    //submit Button
+    btnBox: {
+        margin: 16,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    cancelBtn: {
+        width: "48%",
+        height: 40,
+        borderWidth: 1,
+        borderColor: "#A6A6A6",
+        borderRadius: 5,
+        padding: 12
+    },
+    submitBtn: {
+        width: "48%",
+        height: 40,
+        borderWidth: 1,
+        borderColor: "#A6A6A6",
+        backgroundColor: "#A6A6A6",
+        borderRadius: 5,
+        padding: 12
+    },
+    cancelBtnText: {
+        color: '#a6a6a6',
+        fontSize: 16,
+        textAlign: "center"
+    },
+    submitBtnText: {
+        color: '#ffffff',
+        fontSize: 16,
+        textAlign: "center"
     }
+
 })
 
 const pickerSelectStyles = StyleSheet.create({
