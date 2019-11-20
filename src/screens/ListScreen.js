@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList,Alert } from 'react-native';
 import Item from '../components/Item';
 
 export default class ListScreen extends Component {
@@ -8,8 +8,7 @@ export default class ListScreen extends Component {
         super(props);
         this.state = {
           itemList: [],
-          category: "0"
-        };
+          category: 0}
 
         this.getProductList();
       }
@@ -57,43 +56,49 @@ export default class ListScreen extends Component {
      }
 
      bottomColorStyle = function(index) {
+       alert("hi")
+       alert(index);
         if(index == this.state.category) {
+          console.log(index);
           return {
-            borderBottomWidth: 2,
-            borderBottomColor: '#4630eb'
+            borderBottomWidth: 10,
+            borderBottomColor: 'blue',
+            borderTopColor: 'red'
           }
       }
     }
 
 
     render() {
+      alert(this.state.category === '0'  ? alert("0"): alert("x"));
+      alert(this.state.category === '1' ? alert("1"): alert("x"))
         return (
             
           <View style={ styles.overall }>
             <View style = { styles.scrollViewHolder }>
                 <ScrollView horizontal = { true } showsHorizontalScrollIndicator = { false }>
-                  <TouchableOpacity onPress={()=>this.setCategory("0")}>
-                    <Text style = { [styles.item, this.bottomColorStyle(0)] }>전체</Text>
+                  <TouchableOpacity onPress={()=>this.setCategory(0)}>
+                    <Text style = { [styles.item, this.state.category === 0 ? styles.activeItem: {}] }>전체</Text>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
-                  <TouchableOpacity onPress={()=>this.setCategory("1")}>
-                    <Text style = { [styles.item, this.bottomColorStyle(1)] }>디지털/가전</Text>
+                  <TouchableOpacity onPress={()=>this.setCategory(1)}>
+                    <Text style = { [styles.item, this.state.category === 1 ? styles.activeItem: {}] }>디지털/가전</Text>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("2")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(2)]  }>유아용품</Text>
+                    <Text style = { [styles.item, this.state.category === '2' ? styles.activeItem: {}]  }>유아용품</Text>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("3")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(3)]  }>운동기기</Text>
+                    <Text style = {  [styles.item, this.state.category === '3' ? styles.activeItem: {}]  }>운동기기</Text>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("4")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(4)]  }>뷰티/미용</Text>
+                    <Text style = {  [styles.item, this.state.category === '4' ? styles.activeItem: {}]  }>뷰티/미용</Text>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("5")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(5)]  }>기타</Text>
+                    <Text style = {  [styles.item, this.state.category === '5' ? styles.activeItem: {}]  }>기타</Text>
                   </TouchableOpacity>
               </ScrollView>
             </View>
@@ -146,5 +151,9 @@ const styles = StyleSheet.create(
        borderBottomColor: '#4630eb',
        borderBottomWidth: 1,
      },
+     activeItem: {
+      borderBottomWidth: 2,
+      borderBottomColor: 'blue',
+    }
      
   });

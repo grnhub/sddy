@@ -5,7 +5,6 @@ import RNPickerSelect from 'react-native-picker-select';
 import { SelectMultipleButton } from 'react-native-selectmultiple-button';
 import _ from 'lodash';
 import CNRichTextEditor, { CNToolbar, getInitialObject, getDefaultStyles } from 'react-native-cn-richtext-editor';
-// import { Permissions, ImagePicker } from 'expo';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -46,10 +45,6 @@ export default class PostProductScreen extends Component {
             multipleSelectedData: [],   //거래방식 선택
             content: '',
             selectedTag: 'body',         //상품설명 입력
-            // selectedColor: 'default',
-            // selectedHighlight: 'default',
-            // colors: ['red','green', 'blue'],
-            // highlights: ['yellow_hl', 'pink_hl', 'orange_hl', 'green_hl', 'puple_hl', 'blue_hl'],
             selectedStyles: [],
             value: [getInitialObject()],
             image: '',
@@ -112,15 +107,8 @@ export default class PostProductScreen extends Component {
         })
     }
     onSelectedStyleChanged = (styles) => {
-        // const colors = this.state.colors;  
-        // const highlights = this.state.highlights;  
-        // let sel = styles.filter(x=> colors.indexOf(x) >= 0);
-
-        // let hl = styles.filter(x=> highlights.indexOf(x) >= 0);
         this.setState({
             selectedStyles: styles,
-            // selectedColor : (sel.length > 0) ? sel[sel.length - 1] : 'default',
-            // selectedHighlight : (hl.length > 0) ? hl[hl.length - 1] : 'default',
         })
     }
     onValueChanged = (value) => {
@@ -169,7 +157,7 @@ export default class PostProductScreen extends Component {
             this.useLibraryHandler();
         }
     }
-    
+
     renderImageSelector() {
         return (
             <Menu renderer={SlideInMenu} onSelect={this.onImageSelectorClicked}>
@@ -204,6 +192,40 @@ export default class PostProductScreen extends Component {
         console.log(`image removed (url : ${url})`);
     }
 
+    getDateNow() {
+        let date = new Date();
+        let mm = date.getMonth() + 1;
+        let dd = date.getDate();
+
+        return [date.getFullYear(),
+                (mm>9 ? '': '0') + mm,
+                (dd>9 ? '': '0') + dd
+                ].join('-');
+    };
+    handleSubmit = async () => {
+
+        const {userid, category, pname, price, count,  uploadDate, allowDateStart, allowDateEnd, image, content, likeCount } = this.state
+        let data = {
+            userid: 'user_id_temp',
+            category: this.state.category,
+            pname: this.state.pname,
+            count: 0,
+            price: this.state.price,
+            uploadDate: this.getDateNow() ,
+            allowDateStart: this.state.allowDateStart,
+            allowDateEnd: this.state.allowDateEnd,
+            image: [],
+            content: this.state.value,
+            likeCount: 0,
+        }
+        data = JSON.stringify(data) 
+        const response = await fetch('http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/', {
+            method: 'POST',
+            data: data
+        })
+        const responseData = await response.json()
+
+    }
 
     render() {
         const categoryPlaceholder = {
@@ -213,196 +235,199 @@ export default class PostProductScreen extends Component {
         };
         //set calender, 달력, 날짜 설정
         const { allowDateStart, allowDateEnd } = this.state;
-        const uploadDate = new Date();     //today 오늘
         const startDate = allowDateStart ? allowDateStart.toString() : '';
         const endDate = allowDateEnd ? allowDateEnd.toString() : '';
 
         return (
-            <ScrollView>
-                <View style={styles.box}>
-                    <RNPickerSelect
-                        placeholder={categoryPlaceholder}
-                        items={category}
-                        onValueChange={(value) => this.setState({ category: value })}
-                        style={pickerSelectStyles}
-                    />
-                    <View style={styles.line} />
-                    <TextInput style={styles.inputTitle}
-                        placeholder="상품명(제목)"
-                        placeholderTextColor="#d5d5d5"
-                        onChangeText={this.inputPname}
-                    />
-                </View>
-                <View style={styles.line2} />
-                <View style={styles.box}>
-                    <Text>대여기간</Text>
-                    <View style={styles.row}>
-                        <DatePicker
-                            defaultDate={new Date()}
-                            minimumDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
-                            maximumDate={new Date(2022, 12, 31)}
-                            locale={"ko"}
-                            timeZoneOffsetInMinutes={undefined}
-                            modalTransparent={false}
-                            animationType={"slide"}
-                            androidMode={"default"}
-                            placeHolderText="시작날짜 선택"
-                            textStyle={{ color: "#4630eb" }}
-                            placeHolderTextStyle={{ color: "#d3d3d3" }}
-                            onDateChange={this.setDate}
-                            disabled={false}
+            <KeyboardAvoidingView
+                behavior="padding"
+                enabled
+                keyboardVerticalOffset={IS_IOS ? 0 : 0}
+                style={styles.root}
+            >
+                <ScrollView>
+                    <View style={styles.box}>
+                        <RNPickerSelect
+                            placeholder={categoryPlaceholder}
+                            items={category}
+                            onValueChange={(value) => this.setState({ category: value })}
+                            style={pickerSelectStyles}
                         />
-                        <Text>부터</Text>
-                        <DatePicker
-                            defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
-                            minimumDate={new Date()}
-                            maximumDate={new Date(2022, 12, 31)}
-                            locale={"ko"}
-                            timeZoneOffsetInMinutes={undefined}
-                            modalTransparent={false}
-                            animationType={"slide"}
-                            androidMode={"default"}
-                            placeHolderText="마지막날짜 선택"
-                            textStyle={{ color: "#4630eb" }}
-                            placeHolderTextStyle={{ color: "#d3d3d3" }}
-                            onDateChange={this.setDate}
-                            disabled={false}
-                        />
-                        <Text>까지</Text>
-                    </View>
-                </View>
-                <View style={styles.line2} />
-                <View style={styles.box}>
-                    <Text>판매가격</Text>
-                    <View style={styles.row}>
-                        <TextInput style={styles.inputPrice}
-                            keyboardType='numeric'
-                            maxLength={20}
-                            placeholder="판매가격 입력"
+                        <View style={styles.line} />
+                        <TextInput style={styles.inputTitle}
+                            placeholder="상품명(제목)"
                             placeholderTextColor="#d5d5d5"
-                            onChangeText={this.inputPrice}
+                            onChangeText={this.inputPname}
                         />
-                        <Text style={styles.won}>원/일</Text>
                     </View>
-                    <View style={styles.line} />
-                </View>
-                <View style={styles.line2} />
-                <View style={styles.box}>
-                    <Text>거래방법선택</Text>
-                    <View style={styles.selectBtn}>
-                        {multipleData.map(deal => (
-                            <SelectMultipleButton
-                                key={deal}
-                                buttonViewStyle={{ height: 40, width: '46%' }}
-                                textStyle={{ fontSize: 16 }}
-                                highLightStyle={{
-                                    borderColor: "gray",
-                                    backgroundColor: "transparent",
-                                    textColor: "gray",
-                                    textTintColor: "#4630eb",
-                                    borderTintColor: "#4630eb"
-                                }}
-                                value={deal}
-                                selected={this.state.multipleSelectedData.includes(deal)}
-                                singleTap={valueTap => this.singleTapMultipleSelectedButtons(deal)}
+                    <View style={styles.line2} />
+                    <View style={styles.box}>
+                        <Text>대여기간</Text>
+                        <View style={styles.row}>
+                            <DatePicker
+                                defaultDate={new Date()}
+                                minimumDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
+                                maximumDate={new Date(2022, 12, 31)}
+                                locale={"ko"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"slide"}
+                                androidMode={"default"}
+                                placeHolderText="시작날짜 선택"
+                                textStyle={{ color: "#4630eb" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
                             />
-                        ))}
+                            <Text>부터</Text>
+                            <DatePicker
+                                defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
+                                minimumDate={new Date()}
+                                maximumDate={new Date(2022, 12, 31)}
+                                locale={"ko"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"slide"}
+                                androidMode={"default"}
+                                placeHolderText="마지막날짜 선택"
+                                textStyle={{ color: "#4630eb" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
+                            <Text>까지</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.line2} />
-                <View style={styles.box}>
-                    <KeyboardAvoidingView
-                        behavior="padding"
-                        enabled
-                        keyboardVerticalOffset={IS_IOS ? 100 : 0}
-                        style={styles.root}
-                    >
-                    <ScrollView style={{flex: 1,
-                                        width: "100%",
-                                        padding: 1,
-                                }}    
-                    >
-                        <MenuProvider style={{ flex: 1 }}>
-                            <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-                                <View style={styles.main}>
-                                    <CNRichTextEditor
-                                        ref={input => this.editor = input}
-                                        onSelectedTagChanged={this.onSelectedTagChanged}
-                                        onSelectedStyleChanged={this.onSelectedStyleChanged}
-                                        value={this.state.value}
-                                        style={styles.editor}
-                                        styleList={this.customStyles}
-                                        foreColor='dimgray' // optional (will override default fore-color)
-                                        textInputStyle={fontSize = 12}
-                                        onValueChanged={this.onValueChanged}
-                                        onRemoveImage={this.onRemoveImage}
+                    <View style={styles.line2} />
+                    <View style={styles.box}>
+                        <Text>판매가격</Text>
+                        <View style={styles.row}>
+                            <TextInput style={styles.inputPrice}
+                                keyboardType='numeric'
+                                maxLength={20}
+                                placeholder="판매가격 입력"
+                                placeholderTextColor="#d5d5d5"
+                                onChangeText={this.inputPrice}
+                            />
+                            <Text style={styles.won}>원/일</Text>
+                        </View>
+                        <View style={styles.line} />
+                    </View>
+                    <View style={styles.line2} />
+                    <View style={styles.box}>
+                        <Text>거래방법선택</Text>
+                        <View style={styles.selectBtn}>
+                            {multipleData.map(deal => (
+                                <SelectMultipleButton
+                                    key={deal}
+                                    buttonViewStyle={{ height: 40, width: '46%' }}
+                                    textStyle={{ fontSize: 16 }}
+                                    highLightStyle={{
+                                        borderColor: "gray",
+                                        backgroundColor: "transparent",
+                                        textColor: "gray",
+                                        textTintColor: "#4630eb",
+                                        borderTintColor: "#4630eb"
+                                    }}
+                                    value={deal}
+                                    selected={this.state.multipleSelectedData.includes(deal)}
+                                    singleTap={valueTap => this.singleTapMultipleSelectedButtons(deal)}
+                                />
+                            ))}
+                        </View>
+                    </View>
+                    <View style={styles.line2} />
+                    <View style={styles.box}>
+                        <ScrollView style={{
+                            flex: 1,
+                            width: "100%",
+                            padding: 1,
+                        }}
+                        >
+                            <MenuProvider style={{ flex: 1 }}>
+                                <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+                                    <View style={styles.main}>
+                                        <CNRichTextEditor
+                                            ref={input => this.editor = input}
+                                            onSelectedTagChanged={this.onSelectedTagChanged}
+                                            onSelectedStyleChanged={this.onSelectedStyleChanged}
+                                            value={this.state.value}
+                                            style={[styles.editor, styles.textArea]}
+                                            styleList={this.customStyles}
+                                            foreColor='dimgray' // optional (will override default fore-color)
+                                            textInputStyle={fontSize = 12}
+                                            onValueChanged={this.onValueChanged}
+                                            onRemoveImage={this.onRemoveImage}
+                                        />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                                <View style={styles.toolbarContainer}>
+                                    <CNToolbar
+                                        style={{
+                                            height: 35,
+                                        }}
+                                        iconSetContainerStyle={{
+                                            flexGrow: 1,
+                                            justifyContent: 'space-evenly',
+                                            alignItems: 'center',
+                                        }}
+                                        size={28}
+                                        iconSet={[
+                                            {
+                                                type: 'tool',
+                                                iconArray: [
+                                                    {
+                                                        toolTypeText: 'ul',
+                                                        buttonTypes: 'tag',
+                                                        iconComponent:
+                                                            <MaterialCommunityIcons name="format-list-bulleted" />
+                                                    },
+                                                    {
+                                                        toolTypeText: 'ol',
+                                                        buttonTypes: 'tag',
+                                                        iconComponent:
+                                                            <MaterialCommunityIcons name="format-list-numbered" />
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                type: 'seperator'
+                                            },
+                                            {
+                                                type: 'tool',
+                                                iconArray: [
+                                                    {
+                                                        toolTypeText: 'image',
+                                                        iconComponent: this.renderImageSelector()
+                                                    }]
+                                            },
+
+                                        ]}
+                                        selectedTag={this.state.selectedTag}
+                                        selectedStyles={this.state.selectedStyles}
+                                        onStyleKeyPress={this.onStyleKeyPress}
+                                        backgroundColor="aliceblue" // optional (will override default backgroundColor)
+                                        color="gray" // optional (will override default color)
+                                        selectedColor='white' // optional (will override default selectedColor)
+                                        selectedBackgroundColor='deepskyblue' // optional (will override default selectedBackgroundColor)
                                     />
                                 </View>
-                            </TouchableWithoutFeedback>
-                            <View style={styles.toolbarContainer}>
-                                <CNToolbar
-                                    style={{
-                                        height: 35,
-                                    }}
-                                    iconSetContainerStyle={{
-                                        flexGrow: 1,
-                                        justifyContent: 'space-evenly',
-                                        alignItems: 'center',
-                                    }}
-                                    size={28} 
-                                    iconSet={[
-                                        {
-                                            type: 'tool',
-                                            iconArray: [
-                                                {
-                                                    toolTypeText: 'ul',
-                                                    buttonTypes: 'tag',
-                                                    iconComponent:
-                                                    <MaterialCommunityIcons name="format-list-bulleted" />
-                                                },
-                                                {
-                                                    toolTypeText: 'ol',
-                                                    buttonTypes: 'tag',
-                                                    iconComponent:
-                                                    <MaterialCommunityIcons name="format-list-numbered" />
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            type: 'seperator'
-                                        },
-                                        {
-                                            type: 'tool',
-                                            iconArray: [
-                                            {
-                                                toolTypeText: 'image',
-                                                iconComponent: this.renderImageSelector()
-                                            }]
-                                        },
-                                        
-                                    ]}
-                                    selectedTag={this.state.selectedTag}
-                                    selectedStyles={this.state.selectedStyles}
-                                    onStyleKeyPress={this.onStyleKeyPress} 
-                                    backgroundColor="aliceblue" // optional (will override default backgroundColor)
-                                    color="gray" // optional (will override default color)
-                                    selectedColor='white' // optional (will override default selectedColor)
-                                    selectedBackgroundColor='deepskyblue' // optional (will override default selectedBackgroundColor)
-                                /> 
-                        </View>
-                        </MenuProvider>
+                            </MenuProvider>
                         </ScrollView>
-                    </KeyboardAvoidingView>
-                </View>
-                <View style={styles.btnBox}>
-                    <TouchableOpacity style={styles.cancelBtn}><Text style={styles.cancelBtnText}>취소</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.submitBtn}><Text style={styles.submitBtnText}>등록</Text></TouchableOpacity>
-                </View>
-            </ScrollView>
+                    </View>
+                    <View style={styles.btnBox}>
+                        <TouchableOpacity style={styles.cancelBtn}>
+                            <Text style={styles.cancelBtnText}>취소</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit.bind(this)}>
+                            <Text style={styles.submitBtnText}>등록</Text>   
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
         )
     }
 }
-
 const styles = StyleSheet.create({
     box: {
         margin: 16
@@ -450,7 +475,6 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         paddingTop: 1,
-        backgroundColor: '#eee',
         flexDirection: 'column',
         justifyContent: 'flex-end',
     },
@@ -464,7 +488,13 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     editor: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        fontSize: 12
+    },
+    textArea:{
+        borderColor:'#eee',
+        borderWidth: 1,
+        borderRadius: 5,
     },
     toolbarContainer: {
         minHeight: 35
@@ -515,8 +545,7 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 16,
         textAlign: "center"
-    }
-
+    },
 })
 
 const pickerSelectStyles = StyleSheet.create({
