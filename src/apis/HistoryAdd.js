@@ -10,7 +10,7 @@ async function addHistory(pid, newHistory) {
   var objJson = JSON.stringify(obj);
 
 
-  var r;
+  var r = [];
 
   ///api/getDappContent post dapp_name=(string)&author=(string)&permlink=(string)
   var d = [];
@@ -25,8 +25,7 @@ async function addHistory(pid, newHistory) {
   }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      //console.log(data.result.body);
-      r = JSON.parse(data.result.body);
+      if(data.result != null) r = JSON.parse(data.result.body);
       
   });
 
@@ -43,7 +42,6 @@ async function addHistory(pid, newHistory) {
   // };
   // 2. 히스토리에 새 히스토리 붙이기
   r.push(newHistory);
-
 
   //////////////////////////
 

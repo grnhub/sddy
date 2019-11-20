@@ -36,28 +36,36 @@ export default class BorrowingScreen extends Component {
     }
       
     renderItemList({item, index, separators}) {
-
-        return (
-        <Borrowing
-            item={item}
-            onPress={() => Alert.alert('안내', '반납 신청합니다. 평가를 남기시겠습니까?',
-                                  [
-                                    {
-                                      text: '취소',
-                                      onPress: ()=> console.log("asd")
-                                    },
-                                    {
-                                      text: '네',
-                                      onPress: ()=> this.props.navigation.push("EvaluateScreen", {item: item}),
-                                      style: 'cancel'
-                                    }
-                                    
-                                  ])
-              
-               }
-
-        />
-        )
+      if(item.mystate) {
+        if(item.mystate == "대여중") {
+          return (
+            <Borrowing
+                item={item}
+                onPress={() => Alert.alert('안내', '반납 신청합니다. 평가를 남기시겠습니까?',
+                                      [
+                                        {
+                                          text: '취소',
+                                          onPress: ()=> console.log("cancel")
+                                        },
+                                        {
+                                          text: '네',
+                                          onPress: ()=> this.props.navigation.push("EvaluateScreen", {item: item}),
+                                          style: 'cancel'
+                                        }
+                                        
+                                      ])
+                        }
+            />
+          )
+        } else if(item.mystate == "대여완료") {
+          return(
+          <Borrowing
+                item={item}
+                onPress={() => console.log("대여완료")}
+            />
+          )
+        }
+      }
     
      }
 

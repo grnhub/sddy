@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList,Alert } from 'react-native';
 import Item from '../components/Item';
 
 export default class ListScreen extends Component {
@@ -8,8 +8,7 @@ export default class ListScreen extends Component {
         super(props);
         this.state = {
           itemList: [],
-          category: "0"
-        };
+          category: 0}
 
         this.getProductList();
       }
@@ -57,10 +56,14 @@ export default class ListScreen extends Component {
      }
 
      bottomColorStyle = function(index) {
+       alert("hi")
+       alert(index);
         if(index == this.state.category) {
+          console.log(index);
           return {
-            borderBottomWidth: 2,
-            borderBottomColor: '#4630eb'
+            borderBottomWidth: 10,
+            borderBottomColor: 'blue',
+            borderTopColor: 'red'
           }
       }
     }
@@ -72,28 +75,40 @@ export default class ListScreen extends Component {
           <View style={ styles.overall }>
             <View style = { styles.scrollViewHolder }>
                 <ScrollView horizontal = { true } showsHorizontalScrollIndicator = { false }>
-                  <TouchableOpacity onPress={()=>this.setCategory("0")}>
-                    <Text style = { [styles.item, this.bottomColorStyle(0)] }>전체</Text>
+                  <TouchableOpacity onPress={()=>this.setCategory('0')}>
+                    <View style={[this.state.category === '0' ? styles.activeItem: {}]}>
+                      <Text style = { [styles.item] }>전체</Text>
+                    </View>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
-                  <TouchableOpacity onPress={()=>this.setCategory("1")}>
-                    <Text style = { [styles.item, this.bottomColorStyle(1)] }>디지털/가전</Text>
+                  <TouchableOpacity onPress={()=>this.setCategory('1')}>
+                    <View style={[this.state.category === '1' ? styles.activeItem: {}]}>
+                      <Text style = { [styles.item] }>디지털가전</Text>
+                    </View>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("2")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(2)]  }>유아용품</Text>
+                    <View style={[this.state.category === '2' ? styles.activeItem: {}]}>
+                      <Text style = { [styles.item] }>유아용품</Text>
+                    </View>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("3")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(3)]  }>운동기기</Text>
+                    <View style={[this.state.category === '3' ? styles.activeItem: {}]}>
+                      <Text style = { [styles.item] }>운동기기</Text>
+                    </View>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("4")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(4)]  }>뷰티/미용</Text>
+                    <View style={[this.state.category === '4' ? styles.activeItem: {}]}>
+                      <Text style = { [styles.item] }>뷰티미용</Text>
+                    </View>
                   </TouchableOpacity>
                   <View style = { styles.separator }/>
                   <TouchableOpacity onPress={()=>this.setCategory("5")}>
-                    <Text style = {  [styles.item, this.bottomColorStyle(5)]  }>기타</Text>
+                    <View style={[this.state.category === '5' ? styles.activeItem: {}]}>
+                      <Text style = { [styles.item] }>기타</Text>
+                    </View>
                   </TouchableOpacity>
               </ScrollView>
             </View>
@@ -130,8 +145,8 @@ const styles = StyleSheet.create(
      }, 
      item:
      {
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingTop: 7,
+        paddingBottom: 7,
         paddingRight: 16,
         paddingLeft: 16,
         color: 'black',
@@ -146,5 +161,9 @@ const styles = StyleSheet.create(
        borderBottomColor: '#4630eb',
        borderBottomWidth: 1,
      },
+     activeItem: {
+      borderBottomColor:'#4630eb',
+      borderBottomWidth:2
+    }
      
   });

@@ -59,7 +59,7 @@ export default class EvaluateScreen extends Component {
             userMemo : this.state.userMemo,
             rentDate : '2019-01-05',
             returnDate : this.getDateNow(),
-            lender : '꾸요미',
+            lender : '앙마균태',
             rentalDays : "10"
         };
 
@@ -67,6 +67,8 @@ export default class EvaluateScreen extends Component {
 
 
         addHistory(this.state.product.pid, bodyObj);
+
+        this.props.navigation.popToTop();
     }
 
 
@@ -158,7 +160,7 @@ export default class EvaluateScreen extends Component {
                         justifyContent: 'center',
                         width: 130,
                         backgroundColor: '#cdcdcd'}}
-                        onPress={() => console.log(this.state.userMemo)}
+                        onPress={() => this.props.navigation.goBack()}
                         title='취소하기'
                     />
     
