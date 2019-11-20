@@ -101,7 +101,7 @@ export default class HistoryScreen_registrant extends Component {
                           ItemSeparatorComponent={item => {
                               return <View></View>
                           }}
-                          keyExtractor={item=>item._id}/>
+                          keyExtractor={(item, index)=>index.toString()}/>
 
                 <View style={historyCss.row}>
                     <View style={historyCss.s1}><Image source={require('../images/location2.png')} style={historyCss.location}></Image></View>

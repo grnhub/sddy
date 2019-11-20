@@ -67,6 +67,8 @@ export default class EvaluateScreen extends Component {
 
 
         addHistory(this.state.product.pid, bodyObj);
+
+        this.props.navigation.popToTop();
     }
 
 
