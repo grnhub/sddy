@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch'
     },
     product: {
-        flex:5, 
+        flex:4, 
         paddingTop: 10,
         paddingLeft: 24
     },

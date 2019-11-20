@@ -297,7 +297,8 @@ export default class ChargingScreen extends Component {
                       state5: this.state.state5,
                       state6: this.state.state6,
                       state7: this.state.state7,
-                  })
+                  });
+                  this.props.navigation.goBack();
                 
               }}
             }
