@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Dimensions, Platform, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Alert, Dimensions, Platform, TouchableOpacity } from 'react-native';
 import { DatePicker } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import { SelectMultipleButton } from 'react-native-selectmultiple-button';
@@ -48,6 +48,7 @@ export default class PostProductScreen extends Component {
             selectedStyles: [],
             value: [getInitialObject()],
             image: '',
+            deal: [],
         };
         //상품이름 입력, 제목
         inputPname = (text) => {
@@ -65,15 +66,15 @@ export default class PostProductScreen extends Component {
 
     }
     //대여 시작 날짜 선택
-    onStartDateChange(date, type) {
+    onStartDateChange(allowDateStart) {
         this.setState({
-            allowDateStart: date,
+            allowDateStart: allowDateStart,
         });
     }
     //대여 마지막 날짜 선택
-    onEndDateChange(date, type) {
+    onEndDateChange(allowDateEnd) {
         this.setState({
-            allowDateEnd: date,
+            allowDateEnd: allowDateEnd,
         });
     }
 
@@ -204,27 +205,28 @@ export default class PostProductScreen extends Component {
     };
     handleSubmit = async () => {
 
-        const {userid, category, pname, price, count,  uploadDate, allowDateStart, allowDateEnd, image, content, likeCount } = this.state
-        let data = {
-            userid: 'user_id_temp',
-            category: this.state.category,
-            pname: this.state.pname,
-            count: 0,
-            price: this.state.price,
-            uploadDate: this.getDateNow() ,
-            allowDateStart: this.state.allowDateStart,
-            allowDateEnd: this.state.allowDateEnd,
-            image: [],
-            content: this.state.value,
-            likeCount: 0,
-        }
-        data = JSON.stringify(data) 
-        const response = await fetch('http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/', {
-            method: 'POST',
-            data: data
-        })
-        const responseData = await response.json()
+        // const {userid, category, pname, price, count,  uploadDate, allowDateStart, allowDateEnd, image, content, likeCount } = this.state
+        // let data = {
+        //     userid: 'user_id_temp',
+        //     category: this.state.category,
+        //     pname: this.state.pname,
+        //     count: 0,
+        //     price: this.state.price,
+        //     uploadDate: this.getDateNow() ,
+        //     allowDateStart: this.state.allowDateStart,
+        //     allowDateEnd: this.state.allowDateEnd,
+        //     image: [],
+        //     content: this.state.value,
+        //     likeCount: 0,
+        // }
+        // data = JSON.stringify(data) 
+        // const response = await fetch('http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/', {
+        //     method: 'POST',
+        //     data: data
+        // })
+        // const responseData = await response.json()
 
+        this.props.navigation.popToTop();
     }
 
     render() {
@@ -234,9 +236,9 @@ export default class PostProductScreen extends Component {
             color: '#353535',
         };
         //set calender, 달력, 날짜 설정
-        const { allowDateStart, allowDateEnd } = this.state;
-        const startDate = allowDateStart ? allowDateStart.toString() : '';
-        const endDate = allowDateEnd ? allowDateEnd.toString() : '';
+        // const { allowDateStart, allowDateEnd } = this.state;
+        // const startDate = allowDateStart ? allowDateStart.toString() : '';
+        // const endDate = allowDateEnd ? allowDateEnd.toString() : '';
 
         return (
             <KeyboardAvoidingView
@@ -276,7 +278,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderText="시작날짜 선택"
                                 textStyle={{ color: "#4630eb" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
+                                onDateChange={this.onStartDateChange}
                                 disabled={false}
                             />
                             <Text>부터</Text>
@@ -292,7 +294,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderText="마지막날짜 선택"
                                 textStyle={{ color: "#4630eb" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
+                                onDateChange={this.onEndDateChange}
                                 disabled={false}
                             />
                             <Text>까지</Text>
@@ -324,10 +326,11 @@ export default class PostProductScreen extends Component {
                                     textStyle={{ fontSize: 16 }}
                                     highLightStyle={{
                                         borderColor: "gray",
-                                        backgroundColor: "transparent",
                                         textColor: "gray",
                                         textTintColor: "#4630eb",
-                                        borderTintColor: "#4630eb"
+                                        borderTintColor: "#4630eb",
+                                        backgroundColor: "transparent",
+                                        backgroundTintColor: "#ffffff"
                                     }}
                                     value={deal}
                                     selected={this.state.multipleSelectedData.includes(deal)}
@@ -416,10 +419,25 @@ export default class PostProductScreen extends Component {
                         </ScrollView>
                     </View>
                     <View style={styles.btnBox}>
-                        <TouchableOpacity style={styles.cancelBtn}>
+                        <TouchableOpacity style={styles.cancelBtn}
+                                          onPress={() => this.props}
+                        >
                             <Text style={styles.cancelBtnText}>취소</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit.bind(this)}>
+                        <TouchableOpacity style={styles.submitBtn} 
+                                          onPress={() => Alert.alert('안내', '글을 등록하시겠습니까?', 
+                                                    [
+                                                        {
+                                                            text: '취소',
+                                                            onPress: () => console.log('cancel')
+                                                        },
+                                                        {
+                                                            text: '확인',
+                                                            onPress: () => this.handleSubmit()
+                                                        }
+                                                    ])
+                                          }
+                        >
                             <Text style={styles.submitBtnText}>등록</Text>   
                         </TouchableOpacity>
                     </View>
