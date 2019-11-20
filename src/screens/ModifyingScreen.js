@@ -49,7 +49,7 @@ export default class ModifyingScreen extends Component {
             <ListItem>
               <Body>
                 <Text style={{ color: '#9B9B9B' }}>닉네임</Text>
-                <Text>써도대여</Text>
+                <Text>앙마균태</Text>
               </Body>
               <Right>
               <TouchableOpacity onPress={() => alert('닉네임수정')}>

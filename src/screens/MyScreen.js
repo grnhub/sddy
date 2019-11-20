@@ -31,7 +31,7 @@ export default class MyScreen extends Component {
               <MaterialCommunityIcons size={100} name="account-circle" />
                 <List>
                   <ListItem>
-                    <Text>nickname</Text>
+                    <Text>앙마균태</Text>
                   </ListItem>
                   <ListItem>
                     <MaterialCommunityIcons name="star" size={20} />
