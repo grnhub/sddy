@@ -9,7 +9,6 @@ export default class DetailScreen extends Component {
         this.state = {
             product: this.props.navigation.getParam("item")
         }
-        console.log(this.state.product);
     }
 
     numberWithCommas() {

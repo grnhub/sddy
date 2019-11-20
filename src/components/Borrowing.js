@@ -30,7 +30,8 @@ export default class Borrowing extends Component {
                 <View style={styles.product}>
                     <Text style={styles.productTitle}>{this.props.item.pname}</Text>
                     <Text style={styles.nickname}>{this.props.item.nickname}</Text>   
-                    <Text style={styles.mystate}>대여중</Text>
+                   
+                    <Text style={this.props.item.mystate == "대여중" ? styles.mystate1 : styles.mystate2}>{this.props.item.mystate}</Text>
                 </View>    
                 <View style={styles.chat}> 
                     <MaterialCommunityIcons
@@ -81,8 +82,13 @@ const styles = StyleSheet.create({
     nickname: {
         color : '#666666'
     },
-    mystate: {
+    mystate1: {
         color: '#e91e63',
+        marginTop: 5,
+        marginBottom: 5
+    },
+    mystate2: {
+        color: '#B2CCFF',
         marginTop: 5,
         marginBottom: 5
     },
