@@ -56,8 +56,6 @@ export default class ListScreen extends Component {
      }
 
      bottomColorStyle = function(index) {
-       alert("hi")
-       alert(index);
         if(index == this.state.category) {
           console.log(index);
           return {
