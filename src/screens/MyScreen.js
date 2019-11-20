@@ -26,21 +26,23 @@ export default class MyScreen extends Component {
       <Container>
         <Content>
           <List>
-            <ListItem onPress={()=>this.props.navigation.push('ModifyingScreen')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} onPress={()=>this.props.navigation.push('ModifyingScreen')}>
               <Left>
-              <MaterialCommunityIcons size={100} name="account-circle" />
-                <List>
-                  <ListItem>
-                    <Text>앙마균태</Text>
-                  </ListItem>
-                  <ListItem>
-                    <MaterialCommunityIcons name="star" size={20} />
-                    <MaterialCommunityIcons name="star" size={20} />
-                    <MaterialCommunityIcons name="star" size={20} />
-                    <MaterialCommunityIcons name="star" size={20} />
-                    <MaterialCommunityIcons name="star" size={20} />
-                  </ListItem>
-                </List>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                <MaterialCommunityIcons size={100} name="account-circle" />
+                  <List>
+                    <ListItem>
+                      <Text>앙마균태</Text>
+                    </ListItem>
+                    <ListItem>
+                      <MaterialCommunityIcons name="star" size={20} />
+                      <MaterialCommunityIcons name="star" size={20} />
+                      <MaterialCommunityIcons name="star" size={20} />
+                      <MaterialCommunityIcons name="star" size={20} />
+                      <MaterialCommunityIcons name="star" size={20} />
+                    </ListItem>
+                  </List>
+                </View>
               </Left>
               <Right>
               <MaterialCommunityIcons name="chevron-right" size={30} />
@@ -48,14 +50,16 @@ export default class MyScreen extends Component {
             </ListItem>
           </List>
 
-          <ListItem itemDivider />
+          <ListItem itemDivider style={{backgroundColor:'#EAEAEA'}} />
 
           <List>
 
-            <ListItem icon onPress={()=>alert('aa')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>alert('aa')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
-                <MaterialCommunityIcons name="playlist-check" size={30}/>
-                <Text style={{marginLeft:20}}>빌려준 내역</Text>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                  <MaterialCommunityIcons name="playlist-check" size={30}/>
+                  <Text style={{marginLeft:20}}>빌려준 내역</Text>
+                </View>
               </Body>
               <Right>
                 <MaterialCommunityIcons name="chevron-right" size={30} />
@@ -64,10 +68,12 @@ export default class MyScreen extends Component {
             
 
             
-            <ListItem icon onPress={()=>this.props.navigation.push('BorrowingScreen')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>this.props.navigation.push('BorrowingScreen')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
-                <MaterialCommunityIcons name="playlist-check" size={30}/>
-                <Text style={{marginLeft:20}}>빌린 내역</Text>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                  <MaterialCommunityIcons name="playlist-check" size={30} />
+                  <Text style={{marginLeft:20}}>빌린 내역</Text>
+                </View>
               </Body>
               <Right>
                 <MaterialCommunityIcons name="chevron-right" size={30} />
@@ -75,10 +81,12 @@ export default class MyScreen extends Component {
             </ListItem>
 
             
-            <ListItem icon onPress={()=>alert('aa')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>alert('aa')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
-                <MaterialCommunityIcons name="heart-circle" size={30}/>
-                <Text style={{marginLeft:20}}>관심 목록</Text>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                  <MaterialCommunityIcons name="heart-circle" size={30}/>
+                  <Text style={{marginLeft:20}}>관심 목록</Text>
+                </View>
               </Body>
               <Right>
                 <MaterialCommunityIcons name="chevron-right" size={30} />
@@ -87,20 +95,24 @@ export default class MyScreen extends Component {
             
 
             
-            <ListItem icon onPress={()=>this.props.navigation.push('PostProductScreen')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>this.props.navigation.push('PostProductScreen')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
-                <MaterialCommunityIcons name="playlist-edit" size={30}/>
-                <Text style={{marginLeft:20}}>물품등록하기</Text>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                  <MaterialCommunityIcons name="playlist-edit" size={30}/>
+                  <Text style={{marginLeft:20}}>물품등록하기</Text>
+                </View>
               </Body>
               <Right>
                 <MaterialCommunityIcons name="chevron-right" size={30} />
               </Right>
             </ListItem>
           
-            <ListItem icon onPress={()=>this.props.navigation.push('WalletScreen')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>this.props.navigation.push('WalletScreen')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
-                <MaterialCommunityIcons name="wallet" size={30}/>
-                <Text style={{marginLeft:20}}>나의 지갑</Text>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                  <MaterialCommunityIcons name="wallet" size={30}/>
+                  <Text style={{marginLeft:20}}>나의 지갑</Text>
+                </View>
               </Body>
               <Right>
                 <MaterialCommunityIcons name="chevron-right" size={30} />
@@ -108,12 +120,14 @@ export default class MyScreen extends Component {
             </ListItem>
           </List>
           
-          <ListItem itemDivider />
+          <ListItem itemDivider style={{backgroundColor:'#EAEAEA'}} />
 
           <List>
-            <ListItem onPress={()=>alert('aa')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} onPress={()=>alert('aa')}>
               <Left>
-                <Text>고객 센터</Text>
+                <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
+                  <Text>고객 센터</Text>
+                </View>
               </Left>
               <Right>
                 <MaterialCommunityIcons name="chevron-right" size={30} />
