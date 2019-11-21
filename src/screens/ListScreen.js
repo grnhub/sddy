@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList,Alert } from 'react-native';
+import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList, Alert } from 'react-native';
 import Item from '../components/Item';
 
 export default class ListScreen extends Component {
@@ -8,12 +8,18 @@ export default class ListScreen extends Component {
         super(props);
         this.state = {
           itemList: [],
-          category: '0'
+          category: '0',
+          refreshing: false // 데이터를 가져오는 중인지 판단
         }
 
         this.getProductList();
       }
 
+      _handleRefresh = () => {
+        this.setState({
+          refreshing: true,
+        }, this.getProductList);
+      }
       async getProductList() {
         url = "http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product";
         await fetch(url, {
@@ -118,6 +124,8 @@ export default class ListScreen extends Component {
                       return <View></View>
                     }}
                     keyExtractor={(item, index)=> index.toString()}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._handleRefresh}
             ></FlatList>
         </View>
         )
