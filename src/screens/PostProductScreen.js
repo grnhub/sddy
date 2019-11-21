@@ -205,27 +205,37 @@ export default class PostProductScreen extends Component {
     };
     handleSubmit = async () => {
 
-        // const {userid, category, pname, price, count,  uploadDate, allowDateStart, allowDateEnd, image, content, likeCount } = this.state
-        // let data = {
-        //     userid: 'user_id_temp',
-        //     category: this.state.category,
-        //     pname: this.state.pname,
-        //     count: 0,
-        //     price: this.state.price,
-        //     uploadDate: this.getDateNow() ,
-        //     allowDateStart: this.state.allowDateStart,
-        //     allowDateEnd: this.state.allowDateEnd,
-        //     image: [],
-        //     content: this.state.value,
-        //     likeCount: 0,
-        // }
-        // data = JSON.stringify(data) 
-        // const response = await fetch('http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/', {
-        //     method: 'POST',
-        //     data: data
-        // })
-        // const responseData = await response.json()
-
+        const {userid, category, pname, price, count,  uploadDate, allowDateStart, allowDateEnd, image, content, likeCount } = this.state
+        let data = {
+            pid: 55,
+            pname: this.state.pname,
+            category: this.state.category,
+            count: 0,
+            price: this.state.price,
+            content: this.state.value,
+            image: '',
+            uploadDate: this.getDateNow() ,
+            allowDateStart: this.state.allowDateStart,
+            allowDateEnd: this.state.allowDateEnd,
+            userid: 'beoqhde',
+            area: '북구 산격동',
+            nickname: '홍태균태세균태',
+        }
+        let prodObj = JSON.stringify(data);
+        await fetch('http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/', {
+            method: 'POST',
+            headers: {
+                Accept: "application/json", 
+                "Content-Type": "application/json"
+              },
+              body: prodObj
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            console.log(data);
+            console.log("post product success!");
+        });
+        //const responseData = await response.json()
         this.props.navigation.popToTop();
     }
 
@@ -420,7 +430,18 @@ export default class PostProductScreen extends Component {
                     </View>
                     <View style={styles.btnBox}>
                         <TouchableOpacity style={styles.cancelBtn}
-                                          onPress={() => this.props}
+                                          onPress={() => Alert.alert('안내', '작성을 취소하시겠습니까?', 
+                                          [
+                                              {
+                                                  text: '취소',
+                                                  onPress: () => console.log('cancel')
+                                              },
+                                              {
+                                                  text: '확인',
+                                                  onPress: () => this.props.navigation.popToTop()
+                                              }
+                                          ])
+                                }
                         >
                             <Text style={styles.cancelBtnText}>취소</Text>
                         </TouchableOpacity>
