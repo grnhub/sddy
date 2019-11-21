@@ -67,9 +67,9 @@ async function addHistory(pid, newHistory) {
   }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      console.log(data);
+      //console.log(data);
       console.log("History update success");
   });
 }
   
-  export { addHistory };
+export { addHistory };

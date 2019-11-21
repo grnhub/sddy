@@ -54,7 +54,7 @@ export default class MyScreen extends Component {
 
           <List>
 
-            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>alert('aa')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>this.props.navigation.push('RentListScreen')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
                 <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
                   <MaterialCommunityIcons name="playlist-check" size={30}/>
@@ -81,7 +81,7 @@ export default class MyScreen extends Component {
             </ListItem>
 
             
-            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>alert('aa')}>
+            <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA'}} icon onPress={()=>this.props.navigation.push('InterestScreen')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
                 <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
                   <MaterialCommunityIcons name="heart-circle" size={30}/>

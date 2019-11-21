@@ -20,6 +20,8 @@ import PostProductScreen from './src/screens/PostProductScreen';
 import HistoryScreen_registrant from './src/screens/HistoryScreen_registrant';
 import HistoryAddScreen from './src/screens/HistoryAddScreen';
 import BorrowingScreen from './src/screens/BorrowingScreen';
+import InterestScreen from './src/screens/InterestScreen';
+import RentListScreen from './src/screens/RentListScreen';
 import Test from './src/screens/Test';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -46,15 +48,14 @@ const ListStack = createStackNavigator(
 );
 const AttentionStack = createStackNavigator(
   {
-    //EvaluateScreen
-    Test 
+    InterestScreen
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
           title: '관심목록',
           headerRight: () => (<TouchableOpacity onPress={()=>alert('aa')}><View style={{marginRight:10}}><MaterialCommunityIcons name="bell" size={20}/></View></TouchableOpacity>)
       }),
-      initialRouteName: 'Test',
+      initialRouteName: 'InterestScreen',
   }
 );
 const ChattingStack = createStackNavigator(
@@ -88,6 +89,12 @@ const MyStack = createStackNavigator(
       }, 
       EvaluateScreen : {
         screen: EvaluateScreen
+      },
+      RentListScreen: {
+        screen: RentListScreen
+      },
+      InterestScreen: {
+        screen: InterestScreen
       }
   },
   {

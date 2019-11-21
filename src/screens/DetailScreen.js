@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, PickerIOSComponent} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { InterestUpdate } from '../apis/Product';
 
 export default class DetailScreen extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            product: this.props.navigation.getParam("item")
+            product: this.props.navigation.getParam("item"),
+            heart: this.state.product.interest == 1 ? "heart" : "heart-outline"
         }
+
     }
 
     numberWithCommas() {
@@ -17,16 +20,9 @@ export default class DetailScreen extends Component {
     }
     
     async likeCountIncrease() {
-        //console.log(this.state.product._id);
-        url = "http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/" + this.state.product._id;
-        await fetch(url, {
-          method: "PUT"
-        }).then(function(response) {
-            //console.log(response);
-            //return response.json();
-          }).then(function(data) {
-            //console.log(data);
-        });
+        
+        InterestUpdate(this.state.product._id);
+       
 
     }
 
@@ -42,19 +38,13 @@ export default class DetailScreen extends Component {
                         <View style={styles.flexsetting}>
                             <Text style={styles.productName}>{this.state.product.pname}</Text>
                             <View style={styles.interest}>
-                                <TouchableOpacity onPress={()=>Alert.alert('관심목록', '관심목록에 추가하시겠습니까?',
-                                        [
-                                            {
-                                                text: '취소',
-                                                onPress: () => console.log('Cancel Pressed'),
-                                                style: 'cancel',
-                                            },
-                                            {   text: '예', 
-                                                onPress: () => this.likeCountIncrease()},
-                                        ],
-                                        {cancelable: false}
-                                    )}>
-                                    <MaterialCommunityIcons name="heart-outline" size={32}/>
+                                <TouchableOpacity onPress={ () => { 
+                                                                    this.likeCountIncrease(); 
+                                                                    this.setState({
+                                                                        heart: this.state.product.interest == 1 ? "heart" : "heart-outline"
+                                                                    })
+                                                                }}>
+                                    <MaterialCommunityIcons name={this.state.heart} size={32}/>
                                 </TouchableOpacity>
                             </View>
                         </View>

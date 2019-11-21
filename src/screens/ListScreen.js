@@ -8,7 +8,8 @@ export default class ListScreen extends Component {
         super(props);
         this.state = {
           itemList: [],
-          category: 0}
+          category: '0'
+        }
 
         this.getProductList();
       }

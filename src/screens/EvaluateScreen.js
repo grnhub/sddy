@@ -6,6 +6,7 @@ import historyCss from '../css/HistoryStyle';
 import Stars from 'react-native-stars';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { addHistory } from '../apis/HistoryAdd';
+import { StateUpdate } from '../apis/Product';
 
 export default class EvaluateScreen extends Component {
  
@@ -54,8 +55,10 @@ export default class EvaluateScreen extends Component {
     };
 
     async updateFuturpia() {
+        var pid = state.product.pid;
+
         var bodyObj = {
-            id: this.state.product.pid,
+            id: pid,
             userMemo : this.state.userMemo,
             rentDate : '2019-01-05',
             returnDate : this.getDateNow(),
@@ -63,11 +66,10 @@ export default class EvaluateScreen extends Component {
             rentalDays : "10"
         };
 
-        console.log(this.state.product.pid);
+        console.log(pid);
 
-
-        addHistory(this.state.product.pid, bodyObj);
-
+        addHistory(pid, bodyObj);   // 히스토리 추가
+        StateUpdate(pid);           // mystate 변경 (대여중, 대여완료 )
         this.props.navigation.popToTop();
     }
 
