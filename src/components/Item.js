@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class Item extends Component {
 
@@ -65,7 +66,7 @@ export default class Item extends Component {
                     <Text style={styles.productTitle}>{this.props.item.pname}</Text>
                     <Text style={styles.area}>{this.props.item.area}·{this.getTime()}</Text> 
                     <Text style={styles.price}>{this.numberWithCommas()}원/일</Text>
-                    <Text style={styles.heart}>{this.props.item.interest == 1 ? "♥" : "♡"}{this.props.item.likeCount}</Text>
+                    <Text style={styles.heart}>{this.props.item.interest == 1 ? <MaterialCommunityIcons name="heart" size={20} /> : <MaterialCommunityIcons name="heart-outline" size={20} />}{this.props.item.likeCount}</Text>
                 </View>     
             </TouchableOpacity>
         )
