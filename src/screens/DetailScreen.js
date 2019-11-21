@@ -9,9 +9,10 @@ export default class DetailScreen extends Component {
         super(props);
         this.state = {
             product: this.props.navigation.getParam("item"),
-            heart: this.state.product.interest == 1 ? "heart" : "heart-outline"
+            heart: ''
         }
 
+        
     }
 
     numberWithCommas() {

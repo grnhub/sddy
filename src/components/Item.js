@@ -65,7 +65,7 @@ export default class Item extends Component {
                     <Text style={styles.productTitle}>{this.props.item.pname}</Text>
                     <Text style={styles.area}>{this.props.item.area}·{this.getTime()}</Text> 
                     <Text style={styles.price}>{this.numberWithCommas()}원/일</Text>
-                    <Text style={styles.heart}>{this.props.item.interest == 1 ? "💙" : "🖤"}{this.props.item.likeCount}</Text>
+                    <Text style={styles.heart}>{this.props.item.interest == 1 ? "♥" : "♡"}{this.props.item.likeCount}</Text>
                 </View>     
             </TouchableOpacity>
         )

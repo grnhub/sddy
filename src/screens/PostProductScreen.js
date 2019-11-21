@@ -50,32 +50,9 @@ export default class PostProductScreen extends Component {
             image: '',
             deal: [],
         };
-        //상품이름 입력, 제목
-        inputPname = (text) => {
-            this.setState({ pname: text })
-        };
-        //가격 입력, 금액
-        inputPrice = (text) => {
-            this.setState({ price: text })
-        };
-
-        this.onStartDateChange = this.onStartDateChange.bind(this);
-        this.onEndDateChange = this.onEndDateChange.bind(this);
         //상품설명 편집기
         this.editor = null;
 
-    }
-    //대여 시작 날짜 선택
-    onStartDateChange(allowDateStart) {
-        this.setState({
-            allowDateStart: allowDateStart,
-        });
-    }
-    //대여 마지막 날짜 선택
-    onEndDateChange(allowDateEnd) {
-        this.setState({
-            allowDateEnd: allowDateEnd,
-        });
     }
 
     //거래방식 선택 버튼
@@ -206,35 +183,60 @@ export default class PostProductScreen extends Component {
     handleSubmit = async () => {
 
         const {userid, category, pname, price, count,  uploadDate, allowDateStart, allowDateEnd, image, content, likeCount } = this.state
+        // let data = {
+        //     pname: pname,
+        //     category: category,
+        //     count: 0,
+        //     price: price,
+        //     content: content[0].content[0].text,
+        //     image: content[0].content[1].url,
+        //     uploadDate: this.getDateNow() ,
+        //     allowDateStart: allowDateStart,
+        //     allowDateEnd: allowDateEnd,
+        //     userid: 'beoqhde',
+        //     area: '북구 산격동',
+        //     nickname: '홍태균태세균태',
+        // }
         let data = {
-            pid: 55,
-            pname: this.state.pname,
-            category: this.state.category,
+            pname: 'temp',
+            category: '1',
             count: 0,
-            price: this.state.price,
-            content: this.state.value,
-            image: '',
-            uploadDate: this.getDateNow() ,
-            allowDateStart: this.state.allowDateStart,
-            allowDateEnd: this.state.allowDateEnd,
+            price: 1000,
+            content: content[0].content[0].text,
+            image: content[1].url,
             userid: 'beoqhde',
             area: '북구 산격동',
             nickname: '홍태균태세균태',
         }
+
         let prodObj = JSON.stringify(data);
-        await fetch('http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/', {
+        
+        // console.log(prodObj);
+        // console.log(content);
+        // console.log(content[0].content[0].text);
+        // console.log(content[1].url);
+
+        // const formData = new FormData();
+        
+        // formData.append("file", {
+        //     filename: 'temp',
+        //     uri: content[1].url,
+        // })
+        url = 'http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/';
+        // url = 'http://localhost:3000/product/'
+        await fetch(url, {
             method: 'POST',
             headers: {
-                Accept: "application/json", 
                 "Content-Type": "application/json"
               },
-              body: prodObj
+              body : prodObj
         }).then(function(response) {
+            console.log('--------------------------response success')
             return response.json();
         }).then(function(data) {
             console.log(data);
             console.log("post product success!");
-        });
+        }).catch(e=>console.error(e));
         //const responseData = await response.json()
         this.props.navigation.popToTop();
     }
@@ -269,7 +271,7 @@ export default class PostProductScreen extends Component {
                         <TextInput style={styles.inputTitle}
                             placeholder="상품명(제목)"
                             placeholderTextColor="#d5d5d5"
-                            onChangeText={this.inputPname}
+                            onChangeText={(txt)=>this.setState({ pname: txt })}
                         />
                     </View>
                     <View style={styles.line2} />
@@ -288,7 +290,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderText="시작날짜 선택"
                                 textStyle={{ color: "#4630eb" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.onStartDateChange}
+                                onDateChange={(value) => this.setState({allowDateStart: value})}
                                 disabled={false}
                             />
                             <Text>부터</Text>
@@ -304,7 +306,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderText="마지막날짜 선택"
                                 textStyle={{ color: "#4630eb" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.onEndDateChange}
+                                onDateChange={(value) => this.setState({ allowDateEnd: allowDateEnd })}
                                 disabled={false}
                             />
                             <Text>까지</Text>
@@ -319,7 +321,7 @@ export default class PostProductScreen extends Component {
                                 maxLength={20}
                                 placeholder="판매가격 입력"
                                 placeholderTextColor="#d5d5d5"
-                                onChangeText={this.inputPrice}
+                                onChangeText={(txt) => this.setState({ price: txt })}
                             />
                             <Text style={styles.won}>원/일</Text>
                         </View>
@@ -369,7 +371,7 @@ export default class PostProductScreen extends Component {
                                             styleList={this.customStyles}
                                             foreColor='dimgray' // optional (will override default fore-color)
                                             textInputStyle={fontSize = 12}
-                                            onValueChanged={this.onValueChanged}
+                                            onValueChanged={(txt)=>this.setState({ content: txt })}
                                             onRemoveImage={this.onRemoveImage}
                                         />
                                     </View>
