@@ -20,6 +20,7 @@ export default class ListScreen extends Component {
           refreshing: true,
         }, getProductList() );
       }
+      
       async getProductList() {
         url = "http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product";
         await fetch(url, {
