@@ -9,10 +9,8 @@ export default class DetailScreen extends Component {
         super(props);
         this.state = {
             product: this.props.navigation.getParam("item"),
-            heart: ''
+            heart: this.props.navigation.getParam("item").interest == 1 ? "heart" : "heart-outline"
         }
-
-        
     }
 
     numberWithCommas() {
@@ -21,7 +19,7 @@ export default class DetailScreen extends Component {
     }
     
     async likeCountIncrease() {
-        
+        console.log(this.state.product._id);
         InterestUpdate(this.state.product._id);
        
 
@@ -42,7 +40,7 @@ export default class DetailScreen extends Component {
                                 <TouchableOpacity onPress={ () => { 
                                                                     this.likeCountIncrease(); 
                                                                     this.setState({
-                                                                        heart: this.state.product.interest == 1 ? "heart" : "heart-outline"
+                                                                        heart: this.state.heart == "heart" ? "heart-outline" : "heart" 
                                                                     })
                                                                 }}>
                                     <MaterialCommunityIcons name={this.state.heart} size={32}/>

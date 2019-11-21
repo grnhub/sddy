@@ -18,7 +18,7 @@ export default class ListScreen extends Component {
       _handleRefresh = () => {
         this.setState({
           refreshing: true,
-        }, this.getProductList);
+        }, getProductList() );
       }
       async getProductList() {
         url = "http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product";
@@ -34,6 +34,7 @@ export default class ListScreen extends Component {
           this.setState({itemList: data});
         });
 
+        this.state.refreshing = false;
       }
 
     setCategory(c) {
