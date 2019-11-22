@@ -306,7 +306,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderText="마지막날짜 선택"
                                 textStyle={{ color: "#4630eb" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={(value) => this.setState({ allowDateEnd: allowDateEnd })}
+                                onDateChange={(value) => this.setState({ allowDateEnd: value })}
                                 disabled={false}
                             />
                             <Text>까지</Text>
@@ -371,7 +371,7 @@ export default class PostProductScreen extends Component {
                                             styleList={this.customStyles}
                                             foreColor='dimgray' // optional (will override default fore-color)
                                             textInputStyle={fontSize = 12}
-                                            onValueChanged={(txt)=>this.setState({ content: txt })}
+                                            onValueChanged={this.onValueChanged}
                                             onRemoveImage={this.onRemoveImage}
                                         />
                                     </View>
