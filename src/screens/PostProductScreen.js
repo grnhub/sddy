@@ -91,7 +91,8 @@ export default class PostProductScreen extends Component {
     }
     onValueChanged = (value) => {
         this.setState({
-            value: value
+            value: value,
+            content: value
         });
     }
     insertImage(url) {
