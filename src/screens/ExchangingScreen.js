@@ -67,7 +67,7 @@ export default class ExchangingScreen extends Component {
             state6: false,
             state7: false,
             money: 1000,
-            color1:"#E6E6E6",
+            color1:"#EAEAEA",
             color2:"white",
             color3:"white",
             color4:"white",
@@ -106,7 +106,7 @@ export default class ExchangingScreen extends Component {
             state7: false,
             money: 3000,
             color1:"white",
-            color2:"#E6E6E6",
+            color2:"#EAEAEA",
             color3:"white",
             color4:"white",
             color5:"white",
@@ -145,7 +145,7 @@ export default class ExchangingScreen extends Component {
             money: 5000,
             color1:"white",
             color2:"white",
-            color3:"#E6E6E6",
+            color3:"#EAEAEA",
             color4:"white",
             color5:"white",
             color6:"white",
@@ -184,7 +184,7 @@ export default class ExchangingScreen extends Component {
             color1:"white",
             color2:"white",
             color3:"white",
-            color4:"#E6E6E6",
+            color4:"#EAEAEA",
             color5:"white",
             color6:"white",
             color7:"white",
@@ -223,7 +223,7 @@ export default class ExchangingScreen extends Component {
             color2:"white",
             color3:"white",
             color4:"white",
-            color5:"#E6E6E6",
+            color5:"#EAEAEA",
             color6:"white",
             color7:"white",
           });
@@ -262,7 +262,7 @@ export default class ExchangingScreen extends Component {
             color3:"white",
             color4:"white",
             color5:"white",
-            color6:"#E6E6E6",
+            color6:"#EAEAEA",
             color7:"white",
           });
         }
@@ -302,7 +302,7 @@ export default class ExchangingScreen extends Component {
             color4:"white",
             color5:"white",
             color6:"white",
-            color7:"#E6E6E6",
+            color7:"#EAEAEA",
           });
         }
       }
@@ -369,10 +369,11 @@ export default class ExchangingScreen extends Component {
           <List>
             <View
               style={{
-                backgroundColor: 'skyblue',
+                backgroundColor: '#E2DEFC',
                 flexDirection: 'row',
                 marginTop: 10,
                 height: 40,
+                marginBottom: 10,
               }}>
               <Left>
                 <Text style={{ marginLeft: 16 }}>보유스낵:</Text>
@@ -392,7 +393,7 @@ export default class ExchangingScreen extends Component {
                 height: 20,
                 borderTopWidth: 1,
                 borderTopColor: 'black',
-                backgroundColor: '#CEE3F6',
+                backgroundColor: '#E2DEFC',
               }}
               title={'환전 금액 선택'}
               titleStyle={{ fontSize: 16 ,marginTop: 16}}/>

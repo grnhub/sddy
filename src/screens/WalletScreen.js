@@ -11,7 +11,6 @@ import {
 import { Button } from 'react-native-elements';
 import BreakdownList from '../components/BreakdownList';
 
-
 let mockData = [
   {
     name: '충전',
@@ -76,7 +75,7 @@ export default class WalletScreen extends Component {
           <List>
           <View
             style={{
-              backgroundColor: 'skyblue',
+              backgroundColor: '#E2DEFC',
               flexDirection: 'row',
               marginTop: 10,
               height: 40,
@@ -93,13 +92,13 @@ export default class WalletScreen extends Component {
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'space-around',
+                justifyContent: "space-between",
                 padding: 10,
               }}>
               <Button
               buttonStyle={{alignContent: 'center',
               justifyContent: 'center',
-              width: 130,
+              width: 190,
               backgroundColor: '#4630EB'}}
                 onPress={() =>
                   this.props.navigation.push('Charging', {
@@ -115,7 +114,7 @@ export default class WalletScreen extends Component {
               <Button
                 buttonStyle={{alignContent: 'center',
                 justifyContent: 'center',
-                width: 130,
+                width: 190,
                 backgroundColor: '#4630EB'}}
                 onPress={() =>
                   this.props.navigation.push('Exchanging', {
@@ -132,7 +131,7 @@ export default class WalletScreen extends Component {
           <View
             style={{
               flexDirection: 'row',
-              backgroundColor: 'skyblue',
+              backgroundColor: '#E2DEFC',
               height: 30,
               justifyContent: 'space-between',
             }}>

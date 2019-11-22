@@ -37,7 +37,7 @@ export default class ChargingScreen extends Component {
 ////////////////////////////////////////////////////////////////////////////////
   testr(index, price) {
 
-    var backColor = '#E6E6E6';
+    var backColor = '#EAEAEA';
 
     this.stateInit();
 
@@ -138,7 +138,7 @@ export default class ChargingScreen extends Component {
           <List>
             <View
               style={{
-                backgroundColor: 'skyblue',
+                backgroundColor: '#E2DEFC',
                 flexDirection: 'row',
                 marginTop: 10,
                 height: 40,
@@ -162,7 +162,7 @@ export default class ChargingScreen extends Component {
                 height: 20,
                 borderTopWidth: 1,
                 borderTopColor: 'black',
-                backgroundColor: '#CEE3F6',
+                backgroundColor: '#E2DEFC',
               }}
               title={'충전 금액 선택'}
               titleStyle={{ fontSize: 16 ,marginTop: 16}}/>
