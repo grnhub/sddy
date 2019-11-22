@@ -213,30 +213,30 @@ export default class PostProductScreen extends Component {
         console.log("=============================a");
         let prodObj = JSON.stringify(data);
 
-        const formData = new FormData();
-        const filePathList = content[1].url.split('/');
-        const _filename = filePathList[filePathList.length-1];
-        const [filename, ext] = _filename.split('.')
+        // const formData = new FormData();
+        // const filePathList = content[1].url.split('/');
+        // const _filename = filePathList[filePathList.length-1];
+        // const [filename, ext] = _filename.split('.')
 
-        formData.append("file", {
-            name: filename,
-            type: ext,
-            uri: Platform.OS === "android" ? content[1].url.replace("file://", "") : content[1].url.replace("file://", "")
-        })
+        // formData.append("file", {
+        //     name: filename,
+        //     type: ext,
+        //     uri: Platform.OS === "android" ? content[1].url.replace("file://", "") : content[1].url.replace("file://", "")
+        // })
         
-        Object.keys(data).forEach(key => {
-            // 파일과 함께 보내기 위함.
-            formData.append(key, data[key]);
-          });
-        url = 'http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/';
-        // url = 'http://localhost:3000/product/'
-        console.log(formData)
+        // Object.keys(data).forEach(key => {
+        //     // 파일과 함께 보내기 위함.
+        //     formData.append(key, data[key]);
+        //   });
+        url = 'http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product';
+        // // url = 'http://localhost:3000/product/'
+        // console.log(formData)
         await fetch(url, {
             method: 'POST',
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "application/json"
               },
-              body : formData
+              body : prodObj
         }).then(function(response) {
             console.log('--------------------------response success')
             return response.json();
@@ -245,7 +245,7 @@ export default class PostProductScreen extends Component {
             console.log("post product success!");
         }).catch(e=>console.error(e));
         //const responseData = await response.json()
-        this.props.navigation.popToTop();
+        this.props.navigation.replace('ListScreen');
     }
 
     render() {

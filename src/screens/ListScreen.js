@@ -32,10 +32,8 @@ export default class ListScreen extends Component {
           return resp.json();
         }).then(data => {
           //console.log(data);
-          this.setState({itemList: data});
+          this.setState({itemList: data, refreshing:false});
         });
-
-        this.setState({refreshing:false});
       }
 
     setCategory(c) {
