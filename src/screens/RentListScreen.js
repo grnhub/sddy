@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList, Alert } from 'react-native';
-import Item from '../components/Item';
+import RentList from '../components/RentList';
 
 export default class RentListScreen extends Component {
 
@@ -31,7 +31,7 @@ export default class RentListScreen extends Component {
     renderItemList({item, index, separators}) {
       if(item.mystate == "대여중") {
           return (
-            <Item
+            <RentList
                 item={item}
                 onPress={() => this.props.navigation.push("DetailScreen", {item: item}) }
             />

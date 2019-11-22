@@ -209,27 +209,33 @@ export default class PostProductScreen extends Component {
             nickname: '홍태균태세균태',
         }
 
+        console.log("=============================a");
         let prodObj = JSON.stringify(data);
-        
-        // console.log(prodObj);
-        // console.log(content);
-        // console.log(content[0].content[0].text);
-        // console.log(content[1].url);
 
-        // const formData = new FormData();
+        const formData = new FormData();
+        const filePathList = content[1].url.split('/');
+        const _filename = filePathList[filePathList.length-1];
+        const [filename, ext] = _filename.split('.')
+
+        formData.append("file", {
+            name: filename,
+            type: ext,
+            uri: Platform.OS === "android" ? content[1].url.replace("file://", "") : content[1].url.replace("file://", "")
+        })
         
-        // formData.append("file", {
-        //     filename: 'temp',
-        //     uri: content[1].url,
-        // })
+        Object.keys(data).forEach(key => {
+            // 파일과 함께 보내기 위함.
+            formData.append(key, data[key]);
+          });
         url = 'http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/';
         // url = 'http://localhost:3000/product/'
+        console.log(formData)
         await fetch(url, {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "multipart/form-data"
               },
-              body : prodObj
+              body : formData
         }).then(function(response) {
             console.log('--------------------------response success')
             return response.json();
@@ -306,7 +312,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderText="마지막날짜 선택"
                                 textStyle={{ color: "#4630eb" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={(value) => this.setState({ allowDateEnd: allowDateEnd })}
+                                onDateChange={(value) => this.setState({ allowDateEnd: value })}
                                 disabled={false}
                             />
                             <Text>까지</Text>
