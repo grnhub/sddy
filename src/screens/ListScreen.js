@@ -18,7 +18,7 @@ export default class ListScreen extends Component {
       _handleRefresh = () => {
         this.setState({
           refreshing: true,
-        }, getProductList() );
+        }, this.getProductList);
       }
       
       async getProductList() {
@@ -35,7 +35,7 @@ export default class ListScreen extends Component {
           this.setState({itemList: data});
         });
 
-        this.state.refreshing = false;
+        this.setState({refreshing:false});
       }
 
     setCategory(c) {

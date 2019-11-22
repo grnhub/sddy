@@ -377,7 +377,7 @@ export default class PostProductScreen extends Component {
                                             styleList={this.customStyles}
                                             foreColor='dimgray' // optional (will override default fore-color)
                                             textInputStyle={fontSize = 12}
-                                            onValueChanged={(txt)=>this.setState({ content: txt })}
+                                            onValueChanged={this.onValueChanged}
                                             onRemoveImage={this.onRemoveImage}
                                         />
                                     </View>
