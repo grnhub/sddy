@@ -58,7 +58,7 @@ export default class Item extends Component {
                 >
                 
                 <View style={{flex:3}}>
-                    <Image source={{uri: this.props.item.image}}
+                    <Image source={this.props.item.image ? {uri: this.props.item.image } : require('../images/teed.png')}
                         style={styles.image} />
                 </View>
 
