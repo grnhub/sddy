@@ -57,7 +57,7 @@ export default class MyScreen extends Component {
             <ListItem noIndent style={{paddingLeft:0,borderBottomColor:'#EAEAEA',borderBottomWidth:1}} icon onPress={()=>this.props.navigation.push('RentListScreen')}>
               <Body style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start',borderBottomWidth:0}}>
                 <View style={{marginLeft:10,flexDirection:'row',alignItems:'center'}}>
-                  <MaterialCommunityIcons name="playlist-check" size={30}/>
+                  <MaterialCommunityIcons name="coin" size={30}/>
                   <Text style={{marginLeft:20}}>빌려준 내역</Text>
                 </View>
               </Body>
