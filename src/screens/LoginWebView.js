@@ -4,19 +4,12 @@ import WebView from 'react-native-webview';
 
 export default class LoginWebView extends Component {
 
-  test () {
-    return this.props.navigation.replace("TabNavigator");
-  }
-
   render() {
     return (
-      <View>
-          <WebView 
-            style={styles.container}
-            source = {{uri:'http://dev.futurepia.co.kr/user/login'}}
-          />
-          <Button onPress={this.test.bind(this)} title={'버튼테스트테스트'}></Button>
-      </View>
+      <WebView 
+      style={styles.container}
+      source = {{uri:'http://dev.futurepia.co.kr/user/login'}}
+    />
     )
   }
 }
