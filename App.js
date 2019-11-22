@@ -22,6 +22,7 @@ import HistoryAddScreen from './src/screens/HistoryAddScreen';
 import BorrowingScreen from './src/screens/BorrowingScreen';
 import InterestScreen from './src/screens/InterestScreen';
 import RentListScreen from './src/screens/RentListScreen';
+import LoginWebView from './src/screens/LoginWebView';
 import Test from './src/screens/Test';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -29,7 +30,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ListStack = createStackNavigator(
   {
-    ListScreen,
+    ListScreen: {
+      screen: ListScreen
+    },
     DetailScreen : {
       screen: DetailScreen
     },
@@ -155,12 +158,17 @@ const TabNavigator = createBottomTabNavigator(
 
 const AppStack = createStackNavigator(
   {
-      TabNavigator: {
-          screen: TabNavigator,
-          navigationOptions: ({navigation}) => ({
-              header: null,
-          }),
-      },
+      
+          login: {
+            screen: LoginWebView
+          },
+          TabNavigator: {
+            screen: TabNavigator,
+            navigationOptions: ({navigation}) => ({
+                header: null,
+            }),
+          }
+    
   }
 );
 
