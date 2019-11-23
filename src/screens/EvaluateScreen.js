@@ -138,7 +138,7 @@ export default class EvaluateScreen extends Component {
                             activeOpacity={0.7}
                             style={styles.button}
                             onPress={() => alert(this.state.Default_Rating)}>
-                                <Text>Get Selected Value</Text>
+        
                         </TouchableOpacity>
                     </View>
                 </View> 
@@ -147,7 +147,7 @@ export default class EvaluateScreen extends Component {
                     <View><Text>상세평가</Text></View>
                     <Content>
                         <Form>
-                            <Textarea rowSpan={3} bordered placeholder="Textarea" onChangeText={(text) => this.changeUserMemo(text)} />
+                            <Textarea rowSpan={3} bordered placeholder="" onChangeText={(text) => this.changeUserMemo(text)} />
                         </Form>
                     </Content>
                 </View>
