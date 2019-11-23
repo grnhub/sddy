@@ -80,7 +80,7 @@ export default class HistoryScreen extends Component {
                 <ScrollView>
                 <View style={historyCss.row}> 
                     <View style={{flex: 3}}>
-                        <Image source={{uri: this.state.history.image}} style={historyCss.image}></Image>
+                        <Image source={this.state.history.image ? {uri: this.state.history.image } : require('../images/teed.png')} style={historyCss.image}></Image>
                     </View>
                     <View style={historyCss.namebox}>
                         <Text style={historyCss.name}>{this.state.history.nickname}</Text>

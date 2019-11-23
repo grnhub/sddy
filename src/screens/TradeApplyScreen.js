@@ -14,7 +14,7 @@ export default class TradeApplyScreen extends Component {
 
     pay() {
         if(this.state.option1) {
-            console.log("ok");
+            this.props.navigation.navigate("CompleteScreen");
         }
         else {
             console.log("*");

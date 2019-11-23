@@ -30,7 +30,7 @@ export default class DetailScreen extends Component {
             <View style={styles.container}>
                 <ScrollView  >
                     <View style={styles.top}>
-                        <Image source={{uri: this.state.product.image}}
+                        <Image source={this.state.product.image ? {uri: this.state.product.image } : require('../images/teed.png')}
                             style={styles.image} />
                     </View>
                     <View style={styles.middle}>

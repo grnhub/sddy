@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList, Alert } from 'react-native';
+import {StyleSheet, Text, View, Platform, TouchableOpacity, ScrollView, FlatList, Alert, StatusBar } from 'react-native';
 import Item from '../components/Item';
 
 export default class ListScreen extends Component {
@@ -73,6 +73,9 @@ export default class ListScreen extends Component {
       }
     }
 
+    componentDidMount() {
+      StatusBar.setHidden(false);
+    }
 
     render() {
         return (

@@ -160,7 +160,10 @@ const AppStack = createStackNavigator(
   {
       
           login: {
-            screen: LoginWebView
+            screen: LoginWebView,
+            navigationOptions: {
+              header: null
+            }
           },
           TabNavigator: {
             screen: TabNavigator,
