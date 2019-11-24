@@ -3,6 +3,7 @@ import {Text, View, Image, ScrollView,FlatList} from 'react-native';
 import historyCss from '../css/HistoryStyle';
 import { Button } from 'react-native-elements';
 import HistoryComp from '../components/HistoryComp';
+
 export default class HistoryScreen_registrant extends Component {
 
     constructor(props) {
