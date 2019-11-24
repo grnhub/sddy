@@ -9,6 +9,7 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Menu, MenuOption, MenuOptions, MenuTrigger, MenuProvider, renderers } from 'react-native-popup-menu';
+import moment from 'moment';
 
 //상품 카테고리 선택 category
 const category = [
@@ -299,6 +300,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
                                 onDateChange={(value) => this.setState({allowDateStart: value})}
                                 disabled={false}
+                                formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
                             />
                             <Text>부터</Text>
                             <DatePicker
@@ -315,6 +317,7 @@ export default class PostProductScreen extends Component {
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
                                 onDateChange={(value) => this.setState({ allowDateEnd: value })}
                                 disabled={false}
+                                formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
                             />
                             <Text>까지</Text>
                         </View>
