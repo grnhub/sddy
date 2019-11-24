@@ -573,7 +573,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#A6A6A6",
         borderRadius: 5,
-        padding: 12
+        padding: 8
     },
     submitBtn: {
         width: "48%",
@@ -582,7 +582,7 @@ const styles = StyleSheet.create({
         borderColor: "#A6A6A6",
         backgroundColor: "#A6A6A6",
         borderRadius: 5,
-        padding: 12
+        padding: 8
     },
     cancelBtnText: {
         color: '#a6a6a6',
