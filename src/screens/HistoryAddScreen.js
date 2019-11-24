@@ -4,28 +4,34 @@ import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-ba
 import historyCss from '../css/HistoryStyle';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CheckBox,Button } from 'react-native-elements';
+import { updateHistory } from '../apis/HistoryAdd';
 
 export default class HistoryAddScreen extends Component {
 
     constructor(props) {
-        // 수정해야됨
         super(props);
         const historyData = this.props.navigation.getParam("history");
-        var d  = historyData.histories;
 
         this.state = {
             history: historyData,
-            data: d,
             chosenDate: new Date(),
-            checked: false
+            checked: false,
+            content: ''
         };
         this.setDate = this.setDate.bind(this);
     }
 
+
     setDate(newDate) {
+        console.log(newDate);
+        var d = newDate.toString();
+        console.log(d);
         this.setState({ chosenDate: newDate });
       }
 
+      setContent(txt) {
+        this.setState({ content: txt});
+      }
     renderReturnMemo() {
         var memo = '평가가 없습니다';
         if(this.state.data.returnMemo != '') {
@@ -40,6 +46,10 @@ export default class HistoryAddScreen extends Component {
         return({
 
         })
+    }
+
+    adding() {
+        updateHistory(this.state.history.pid, this.state.chosenDate, this.state.content);
     }
 
     render() {
@@ -67,7 +77,7 @@ export default class HistoryAddScreen extends Component {
                         <Text style={historyCss.productName}>{this.state.history.pname}</Text>
                     </View>
                 </View>
-                <View style={{flex: 1}}>
+                {/* <View style={{flex: 1}}>
                     <View><Text>대여기간</Text></View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <DatePicker
@@ -122,24 +132,22 @@ export default class HistoryAddScreen extends Component {
                         title='없음'
                     />
                     </View>
-                </View>
+                </View> */}
                 <View style={{flex: 1}}>
                     <View><Text>수리날짜</Text></View>
                     <View>
                         <DatePicker
-                            defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
-                            minimumDate={new Date((new Date().getFullYear()-1), 1, 1)}
-                            maximumDate={new Date(2022, 12, 31)}
-                            locale={"en"}
+                            defaultDate={new Date()}
+                            locale={"ko"}
                             timeZoneOffsetInMinutes={undefined}
                             modalTransparent={false}
                             animationType={"fade"}
                             androidMode={"default"}
-                            placeHolderText="Select date"
+                            placeHolderText="수리날짜 선택"
                             textStyle={{ color: "green" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
-                            onDateChange={this.setDate}
-                            disabled={false}
+                            onDateChange={(d) => this.setDate(d)}
+                            formatChosenDate={d => {return moment(d).format('YYYY-MM-DD');}}
                         />
                     </View>
                 </View>
@@ -147,7 +155,7 @@ export default class HistoryAddScreen extends Component {
                     <View><Text>수리내용</Text></View>
                     <Content>
                         <Form>
-                            <Textarea rowSpan={3} bordered placeholder="수리내용을 입력해주세요."/>
+                            <Textarea rowSpan={3} bordered placeholder="수리내용을 입력해주세요." onChangeText={(txt) => this.setContent(txt)}/>
                         </Form>
                     </Content>
                 </View>
@@ -170,7 +178,7 @@ export default class HistoryAddScreen extends Component {
                         justifyContent: 'center',
                         width: 130,
                         backgroundColor: '#4630EB'}}
-                        onPress={() =>alert('추가')}
+                        onPress={() => this.adding()}
                         title='추가하기' 
                     />
                 </View>

@@ -119,7 +119,8 @@ async function updateHistory(pid, rdate, rmemo) {
   //console.log(len);
   if(len != 0) {
     var index = len - 1;
-    r[index].repairDate = rdate;
+    console.log(rdate + "// "+ rmemo);
+    r[index].repairDate = rdate.substring(0, 10);
     r[index].repairMemo = rmemo;
   }
   //////////////////////////

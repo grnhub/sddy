@@ -6,17 +6,13 @@ import HistoryComp from '../components/HistoryComp';
 export default class HistoryScreen extends Component {
 
     constructor(props) {
-        // 수정해야됨
         super(props);
         const historyData = this.props.navigation.getParam("history");
         
-
-        // history.pid
         this.state = {
             history: historyData,
             data: []
         }
-
         this.getHistoryFromFuturpia();
     }
 

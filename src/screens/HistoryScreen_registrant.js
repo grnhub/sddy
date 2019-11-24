@@ -7,12 +7,9 @@ import HistoryComp from '../components/HistoryComp';
 export default class HistoryScreen_registrant extends Component {
 
     constructor(props) {
-        // 수정해야됨
         super(props);
         const historyData = this.props.navigation.getParam("history");
         
-
-        // history.pid
         this.state = {
             history: historyData,
             data: []
