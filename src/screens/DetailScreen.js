@@ -21,8 +21,6 @@ export default class DetailScreen extends Component {
     async likeCountIncrease() {
         console.log(this.state.product._id);
         InterestUpdate(this.state.product._id);
-       
-
     }
 
     render() {
@@ -43,7 +41,7 @@ export default class DetailScreen extends Component {
                                                                         heart: this.state.heart == "heart" ? "heart-outline" : "heart" 
                                                                     })
                                                                 }}>
-                                    <MaterialCommunityIcons name={this.state.heart} size={32}/>
+                                    <MaterialCommunityIcons name={this.state.heart} size={32} color={'#FF7E7E'}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
     },
     productName: {
         flex: 8,
-        fontSize: 32,
+        fontSize: 30,
         marginTop: 8,
         marginBottom: 8,
         
@@ -172,7 +170,7 @@ const styles = StyleSheet.create({
     },
     price: {
         flex: 0,
-        color: '#F15F5F',
+        color: '#AA1212',
         fontSize: 24,
         alignSelf: "flex-end",
         marginRight: 32
@@ -190,15 +188,15 @@ const styles = StyleSheet.create({
     },
     button: {
         width: "30%",
-        height: 36,
+        height: 40,
         backgroundColor: '#4630eb',
-        borderRadius: 8,
+        borderRadius: 5,
         padding:5,
         margin: 5
     },
     buttonText: {
-        paddingTop: 5,
-        fontSize: 18,
+        marginTop: 4,
+        fontSize: 16,
         color: 'white',
         justifyContent: 'center',
         alignItems: 'center',
