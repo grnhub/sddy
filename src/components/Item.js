@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     },
     product: {
         flex:6, 
-        paddingTop: 10,
         paddingLeft: 24
     },
     productTitle: {
