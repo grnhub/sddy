@@ -147,7 +147,7 @@ export default class HistoryAddScreen extends Component {
                     <View><Text>수리내용</Text></View>
                     <Content>
                         <Form>
-                            <Textarea rowSpan={3} bordered placeholder="Textarea" />
+                            <Textarea rowSpan={3} bordered placeholder="수리내용을 입력해주세요."/>
                         </Form>
                     </Content>
                 </View>
