@@ -138,6 +138,8 @@ export default class HistoryAddScreen extends Component {
                     <View>
                         <DatePicker
                             defaultDate={new Date()}
+                            minimumDate={new Date()}
+                            maximumDate={new Date(2022, 12, 31)}
                             locale={"ko"}
                             timeZoneOffsetInMinutes={undefined}
                             modalTransparent={false}
@@ -147,6 +149,7 @@ export default class HistoryAddScreen extends Component {
                             textStyle={{ color: "green" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
                             onDateChange={(d) => this.setDate(d)}
+                            disabled={false}
                             formatChosenDate={d => {return moment(d).format('YYYY-MM-DD');}}
                         />
                     </View>
