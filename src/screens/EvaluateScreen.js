@@ -55,7 +55,8 @@ export default class EvaluateScreen extends Component {
     };
 
     async updateFuturpia() {
-        var pid = state.product.pid;
+        console.log(this.state.Default_Rating);
+        var pid = this.state.product.pid;
 
         var bodyObj = {
             id: pid,
@@ -69,7 +70,7 @@ export default class EvaluateScreen extends Component {
         console.log(pid);
 
         addHistory(pid, bodyObj);   // 히스토리 추가
-        StateUpdate(pid);           // mystate 변경 (대여중, 대여완료 )
+        StateUpdate(this.state.product._id);           // mystate 변경 (대여중, 대여완료 )
         this.props.navigation.popToTop();
     }
 

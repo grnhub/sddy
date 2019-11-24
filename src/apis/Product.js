@@ -1,4 +1,5 @@
 async function StateUpdate(pid) {
+  console.log(pid);
     url = "http://ec2-52-79-239-153.ap-northeast-2.compute.amazonaws.com:3000/product/" + pid + "/mystate";
     await fetch(url, {
       method: "PUT"

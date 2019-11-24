@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, Image, CheckBox, DatePickerAndroid} from 'react-native';
 import historyCss from '../css/HistoryStyle';
+import { StateUpdate } from '../apis/Product';
 
 export default class TradeApplyScreen extends Component {
 
@@ -14,6 +15,7 @@ export default class TradeApplyScreen extends Component {
 
     pay() {
         if(this.state.option1) {
+            StateUpdate(this.state.history._id);
             this.props.navigation.navigate("CompleteScreen", {item: this.state.history});
         }
         else {
