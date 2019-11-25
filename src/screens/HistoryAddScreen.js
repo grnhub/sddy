@@ -173,7 +173,7 @@ export default class HistoryAddScreen extends Component {
                         justifyContent: 'center',
                         width: 130,
                         backgroundColor: '#4630EB'}}
-                        onPress={() =>alert('취소')}
+                        onPress={() => this.props.navigation.popToTop()}
                         title='취소하기'
                     />  
                     <Button
