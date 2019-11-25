@@ -5,6 +5,7 @@ import historyCss from '../css/HistoryStyle';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CheckBox,Button } from 'react-native-elements';
 import { updateHistory } from '../apis/HistoryAdd';
+import moment from 'moment';
 
 export default class HistoryAddScreen extends Component {
 
@@ -24,7 +25,7 @@ export default class HistoryAddScreen extends Component {
 
     setDate(newDate) {
         console.log(newDate);
-        var d = newDate.toString();
+        var d = moment(newDate).format("YYYY-MM-DD");
         console.log(d);
         this.setState({ chosenDate: newDate });
       }
@@ -36,7 +37,6 @@ export default class HistoryAddScreen extends Component {
         var memo = '평가가 없습니다';
         if(this.state.data.returnMemo != '') {
             memo = this.state.data.returnMemo ;
-            
         } 
         return memo;
         
@@ -48,9 +48,9 @@ export default class HistoryAddScreen extends Component {
         })
     }
 
-    adding() {
-        updateHistory(this.state.history.pid, this.state.chosenDate, this.state.content);
-    }
+    // adding() {
+    //     updateHistory(this.state.history.pid, this.state.chosenDate, this.state.content);
+    // }
 
     render() {
         return (
@@ -137,7 +137,7 @@ export default class HistoryAddScreen extends Component {
                     <View><Text>수리날짜</Text></View>
                     <View>
                         <DatePicker
-                            defaultDate={new Date()}
+                            defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
                             minimumDate={new Date()}
                             maximumDate={new Date(2022, 12, 31)}
                             locale={"ko"}
@@ -146,7 +146,7 @@ export default class HistoryAddScreen extends Component {
                             animationType={"fade"}
                             androidMode={"default"}
                             placeHolderText="수리날짜 선택"
-                            textStyle={{ color: "green" }}
+                            textStyle={{ color: "#4630eb" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
                             onDateChange={(d) => this.setDate(d)}
                             disabled={false}
