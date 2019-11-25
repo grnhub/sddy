@@ -98,7 +98,7 @@ export default class HistoryScreen extends Component {
                 <View style={historyCss.row}>
                     <View style={historyCss.s1}><Image source={require('../images/location2.png')} style={historyCss.location}></Image></View>
                     <View style={historyCss.s2}><Text>현재</Text></View>
-                    <View style={historyCss.s2}><Text>-</Text></View>
+                    <View style={historyCss.s2}><Text>{new Date().getFullYear()+'.'+(new Date().getMonth()+1)+'.'+(new Date().getDay()<10 ? '0'+new Date().getDay() : new Date().getDay())}</Text></View>
                 </View>
                 </ScrollView>
             </View> 

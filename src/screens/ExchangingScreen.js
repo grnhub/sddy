@@ -356,7 +356,7 @@ export default class ExchangingScreen extends Component {
     listUpFunc({
                   name: "환전",
                   state: "0",
-                  date: "2019.12.24 16:30",
+                  date: (new Date().getFullYear()+'.'+(new Date().getMonth()+1)+'.'+new Date().getDay()+' '+new Date().getHours()+':'+new Date().getMinutes()),
                   money: (this.state.money),
                   profile: ""
                 });

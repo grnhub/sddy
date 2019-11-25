@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, Image, CheckBox, DatePickerAndroid} from 'react-native';
 import historyCss from '../css/HistoryStyle';
 import { StateUpdate } from '../apis/Product';
-
+import {DatePicker} from 'native-base';
+import moment from 'moment';
 export default class TradeApplyScreen extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             option1: false,
-            history: this.props.navigation.getParam("history")
+            history: this.props.navigation.getParam("history"),
+            allowDateStart: null,
+            allowDateEnd: null,
         }
     }
 
@@ -28,11 +31,12 @@ export default class TradeApplyScreen extends Component {
         return m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     numberWithCommas2() {
-        var m = this.state.history.price * 5;
+        var m = this.state.history.price * ((this.state.allowDateEnd-this.state.allowDateStart)/86400000+1);
         return m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     render() {
+        console.log((this.state.allowDateEnd-this.state.allowDateStart)/86400000+1)
         return (
             <View style={historyCss.container}>
                 <ScrollView>
@@ -46,17 +50,53 @@ export default class TradeApplyScreen extends Component {
                             <Text style={historyCss.priceDetail}>{this.numberWithCommas()}원/일</Text>
                         </View>
                     </View>
-                    <View style={historyCss.topPadding}>
+                    <View style={{margin: 16}}>
                         <Text>대여기간</Text>
-                    </View>
-                    <View style={[historyCss.row, historyCss.bottomPadding]}>
-                        <Text style={historyCss.intervalDate}>{this.state.history.allowDateStart.substring(0,10)} 부터 {this.state.history.allowDateEnd ? this.state.history.allowDateEnd.substring(0,10) : "2099-12-12" } 까지</Text>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center'}}>
+                            <DatePicker
+                                defaultDate={new Date()}
+                                minimumDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
+                                maximumDate={new Date(2022, 12, 31)}
+                                locale={"ko"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"slide"}
+                                androidMode={"default"}
+                                placeHolderText="시작날짜 선택"
+                                textStyle={{ color: "#4630eb" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={(value) => this.setState({allowDateStart: value})}
+                                disabled={false}
+                                formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
+                            />
+                            <Text>부터</Text>
+                            <DatePicker
+                                defaultDate={new Date(new Date().getFullYear(), (new Date().getMonth()), new Date().getDay())}
+                                minimumDate={new Date()}
+                                maximumDate={new Date(2022, 12, 31)}
+                                locale={"ko"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"slide"}
+                                androidMode={"default"}
+                                placeHolderText="마지막날짜 선택"
+                                textStyle={{ color: "#4630eb" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={(value) => this.setState({ allowDateEnd: value })}
+                                disabled={false}
+                                formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
+                            />
+                            <Text>까지</Text>
+                            
+                        </View>
                     </View>
                     <View style={historyCss.topPadding}>
                         <Text>({this.numberWithCommas()}원/일)로 자동계산된 가격</Text>
                     </View>
                     <View style={[historyCss.row, historyCss.bottomPadding]}>
-                        <Text style={historyCss.price}>{this.numberWithCommas2()}원</Text>
+                        <Text style={historyCss.price}>{this.numberWithCommas2()<=0?0:this.numberWithCommas2()}원</Text>
                     </View>
                     <View style={historyCss.topPadding}>
                         <Text>대여 신청정보</Text>
