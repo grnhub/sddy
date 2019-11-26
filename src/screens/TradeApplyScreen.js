@@ -50,7 +50,7 @@ export default class TradeApplyScreen extends Component {
                         <Text>대여기간</Text>
                     </View>
                     <View style={[historyCss.row, historyCss.bottomPadding]}>
-                        <Text style={historyCss.intervalDate}>{this.state.history.allowDateStart.substring(0,10)} 부터 {this.state.history.allowDateEnd ? this.state.history.allowDateEnd.substring(0,10) : "2099-12-12" } 까지</Text>
+                        <Text style={historyCss.intervalDate}>2019-10-21부터 2019-10-26까지</Text>
                     </View>
                     <View style={historyCss.topPadding}>
                         <Text>({this.numberWithCommas()}원/일)로 자동계산된 가격</Text>

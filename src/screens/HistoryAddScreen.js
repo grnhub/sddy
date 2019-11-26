@@ -27,7 +27,7 @@ export default class HistoryAddScreen extends Component {
         console.log(newDate);
         var d = moment(newDate).format("YYYY-MM-DD");
         console.log(d);
-        this.setState({ chosenDate: newDate });
+        this.setState({ chosenDate: d });
       }
 
       setContent(txt) {
@@ -48,9 +48,9 @@ export default class HistoryAddScreen extends Component {
         })
     }
 
-    // adding() {
-    //     updateHistory(this.state.history.pid, this.state.chosenDate, this.state.content);
-    // }
+    adding() {
+        updateHistory(this.state.history.pid, this.state.chosenDate, this.state.content);
+    }
 
     render() {
         return (
@@ -73,7 +73,7 @@ export default class HistoryAddScreen extends Component {
                         <Image source={{uri: this.state.history.image}} style={historyCss.image}></Image>
                     </View>
                     <View style={historyCss.namebox}>
-                        <Text style={historyCss.name}>홍길동</Text>
+                        <Text style={historyCss.name}>{this.state.history.nickname}</Text>
                         <Text style={historyCss.productName}>{this.state.history.pname}</Text>
                     </View>
                 </View>

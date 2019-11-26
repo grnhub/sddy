@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView,Image,Platform } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView,Image,Platform, Alert } from 'react-native';
 import { Rating, AirbnbRating,Button } from 'react-native-elements';
 import { Container, Header, Content, DatePicker,Textarea, Form } from 'native-base';
 import historyCss from '../css/HistoryStyle';
@@ -61,16 +61,17 @@ export default class EvaluateScreen extends Component {
         var bodyObj = {
             id: pid,
             userMemo : this.state.userMemo,
-            rentDate : '2019-01-05',
-            returnDate : this.getDateNow(),
+            rentDate : '2019-10-21',
+            returnDate : '2019-10-26',
             lender : '앙마균태',
-            rentalDays : "10"
+            rentalDays : "5"
         };
 
         console.log(pid);
 
         addHistory(pid, bodyObj);   // 히스토리 추가
         StateUpdate(this.state.product._id);           // mystate 변경 (대여중, 대여완료 )
+        Alert.alert('반납 평가를 남겼습니다. 감사합니다.');
         this.props.navigation.popToTop();
     }
 

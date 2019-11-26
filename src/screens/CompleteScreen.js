@@ -12,7 +12,7 @@ export default class CompleteScreen extends Component {
     }
 
     numberWithCommas() {
-        var m = this.state.item.price;
+        var m = this.state.item.price * 5;
         return m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
@@ -25,7 +25,7 @@ export default class CompleteScreen extends Component {
                             style={styles.image} />
                 <Text style={styles.detail}>{this.state.item.pname}</Text>
                 <Text style={styles.detail}>결제금액 : {this.numberWithCommas()}원</Text>
-                <Text style={styles.detail}>대여기간 : {this.state.item.allowDateStart.substring(0,10)} ~ {this.state.item.allowDateEnd ? this.state.item.allowDateEnd.substring(0,10) : "2019-12-20" }</Text>
+                <Text style={styles.detail}>대여기간 : 2019-10-21 ~ 2019-10-26</Text>
                 <Text style={styles.detail}>거래현황 : 배송준비중</Text>
 
                 <TouchableOpacity onPress={()=>this.props.navigation.popToTop()} 
