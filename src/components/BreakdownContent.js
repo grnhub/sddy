@@ -58,7 +58,7 @@ export default class BreakdownContent extends Component {
 }
 
 const styles = StyleSheet.create({
-    one:{flexDirection:'row',justifyContent:'space-between'},
+    one:{flexDirection:'row',justifyContent:'space-between',width:80},
     two:{color:'red',fontSize:14},
     two2:{color:'blue',fontSize:14},
     three:{fontSize:14},
