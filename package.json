@@ -17,7 +17,7 @@
     "expo-image-picker": "~7.0.0",
     "expo-permissions": "~7.0.0",
     "https-browserify": "1.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongodb-stitch-react-native-services-mongodb-remote": "^4.6.0",
     "native-base": "^2.13.8",
     "node-libs-browser": "^2.2.1",
